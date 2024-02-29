@@ -14658,7 +14658,7 @@ div.jp-OutputPrompt {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="AERSP/ME-597---Machine-Learning-in-Aerosapce-Engineering">AERSP/ME 597 - Machine Learning in Aerosapce Engineering<a class="anchor-link" href="#AERSP/ME-597---Machine-Learning-in-Aerosapce-Engineering">&#182;</a></h2><h2 id="Math-Background:-Solving-Differential-Equations">Math Background: Solving Differential Equations<a class="anchor-link" href="#Math-Background:-Solving-Differential-Equations">&#182;</a></h2><h3 id="Instructor:-Daning-Huang">Instructor: Daning Huang<a class="anchor-link" href="#Instructor:-Daning-Huang">&#182;</a></h3>
+<h2 id="AERSP/ME-597---Machine-Learning-for-Engineering">AERSP/ME 597 - Machine Learning for Engineering<a class="anchor-link" href="#AERSP/ME-597---Machine-Learning-for-Engineering">&#182;</a></h2><h2 id="Math-Background:-Solving-Differential-Equations">Math Background: Solving Differential Equations<a class="anchor-link" href="#Math-Background:-Solving-Differential-Equations">&#182;</a></h2><h3 id="Instructor:-Daning-Huang">Instructor: Daning Huang<a class="anchor-link" href="#Instructor:-Daning-Huang">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -14671,7 +14671,6 @@ div.jp-OutputPrompt {
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="TODAY:-Numerical-Algorithms-for-DEs">TODAY: Numerical Algorithms for DEs<a class="anchor-link" href="#TODAY:-Numerical-Algorithms-for-DEs">&#182;</a></h2><ul>
 <li>Galerkin method</li>
-<li>Adjoint system</li>
 </ul>
 <h3 id="References:">References:<a class="anchor-link" href="#References:">&#182;</a></h3><ul>
 <li>[Strang]</li>
@@ -14963,6 +14962,23 @@ which completes the linear system of equations, $Aw=b$, and one can solve for $w
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Side note:</p>
+<ul>
+<li>We are presenting the "spectral" Galerkin method, where we use global bases to discretize the DE.</li>
+<li>There is also Galerkin "finite element" method, that discretizes the domain into many pieces and uses local bases.</li>
+<li>Petrov-Galerkin is more relevant for the latter case - search for "upwinding" for more details.</li>
+</ul>
+
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>To develop the standard Galerkin methods, we need to manipulate $A_{ij} = &lt;\psi_i,\phi_j''&gt;$ more, because,</p>
 <ul>
 <li>There is an uneven requirement of smoothness of $\psi$ and $\phi$.  In particular, $\phi$ needs to be $C^2$, which might be inconvenient to achieve.</li>
@@ -15020,7 +15036,7 @@ Then,</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Standard-Galerkin-method">Standard Galerkin method<a class="anchor-link" href="#Standard-Galerkin-method">&#182;</a></h3><p>We organize the weighted residual as
+<h2 id="Standard-Galerkin-method">Standard Galerkin method<a class="anchor-link" href="#Standard-Galerkin-method">&#182;</a></h2><p>We organize the weighted residual as
 $$
 \int_a^b \psi_i'(x) u'(x) dx = \psi_i(b) u'(b) - \psi_i(a) u'(a) - \int_a^b \psi_i(x) f(x) dx
 $$
@@ -15049,7 +15065,7 @@ $$</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h4 id="Homogeneous-essential-BCs">Homogeneous essential BCs<a class="anchor-link" href="#Homogeneous-essential-BCs">&#182;</a></h4><p>In this case, the essential BCs are zero, with possibly non-zero natural BCs.</p>
+<h3 id="Homogeneous-essential-BCs">Homogeneous essential BCs<a class="anchor-link" href="#Homogeneous-essential-BCs">&#182;</a></h3><p>In this case, the essential BCs are zero, with possibly non-zero natural BCs.</p>
 <p>We choose $\psi$ to be zero at essential BCs and free at the other BCs.</p>
 <p>For example,</p>
 
@@ -15117,7 +15133,7 @@ $$</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h4 id="Non-homogeneous-essential-BCs">Non-homogeneous essential BCs<a class="anchor-link" href="#Non-homogeneous-essential-BCs">&#182;</a></h4><p>In this case, the essential BCs are non-zero.</p>
+<h3 id="Non-homogeneous-essential-BCs">Non-homogeneous essential BCs<a class="anchor-link" href="#Non-homogeneous-essential-BCs">&#182;</a></h3><p>In this case, the essential BCs are non-zero.</p>
 <p>We still choose $\psi$ to be zero at essential BCs and free at the other BCs, so are $\phi$.</p>
 <p>But now we also need to choose a <strong>special trial function</strong> $\phi_0(x)$, that satisfies the non-zero essential BCs, so
 $$
@@ -15179,7 +15195,7 @@ where $\hat{b}$ effectively accounts for the non-zero essential BCs.</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Finite-element-like-approach">Finite-element-like approach<a class="anchor-link" href="#Finite-element-like-approach">&#182;</a></h3><p>In the standard approach, we choose appropriate $\psi$ and $\phi$ to satisfy BCs, so that when forming the linear system, all the BCs are automatically satisfied.  However, treating non-homogeneous essential BCs require <strong>devising</strong> a special trial function, that is sometimes (or often) cumbersome to do.</p>
+<h2 id="Finite-element-like-approach">Finite-element-like approach<a class="anchor-link" href="#Finite-element-like-approach">&#182;</a></h2><p>In the standard approach, we choose appropriate $\psi$ and $\phi$ to satisfy BCs, so that when forming the linear system, all the BCs are automatically satisfied.  However, treating non-homogeneous essential BCs require <strong>devising</strong> a special trial function, that is sometimes (or often) cumbersome to do.</p>
 <p>An alternative approach is to employ a finite-element-like approach, that works the other way around.</p>
 <ul>
 <li>Select a set of $\psi$, that do not necessarily satisfy essential BCs.</li>
@@ -15222,6 +15238,7 @@ where $\bar{b}=0$ following the same argument in standard approach (i.e., homoge
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <blockquote><p>To be precise, the previous formulation should be derived via variational calculus, which would lead us to the finite element method.</p>
+<p>Alternatively, one could also use the concept of projection and stay within the Galerkin approach.  See the 2D case for more details.</p>
 </blockquote>
 
 </div>
@@ -15234,7 +15251,7 @@ where $\bar{b}=0$ following the same argument in standard approach (i.e., homoge
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h4 id="Solving-the-augmented-system---Exact">Solving the augmented system - Exact<a class="anchor-link" href="#Solving-the-augmented-system---Exact">&#182;</a></h4><p>The linear system is solved via an equality-constrained optimization:
+<h3 id="Solving-the-augmented-system---Exact">Solving the augmented system - Exact<a class="anchor-link" href="#Solving-the-augmented-system---Exact">&#182;</a></h3><p>The linear system is solved via an equality-constrained optimization:
 $$
 \begin{align*}
 \min_w &amp;\ w^TAw-w^Tb \\
@@ -15317,7 +15334,7 @@ $$</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h4 id="Solving-the-augmented-system---Approximate">Solving the augmented system - Approximate<a class="anchor-link" href="#Solving-the-augmented-system---Approximate">&#182;</a></h4><p>An alternative, approximate approach is to use a penalty method.  We solve an unconstrained problem instead,
+<h3 id="Solving-the-augmented-system---Approximate">Solving the augmented system - Approximate<a class="anchor-link" href="#Solving-the-augmented-system---Approximate">&#182;</a></h3><p>An alternative, approximate approach is to use a penalty method.  We solve an unconstrained problem instead,
 $$
 \min_w \ w^TAw-w^Tb + \mu \lVert Bw-c \rVert^2
 $$
@@ -15327,6 +15344,295 @@ $$
 (A+\mu B^TB)w = b+\mu B^T c
 $$</p>
 <p>Note that this formulation only approximately satisfies the constraint - only exact when $\mu\rightarrow\infty$.</p>
+
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="2D-Case">2D Case<a class="anchor-link" href="#2D-Case">&#182;</a></h2><p>Slightly more general treatment; skip in class.</p>
+
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>We consider a steady advection-diffusion equation, where $c\in R^2$ is constant.  We delibrately include all possible (simple) BCs</p>
+$$
+\begin{align*}
+c\cdot\nabla u - \Delta u = f(x,y),&amp;\quad \text{in}\quad \Omega \\
+u(x,y) = 0 &amp;\quad \text{on}\quad \Gamma_d^h \\
+u(x,y) = g_1(x,y) &amp;\quad \text{on}\quad \Gamma_d^n \\
+n\cdot\nabla u(x,y) = 0 &amp;\quad \text{on}\quad \Gamma_n^h \\
+n\cdot\nabla u(x,y) = g_2(x,y) &amp;\quad \text{on}\quad \Gamma_n^n
+\end{align*}
+$$<p>Domain: $\Omega$</p>
+<p>Boundary: $\Gamma=\partial\Omega\equiv \Gamma_d\cup\Gamma_n$</p>
+<p>Dirichlet BC: $\Gamma_d = \Gamma_d^h \cup \Gamma_d^n$</p>
+<p>Neumann BC: $\Gamma_n = \Gamma_n^h \cup \Gamma_n^n$</p>
+
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Initial-weak-form-derivation">Initial weak form derivation<a class="anchor-link" href="#Initial-weak-form-derivation">&#182;</a></h3><p>Select $\psi$ that satisfies $\psi=0$ on $\Gamma_d$.</p>
+$$
+\begin{align*}
+&lt;\psi, c\cdot\nabla u - \Delta u&gt; &amp;= &lt;\psi, f&gt; \\
+&lt;\psi, c\cdot\nabla u&gt; - &lt;\psi, \Delta u&gt; &amp;= &lt;\psi, f&gt;
+\end{align*}
+$$
+</div>
+</div>
+</div>
+</div><div class="fragment">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>In the following we will need the integral-by-parts formula:
+$$
+\begin{align*}
+\int_\Omega \psi\nabla\cdot u d\Omega &amp;= \int_\Gamma \psi u\cdot n d\Gamma - \int_\Omega \nabla \psi \cdot u d\Omega \\
+\int_\Omega \psi\Delta u d\Omega &amp;= \int_\Gamma \psi (\nabla u\cdot n) d\Gamma - \int_\Omega \nabla \psi\cdot\nabla u d\Omega
+\end{align*}
+$$</p>
+
+</div>
+</div>
+</div>
+</div></div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>For the <strong>diffusion</strong> term:
+$$
+\begin{align*}
+&lt;\psi, \Delta u&gt; &amp;= \int_\Omega \psi \Delta u d\Omega \\
+&amp;= \int_\Gamma \psi (\nabla u\cdot n) d\Gamma - \int_\Omega \nabla \psi\cdot\nabla u d\Omega \\
+&amp;= \int_\Gamma \psi (n\cdot\nabla u) d\Gamma - &lt; \nabla \psi, \nabla u &gt;
+\end{align*}
+$$</p>
+
+</div>
+</div>
+</div>
+</div><div class="fragment">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>On $\Gamma_d$, $\psi=0$</p>
+<p>On $\Gamma_n^h$, $n\cdot\nabla u=0$</p>
+<p>On $\Gamma_n^n$, $n\cdot\nabla u=g_2$</p>
+<p>So
+$$
+&lt;\psi, \Delta u&gt; = \int_{\Gamma_n^n} \psi g_2 d\Gamma - &lt; \nabla \psi, \nabla u &gt;
+$$</p>
+
+</div>
+</div>
+</div>
+</div></div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>For the <strong>advection</strong> term:
+$$
+\begin{align*}
+&lt;\psi, c\cdot\nabla u&gt; &amp;= \int_\Omega \psi (c\cdot\nabla u) d\Omega \\
+&amp;= \int_\Omega \psi\nabla\cdot (cu) d\Omega \\
+&amp;= \int_\Gamma \psi (cu)\cdot n d\Gamma - \int_\Omega \nabla \psi \cdot (cu) d\Omega \\
+&amp;= \int_\Gamma \psi u (c\cdot n) d\Gamma - &lt; c\cdot\nabla \psi, u &gt;
+\end{align*}
+$$</p>
+
+</div>
+</div>
+</div>
+</div><div class="fragment">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Only know $\psi=0$ on $\Gamma_d$.</p>
+<p>So
+$$
+&lt;\psi, c\cdot\nabla u&gt; = \int_{\Gamma_n} \psi u (c\cdot n) d\Gamma - &lt; c\cdot\nabla \psi, u &gt;
+$$</p>
+
+</div>
+</div>
+</div>
+</div></div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>The <strong>weak form</strong> is now organized as,</p>
+$$
+- &lt; c\cdot\nabla \psi, u &gt; + \int_{\Gamma_n} \psi u (c\cdot n) d\Gamma + &lt; \nabla \psi, \nabla u &gt; = &lt;\psi, f&gt; + \int_{\Gamma_n^n} \psi g_2 d\Gamma
+$$<p>The natural BCs are explicitly incorporated, and <strong>no</strong> further treatment is needed.</p>
+
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Treatment-of-essential-BCs">Treatment of essential BCs<a class="anchor-link" href="#Treatment-of-essential-BCs">&#182;</a></h3><p>Define $u=\phi^Tw+\phi_0$, where:</p>
+<p>$\phi_i=0$ on $\Gamma_d$</p>
+<p>$\phi_0=0$ on $\Gamma_d^h$, $\phi_0=g_1$ on $\Gamma_d^n$</p>
+
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Now consider $\psi=\phi$ and arbitrary choice of basis $\varphi$ that might not satisfy the essential BCs.</p>
+<ul>
+<li>$\phi_0 = \omega^T \varphi$: Use $\varphi$ to represent the non-homogeneous solution.  $\omega$ can be found by, e.g., collocation at $\Gamma_d$, which results in an under-determined equation $B\omega=c$.</li>
+<li>$\phi = P\varphi$: Project the basis with $P=I-B^+B$.</li>
+</ul>
+
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>For clarity, we consider separately</p>
+<ul>
+<li>The diffusion part</li>
+</ul>
+$$
+&lt; \nabla \psi, \nabla \phi &gt;w ;\quad &lt;\psi, f&gt; + \int_{\Gamma_n^n} \psi g_2 d\Gamma - &lt; \nabla \psi, \nabla \phi_0 &gt;
+$$<ul>
+<li>The advection part</li>
+</ul>
+$$
+- &lt; c\cdot\nabla \psi, \phi &gt;w + \left(\int_{\Gamma_n} \psi \phi (c\cdot n) d\Gamma\right)w ;\quad &lt; c\cdot\nabla \psi, \phi_0 &gt; - \int_{\Gamma_n} \psi \phi_0 (c\cdot n) d\Gamma
+$$
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Substitute $\varphi$ into the diffusion part, we get</p>
+$$
+\begin{align*}
+P&lt; \nabla \varphi, \nabla \varphi &gt;P w &amp;;\quad P&lt;\varphi, f&gt; + P\int_{\Gamma_n^n} \varphi g_2 d\Gamma - P&lt; \nabla \varphi, \nabla \varphi &gt; \omega \\
+\Rightarrow\quad PA_dP w &amp;;\quad P(b_1 + b_2 - A_d\omega)
+\end{align*}
+$$<p>This is what was derived earlier for 1D case.</p>
+
+</div>
+</div>
+</div>
+</div><div class="fragment">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Similarly for the advection part, we get</p>
+$$
+P(-A_a+B)Pw ;\quad P(A_a-B)\omega
+$$<p>where</p>
+$$
+A_a = &lt; c\cdot\nabla \varphi, \varphi &gt;,\quad B = \int_{\Gamma_n} \varphi \varphi (c\cdot n) d\Gamma
+$$
+</div>
+</div>
+</div>
+</div></div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Together we have
+$$
+PAPw = P(b - A\omega)
+$$
+where $A=-A_a+B+A_d$.</p>
+<p>The solution is
+$$
+u = w^T\phi+\phi_0 = \varphi^T(Pw+\omega) \equiv \varphi^T\tilde{w}
+$$</p>
+<blockquote><p>This recovers the results from the "finite-element-like" approach.</p>
+</blockquote>
+
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Lastly, we can "reverse-engineer" the optimization problem,
+$$
+\begin{bmatrix}
+A &amp; B^T \\ B &amp; O
+\end{bmatrix}
+\begin{bmatrix}
+\tilde{w} \ \lambda</p>
+<h1 id="%5Cend%7Bbmatrix%7D">\end{bmatrix}<a class="anchor-link" href="#%5Cend%7Bbmatrix%7D">&#182;</a></h1>\begin{bmatrix}
+b \\ c
+\end{bmatrix}<p>$$</p>
 
 </div>
 </div>
