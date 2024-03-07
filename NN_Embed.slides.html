@@ -15114,7 +15114,7 @@ $$</p>
 $$
 \begin{align*}
 \min_{\vtt} &amp;\quad J(u;\vtt) \equiv \int_0^1 (u-u^*)^2 dx \\
-\mathrm{s.t.} &amp;\quad p u' - u'' = f(x;\theta),\quad u(0)=u_0,\ u'(1)=n_1
+\mathrm{s.t.} &amp;\quad p u' - u'' = f(x;\vtt),\quad u(0)=u_0,\ u'(1)=n_1
 \end{align*}
 $$</p>
 
@@ -15130,8 +15130,6 @@ $$</p>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">xx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">41</span><span class="p">)</span>
-<span class="n">c0</span> <span class="o">=</span> <span class="mi">439</span><span class="o">/</span><span class="mi">5000</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-<span class="n">fu</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">c0</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">10</span><span class="o">*</span><span class="n">x</span><span class="p">))</span> <span class="o">+</span> <span class="n">x</span><span class="o">/</span><span class="mi">500</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="mi">100</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mi">3</span><span class="o">/</span><span class="mi">30</span>
 <span class="n">f</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">fu</span><span class="p">(</span><span class="n">xx</span><span class="p">));</span>
 </pre></div>
