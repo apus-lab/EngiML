@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
 
-<title>index slides</title><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>cav24_arch slides</title><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 
 <!-- General and theme style sheets -->
 <link rel="stylesheet" href="https://unpkg.com/reveal.js@4.0.2/dist/reveal.css">
@@ -14658,7 +14658,7 @@ div.jp-OutputPrompt {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Machine-Learning-for-Engineering">Machine Learning for Engineering<a class="anchor-link" href="#Machine-Learning-for-Engineering">&#182;</a></h2><h3 id="Instructor:-Daning-Huang">Instructor: <a href="https://apus-lab.github.io">Daning Huang</a><a class="anchor-link" href="#Instructor:-Daning-Huang">&#182;</a></h3>
+<h2 id="2024-CAV-Short-Course">2024 CAV Short Course<a class="anchor-link" href="#2024-CAV-Short-Course">&#182;</a></h2><h1 id="Machine-Learning-&amp;-AI-in-Acoustics-and-Vibration">Machine Learning &amp; AI in Acoustics and Vibration<a class="anchor-link" href="#Machine-Learning-&amp;-AI-in-Acoustics-and-Vibration">&#182;</a></h1><h2 id="Session-1,-Part-I:-Common-Architectures">Session 1, Part I: Common Architectures<a class="anchor-link" href="#Session-1,-Part-I:-Common-Architectures">&#182;</a></h2><h2 id="Instructor:-Daning-Huang">Instructor: Daning Huang<a class="anchor-link" href="#Instructor:-Daning-Huang">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -14669,34 +14669,56 @@ div.jp-OutputPrompt {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Introduction">Introduction<a class="anchor-link" href="#Introduction">&#182;</a></h2><p>This website hosts the slides used for the AERSP/ME 597 course taught at Penn State.</p>
-<p>This course has a strong focus on regression (almost no classification).  It</p>
-<ul>
-<li>covers the machine learning techniques for the data-driven modeling and data analysis with emphasis on aerospace engineering applications, and</li>
-<li>exposes the students to the latest advances in the data-driven modeling studies that would be beneficial to their research.</li>
-</ul>
-<p>The topics are accompanied by case studies representing the application of machine learning techniques in aerospace engineering research.  Knowledge of multivariate calculus and basic linear algebra is required, and some familiarity with probability would be helpful.</p>
-
+$$
+\newcommand\ppf[2]{\dfrac{\partial #1}{\partial #2}}
+\newcommand\norm[1]{\left\Vert#1\right\Vert}
+\newcommand{\bR}{\mathbb{R}}
+\newcommand{\cD}{\mathcal{D}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\cN}{\mathcal{N}}
+\newcommand{\vF}{\mathbf{F}}
+\newcommand{\vH}{\mathbf{H}}
+\newcommand{\vI}{\mathbf{I}}
+\newcommand{\vK}{\mathbf{K}}
+\newcommand{\vL}{\mathbf{L}}
+\newcommand{\vM}{\mathbf{M}}
+\newcommand{\vO}{\mathbf{O}}
+\newcommand{\vQ}{\mathbf{Q}}
+\newcommand{\vV}{\mathbf{V}}
+\newcommand{\vW}{\mathbf{W}}
+\newcommand{\vb}{\mathbf{b}}
+\newcommand{\vf}{\mathbf{f}}
+\newcommand{\vh}{\mathbf{h}}
+\newcommand{\vm}{\mathbf{m}}
+\newcommand{\vx}{\mathbf{x}}
+\newcommand{\vy}{\mathbf{y}}
+$$
 </div>
 </div>
 </div>
-</div></section><section>
+</div></section></section><section><section>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Specifically, the course consists of following topics:</p>
-<ul>
-<li>Mathematical background</li>
-<li>Linear regression</li>
-<li>Gaussian process regression</li>
-<li>Neural networks</li>
-<li>High-Dimensional systems</li>
-<li>Dynamical and differential systems</li>
+<h2 id="Classical-Deep-Architectures">Classical Deep Architectures<a class="anchor-link" href="#Classical-Deep-Architectures">&#182;</a></h2><ul>
+<li>Convolutional Neural Network (CNN)<ul>
+<li>Widely used for image modeling</li>
+<li>e.g. object recognition, segmentation, vision-based reinforcement learning problems</li>
+<li>e.g. flow analysis and modeling (i.e. thinking the flow field as 2D/3D images)</li>
 </ul>
-<p>See following slides for more details</p>
+</li>
+<li>Recurrent Neural Network (RNN)<ul>
+<li>Widely used for sequential data modeling</li>
+<li>e.g. machine translation, image caption generation</li>
+<li>e.g. time series analysis and forecasting, nonlinear dynamics</li>
+</ul>
+</li>
+</ul>
+<blockquote><p>These are mainly the cases of <strong>inductive</strong> bias.</p>
+</blockquote>
 
 </div>
 </div>
@@ -14708,50 +14730,9 @@ div.jp-OutputPrompt {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Mathematical background</p>
-<ul>
-<li><a href="Math_LA.slides.html">Linear Algebra</a></li>
-<li><a href="Math_Prob.slides.html">Probability Theory</a>, <a href="Math_Prob_supp_mat.pdf">Supp. notes</a></li>
-<li><a href="Math_Opt.slides.html">Optimization</a></li>
-<li><a href="Math_DE.slides.html">Differential Equations</a></li>
-</ul>
-<p>Linear regression</p>
-<ul>
-<li><a href="LR_Basics.slides.html">Basics</a></li>
-<li><a href="LR_Reg.slides.html">Regularization</a></li>
-<li><a href="LR_Prob.slides.html">Probability Formulation</a></li>
-<li><a href="LR_BiasVar.slides.html">Model Selection</a></li>
-<li><a href="LR_Kern.slides.html">Kernel Method</a></li>
-<li>More Variants <a href="LR_Variants.slides.html">draft</a></li>
-</ul>
-
-</div>
-</div>
-</div>
-</div></section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Gaussian process regression</p>
-<ul>
-<li><a href="GPR_Basics.slides.html">Basics</a></li>
-<li><a href="GPR_Prob.slides.html">Formulation</a></li>
-<li><a href="GPR_MCMC.slides.html">Markov Chain Monte Carlo</a></li>
-<li><a href="GPR_Sampling.slides.html">Sampling</a></li>
-<li><a href="GPR_BO.pdf">Bayesian Optimization (PDF)</a> <a href="GPR_BO.slides.html">slides (draft)</a></li>
-<li><a href="GPR_Variants.pdf">Variants (PDF)</a> <a href="GPR_Variants.slides.html">slides (draft)</a></li>
-</ul>
-<p>Neural networks</p>
-<ul>
-<li><a href="NN_Basics.slides.html">Basics</a></li>
-<li><a href="NN_GD.slides.html">Training</a></li>
-<li><a href="NN_BP.slides.html">Automatic Differentiation</a></li>
-<li><a href="NN_Variants.slides.html">Common Architectures</a></li>
-<li><a href="NN_Embed.slides.html">Model Embedding</a></li>
-<li><a href="NN_PI.slides.html">Physics-Informed NN</a></li>
+<h2 id="Convolutional-Neural-Network">Convolutional Neural Network<a class="anchor-link" href="#Convolutional-Neural-Network">&#182;</a></h2><ul>
+<li>A special kind of multi-layer neural network</li>
+<li>Traditionally designed to recognize visual patterns directly from raw pixels</li>
 </ul>
 
 </div>
@@ -14764,24 +14745,69 @@ div.jp-OutputPrompt {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>High-Dimensional systems</p>
-<ul>
-<li><a href="HD_Basics.slides.html">Basics</a></li>
-<li><a href="HD_Spatial.slides.html">Spatial Decomposition</a></li>
-<li><a href="HD_VAE.slides.html">Autoencoders</a></li>
-<li><a href="HD_Clustering.slides.html">Clustering</a></li>
-<li><a href="HD_Temporal.slides.html">Temporal Decomposition</a></li>
+<h3 id="Multi-layer-Perceptron-(MLP)">Multi-layer Perceptron (MLP)<a class="anchor-link" href="#Multi-layer-Perceptron-(MLP)">&#182;</a></h3><ul>
+<li>Consider 100x100 input pixels</li>
+<li>1 hidden layer with 10000 hidden units</li>
+<li><strong>100M parameters</strong> $\rightarrow$ infeasible!
+$\rightarrow$ Pixels are locally correlated!
+<img src="pics/cnn_ex1.png" width=400px /></li>
 </ul>
-<p>Dynamical and differential systems</p>
-<ul>
-<li><a href="DS_Basics.slides.html">Basics</a></li>
-<li><a href="DS_Lin.slides.html">Linear System</a></li>
-<li><a href="L22_DS_Nonnormal.slides.html">Nonnormality</a>, <a href="L22E_DS_DMD_Revisit.slides.html">DMD Revisited</a></li>
-<li><a href="L23_DS_NL.slides.html">Tackling Nonlinearity</a></li>
-<li><a href="L24_DS_Regr.slides.html">Sparse Regression</a></li>
-<li><a href="L25_Koopman.slides.html">Koopman</a></li>
-<li><a href="DS_Opt.slides.html">Differentially-constrained problems</a></li>
-<li>Neural ODEs (TBA)</li>
+
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Locally-connected-Neural-Network">Locally-connected Neural Network<a class="anchor-link" href="#Locally-connected-Neural-Network">&#182;</a></h3><ul>
+<li>Consider 100x100 input pixels</li>
+<li>Each unit is connected to 10x10 pixels.</li>
+<li>Each unit extracts a local pattern from the image.</li>
+<li>10000 hidden units</li>
+<li><strong>1M parameters</strong> $\rightarrow$ still too large
+<img src="pics/cnn_ex2.png" width=400px /></li>
+</ul>
+
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Convolutional-Neural-Network-(one-filter)">Convolutional Neural Network (one filter)<a class="anchor-link" href="#Convolutional-Neural-Network-(one-filter)">&#182;</a></h3><ul>
+<li>Consider 100x100 input pixels</li>
+<li>Apply the <strong>same filter (weight)</strong> over the entire image.</li>
+<li>Hidden units form a 100x100 <strong>feature map</strong>.</li>
+<li>10x10 parameters. <br />
+$\rightarrow$ <strong>only captures a single local pattern.</strong>
+<img src="pics/cnn_ex3.png" width=700px /></li>
+</ul>
+
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Convolutional-Neural-Network-(multiple-filters)">Convolutional Neural Network (multiple filters)<a class="anchor-link" href="#Convolutional-Neural-Network-(multiple-filters)">&#182;</a></h3><ul>
+<li>100x100 input pixels</li>
+<li>Apply K number of 10x10 filters. </li>
+<li>Hidden units form a Kx100x100 feature map.</li>
+<li>Kx10x10 parameters. <br /></li>
+<li>Num of filters and size of filters are hyperparameters.
+<img src="pics/cnn_ex4.png" width=800px /></li>
 </ul>
 
 </div>
@@ -14794,21 +14820,206 @@ div.jp-OutputPrompt {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="References">References<a class="anchor-link" href="#References">&#182;</a></h2><ol>
-<li>[PRML] Pattern Recognition and Machine Learning, Christopher Bishop, 2006.</li>
-<li>[MLaPP] Machine Learning: A Probabilistic Perspective, Kevin P. Murphy, 2012.</li>
-<li>[GPML] Gaussian Processes for Machine Learning, C. E. Rasmussen and C. K. I. Williams, 2006.</li>
-<li>[DMSC] Data-driven Modeling and Scientific Computation, Nathan Kutz, 2013.</li>
-</ol>
-<h2 id="Relevant-Courses">Relevant Courses<a class="anchor-link" href="#Relevant-Courses">&#182;</a></h2><ol>
-<li>More basic ones: <a href="https://www.eecs189.org/">Berkeley CS 189</a>, <a href="https://cs229.stanford.edu/">Stanford CS 229</a></li>
-<li>CNN-specific: <a href="http://cs231n.stanford.edu/">Stanford CS 231n</a></li>
-<li>ML with a Linear Algebra flavor: <a href="https://ocw.mit.edu/courses/mathematics/18-065-matrix-methods-in-data-analysis-signal-processing-and-machine-learning-spring-2018/">MIT 18.065</a></li>
-</ol>
-<h2 id="Credits:">Credits:<a class="anchor-link" href="#Credits:">&#182;</a></h2><ol>
-<li><a href="https://github.com/thejakeyboy/umich-eecs545-lectures">UMich EECS 545</a></li>
-<li>@evislomo for generating the homework solutions</li>
-</ol>
+<h3 id="Typical-Deep-CNN-Architecture">Typical Deep CNN Architecture<a class="anchor-link" href="#Typical-Deep-CNN-Architecture">&#182;</a></h3><p><img src="pics/typical_cnn.png" width=800px /></p>
+
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Details-of-Convolution">Details of Convolution<a class="anchor-link" href="#Details-of-Convolution">&#182;</a></h3><p><img src="pics/convolution_step1.png" width=800px /></p>
+
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Details-of-Convolution:-Convolutional-Filtering">Details of Convolution: Convolutional Filtering<a class="anchor-link" href="#Details-of-Convolution:-Convolutional-Filtering">&#182;</a></h3><ul>
+<li>A filter has $\textbf{W} \in \mathbb{R}^{h \times w}$ weights (bias is omitted for simplicity).</li>
+<li>Compute inner products between $\textbf{W}$ and $h \times w$ input patches by sliding window.<ul>
+<li>The same weight is shared across the entire image.</li>
+</ul>
+</li>
+<li>The following animation shows the simplest case: one-channel input, one filter
+<img src=pics/convolution.gif width=350px />
+<span style="color:gray; font-size:10px; float:right">(Figure from Stanford UFLDL Tutorial)</span></li>
+</ul>
+
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Details-of-Convolution:-Convolutional-Filtering">Details of Convolution: Convolutional Filtering<a class="anchor-link" href="#Details-of-Convolution:-Convolutional-Filtering">&#182;</a></h3><ul>
+<li>In general, an input consists of multiple channels.<ul>
+<li>Each filter has $\textbf{W} \in \mathbb{R}^{c \times h \times w}$ weight ($c$: #channels of input).</li>
+</ul>
+</li>
+<li>Applying $K$ different filters $\rightarrow$ produces a 3D feature map (stacked through channels).</li>
+<li>Hyperparameters: num of filters, size of filters</li>
+<li>The following figure shows the general case: multi-channel input, mutilple filters
+<img src=pics/convolution_multi.png width=500px />
+<span style="color:gray; font-size:10px; float:right">(Figure from Yann LeCun)</span></li>
+</ul>
+
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Details-of-Convolution:-Non-linearity">Details of Convolution: Non-linearity<a class="anchor-link" href="#Details-of-Convolution:-Non-linearity">&#182;</a></h3><ul>
+<li>Method: Just apply non-linear function (e.g., Sigmoid, ReLU)</li>
+<li>ReLU is preferred because it is easier to optimize.
+<img src="pics/convolution_step2.png" width=800px /></li>
+</ul>
+
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Details-of-Convolution:-Pooling">Details of Convolution: Pooling<a class="anchor-link" href="#Details-of-Convolution:-Pooling">&#182;</a></h3><p><img src="pics/convolution_step3.png" width=800px /></p>
+
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Details-of-Convolution:-Pooling">Details of Convolution: Pooling<a class="anchor-link" href="#Details-of-Convolution:-Pooling">&#182;</a></h3><ul>
+<li>Method: Take average or maximum over HxW region of input feature.</li>
+<li>Outcome<ul>
+<li>Shrink the number of hidden units.$\rightarrow$ reduces the number of parameters at the end.</li>
+<li>Make features robust to small translations of image.</li>
+</ul>
+</li>
+<li>Hyperparameters: pooling method (avg or max), pooling size</li>
+<li>Often called "sub-sampling"
+<img src=pics/pooling.gif width=500px />
+<span style="color:gray; font-size:10px; float:right">(Figure from Stanford UFLDL Tutorial)</span></li>
+</ul>
+
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Illustration-of-Deep-CNN">Illustration of Deep CNN<a class="anchor-link" href="#Illustration-of-Deep-CNN">&#182;</a></h3><ul>
+<li>Feature maps become smaller in higher layers due to pooling.</li>
+<li>Hidden units in higher layers capture patterns from larger input patches.
+<img src=pics/deep_cnn.png />
+<span style="color:gray; font-size:10px; float:right">(Figure from Yann LeCun)</span></li>
+</ul>
+
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="What-is-learned-by-CNN?-Filter-Visualization">What is learned by CNN? Filter Visualization<a class="anchor-link" href="#What-is-learned-by-CNN?-Filter-Visualization">&#182;</a></h3><ul>
+<li>Train a deep CNN on <em>ImageNet</em> (1.2M images, 1000 classes)</li>
+<li>Perform forward propagations from many examples</li>
+<li>Find image patches that strongly activate a specific feature map (filter)</li>
+<li>Reconstruct the input patch from the feature map</li>
+<li>Proposed by Zeiler and Fergus (ECCV 2014)</li>
+</ul>
+
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Filter-Visualization:-1st-and-2nd-Layer">Filter Visualization: 1st and 2nd Layer<a class="anchor-link" href="#Filter-Visualization:-1st-and-2nd-Layer">&#182;</a></h3><p><img src=pics/cnn_visualization1.png width=700px /></p>
+
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Filter-Visualization:-3rd-Layer">Filter Visualization: 3rd Layer<a class="anchor-link" href="#Filter-Visualization:-3rd-Layer">&#182;</a></h3><ul>
+<li>Shows more complex patterns
+<img src=pics/cnn_visualization2.png width=1000px /></li>
+</ul>
+
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Filter-Visualization:-4th-Layer">Filter Visualization: 4th Layer<a class="anchor-link" href="#Filter-Visualization:-4th-Layer">&#182;</a></h3><ul>
+<li>More class-specific
+<img src=pics/cnn_visualization3.png width=1000px /></li>
+</ul>
+
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Filter-Visualization:-5th-Layer">Filter Visualization: 5th Layer<a class="anchor-link" href="#Filter-Visualization:-5th-Layer">&#182;</a></h3><ul>
+<li>Shows entire objects with pose variations</li>
+<li>Each filter can be viewed as a part detector. (e.g., dog face, text, animal leg)
+<img src=pics/cnn_visualization4.png width=1000px /></li>
+</ul>
 
 </div>
 </div>
@@ -14820,11 +15031,416 @@ div.jp-OutputPrompt {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="CAV-Workshop">CAV Workshop<a class="anchor-link" href="#CAV-Workshop">&#182;</a></h2><ul>
-<li><a href="cav24_basics.slides.html">Basics</a></li>
-<li><a href="cav24_train_sgd.slides.html">Training: gradient descent</a></li>
-<li><a href="cav24_train_bp.slides.html">Training: back propagation</a></li>
-<li><a href="cav24_arch.slides.html">Common architectures</a></li>
+<p>An online interactive CNN visualization example:</p>
+<ul>
+<li><a href="https://poloclub.github.io/cnn-explainer/">https://poloclub.github.io/cnn-explainer/</a></li>
+</ul>
+
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Comparison-to-Traditional-Approach">Comparison to Traditional Approach<a class="anchor-link" href="#Comparison-to-Traditional-Approach">&#182;</a></h3><p><img src=pics/cnn_comparison.png width=1000px /></p>
+
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Summary-of-Convolutional-Neural-Network">Summary of Convolutional Neural Network<a class="anchor-link" href="#Summary-of-Convolutional-Neural-Network">&#182;</a></h3><ul>
+<li>Convolutional Neural Network: a special kind of neural network with local connectivity and weight sharing.</li>
+<li>Achieves state-of-the-art performances on many different computer visoin tasks.</li>
+<li>Higher layers extract high-level features (e.g., dog face).</li>
+<li>Learned features can be generally used for other vision tasks.</li>
+</ul>
+
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Recurrent-Neural-Networks-(RNN)">Recurrent Neural Networks (RNN)<a class="anchor-link" href="#Recurrent-Neural-Networks-(RNN)">&#182;</a></h2><ul>
+<li>A special kind of neural network designed for modeling sequential data<ul>
+<li>Can take arbitrary number of inputs</li>
+<li>Can produce arbitrary number of outputs</li>
+</ul>
+</li>
+<li>Examples of sequential problems<ul>
+<li>Machine translation</li>
+<li>Speech recognition</li>
+<li>Image caption generation</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Forward-Propagation">Forward Propagation<a class="anchor-link" href="#Forward-Propagation">&#182;</a></h3><p><img src="pics/simple_rnn_fprop.png" width=700px /></p>
+
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Forward-Propagation">Forward Propagation<a class="anchor-link" href="#Forward-Propagation">&#182;</a></h3>$$ \textbf{h}_t = f(\textbf{W}\textbf{x}_t + \textbf{U}\textbf{h}_{t-1}+\textbf{b}) $$$$ \hat{\textbf{y}}_t = \textbf{V}\textbf{h}_t + \textbf{b}' $$$$ \mathcal{L} = \sum_{t=1}^{T} \mathcal{L}_t \left( \textbf{y}_t, \hat{\textbf{y}}_t \right) $$<ul>
+<li>$\textbf{W}$: input weight, $\textbf{U}$: recurrent weight, $\textbf{V}$: output weight, $\textbf{b},\textbf{b}'$: bias, $f$: non-linear activation (e.g., ReLU)</li>
+<li>Weights are shared across time: the number of parameters does not depend on the length of input/output sequence</li>
+</ul>
+<p><img src="pics/simple_rnn.png" width=400px /></p>
+
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Backpropagation-Through-Time-(BPTT)">Backpropagation Through Time (BPTT)<a class="anchor-link" href="#Backpropagation-Through-Time-(BPTT)">&#182;</a></h3><ul>
+<li>Gradient w.r.t. hidden units (assuming that $\ppf{\cL}{\vh_{t+1}}$ is given)
+$$
+\begin{align*}
+\frac{\partial\mathcal{L}}{\partial \textbf{h}_t} = \sum_{\tau=t}^{T}\frac{\partial\mathcal{L}_{\tau}}{\partial \textbf{h}_t} &amp;= \frac{\partial \mathcal{L}_t}{\partial \textbf{h}_t} + \frac{\partial \textbf{h}_{t+1}}{\partial \textbf{h}_{t}} \frac{\partial \sum_{\tau=t+1}^{T}\mathcal{L}_{\tau}}{\partial \textbf{h}_{t+1}} \\
+&amp;= \underbrace{\frac{\partial \mathcal{L}_t}{\partial \hat{\textbf{y}}_t}}_{\mbox{easy}}\underbrace{\frac{{\partial \hat{\textbf{y}}_t}}{\partial \textbf{h}_t}}_{\mbox{easy}} + \underbrace{\frac{\partial \textbf{h}_{t+1}}{\partial \textbf{h}_{t}}}_{\mbox{easy}} \underbrace{\frac{\partial \mathcal{L}}{\partial \textbf{h}_{t+1}}}_{\mbox{given}}
+\end{align*}
+$$ </li>
+</ul>
+<p><img src="pics/simple_rnn_fprop.png" width=400px /></p>
+
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Backpropagation-Through-Time-(BPTT)">Backpropagation Through Time (BPTT)<a class="anchor-link" href="#Backpropagation-Through-Time-(BPTT)">&#182;</a></h3><ul>
+<li>Gradient w.r.t. input units (given $\ppf{\cL}{\vh_t}$)
+$$ \frac{\partial\mathcal{L}}{\partial \textbf{x}_t} = \frac{\partial \mathcal{L}}{\partial \textbf{h}_t}\frac{\partial \textbf{h}_t}{\partial \textbf{x}_t} $$
+<img src="pics/simple_rnn_fprop.png" width=400px /></li>
+</ul>
+
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Backward-Propagation">Backward Propagation<a class="anchor-link" href="#Backward-Propagation">&#182;</a></h3><p><img src="pics/simple_rnn_back2.png" width=700px align="middle" /></p>
+
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Backward-Propagation">Backward Propagation<a class="anchor-link" href="#Backward-Propagation">&#182;</a></h3><p><img src="pics/simple_rnn_back3.png" width=700px /></p>
+
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Backward-Propagation">Backward Propagation<a class="anchor-link" href="#Backward-Propagation">&#182;</a></h3><p><img src="pics/simple_rnn_back4.png" width=700px /></p>
+
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Backward-Propagation">Backward Propagation<a class="anchor-link" href="#Backward-Propagation">&#182;</a></h3><p><img src="pics/simple_rnn_back5.png" width=700px /></p>
+
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Backward-Propagation">Backward Propagation<a class="anchor-link" href="#Backward-Propagation">&#182;</a></h3><p><img src="pics/simple_rnn_back6.png" width=700px /></p>
+
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Backward-Propagation">Backward Propagation<a class="anchor-link" href="#Backward-Propagation">&#182;</a></h3><p><img src="pics/simple_rnn_back7.png" width=700px /></p>
+
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Backpropagation-Through-Time-(BPTT)">Backpropagation Through Time (BPTT)<a class="anchor-link" href="#Backpropagation-Through-Time-(BPTT)">&#182;</a></h3><ul>
+<li>Gradient w.r.t. weights<ul>
+<li>Recall: The weights are shared through time. Gradients of shared weights should be accumulated!</li>
+</ul>
+</li>
+</ul>
+$$
+\color{red}{\dfrac{\partial \mathcal{L}}{\partial \textbf{V}} = \sum_{t=1}^{T}\dfrac{\partial \mathcal{L}}{\partial \hat{\textbf{y}}_t}\dfrac{\partial \hat{\textbf{y}}_t}{\partial \textbf{V}}},\quad \color{blue}{\dfrac{\partial \mathcal{L}}{\partial \textbf{W}} = \sum_{t=1}^{T}\dfrac{\partial \mathcal{L}}{\partial \textbf{h}_t}\dfrac{\partial \textbf{h}_t}{\partial \textbf{W}}},\quad \color{green}{\dfrac{\partial \mathcal{L}}{\partial \textbf{U}} = \sum_{t=1}^{T-1}\dfrac{\partial \mathcal{L}}{\partial \textbf{h}_{t+1}}\dfrac{\partial \textbf{h}_{t+1}}{\partial \textbf{U}}}
+$$<p><img src="pics/simple_rnn_back_w.png" width=600px/></p>
+
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Summary-of-Standard-Recurrent-Neural-Network">Summary of Standard Recurrent Neural Network<a class="anchor-link" href="#Summary-of-Standard-Recurrent-Neural-Network">&#182;</a></h3><ul>
+<li>RNN is actually not much different from a standard (feedforward) neural network except that:<ul>
+<li>Input/output are given through time.</li>
+<li>Weights are extensively shared.</li>
+</ul>
+</li>
+<li>RNN can be viewed as a very deep feedforward neural network with shared weights.</li>
+</ul>
+
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Vanshing-Gradient-Problem">Vanshing Gradient Problem<a class="anchor-link" href="#Vanshing-Gradient-Problem">&#182;</a></h3><ul>
+<li>RNN can model arbitrary sequences if properly trained.</li>
+<li>In practice, it is difficult to train an RNN to learn long-term dependencies because of vanishing gradient.</li>
+<li>Intuition of vanishing gradient<ul>
+<li>A hidden unit activation is not well-preserved to the long-term future (forward propagation view)</li>
+<li>Gradients are diffused through time (backward propagation view)</li>
+</ul>
+</li>
+</ul>
+<p><img src="pics/vanish_rnn.png" alt="">
+<span style="color:gray; font-size:10px; float:right">(Figure from Alex Graves)</span></p>
+
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Mathematical details: Let $\norm{\ppf{\vh_{\tau+1}}{\vh_\tau}}\approx \alpha$</p>
+$$
+\begin{align*}
+\norm{\ppf{\cL}{\vh_t}} &amp;\propto \norm{\ppf{\vh_{t+1}}{\vh_t}\ppf{\cL}{\vh_{t+1}}} \propto \norm{ \left(\prod_{\tau=t}^{T-1}\ppf{\vh_{\tau+1}}{\vh_\tau}\right) \ppf{\cL}{\vh_T}} \leq \prod_{\tau=t}^{T-1}\norm{\ppf{\vh_{\tau+1}}{\vh_\tau}} \norm{\ppf{\cL}{\vh_T}} \\
+&amp;\Rightarrow \norm{\ppf{\cL}{\vh_t}} \approx \alpha^{T-t} \norm{\ppf{\cL}{\vh_T}}
+\end{align*}
+$$<p>At very old steps, i.e. when $T\gg t$,</p>
+<ul>
+<li>If $\alpha&lt;1$, $\ppf{\cL}{\vh_t} \ll \ppf{\cL}{\vh_T}\quad \Rightarrow$ <strong>Gradient vanishing</strong></li>
+<li>If $\alpha&gt;1$, $\ppf{\cL}{\vh_t} \rightarrow \infty\quad \Rightarrow$ <strong>Gradient explosion</strong></li>
+</ul>
+
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Long-Short-Term-Memory-(LSTM)">Long Short-Term Memory (LSTM)<a class="anchor-link" href="#Long-Short-Term-Memory-(LSTM)">&#182;</a></h3><ul>
+<li>A special type of RNN that can handle vanishing gradient better.</li>
+<li>$i_t,o_t,f_t$: <strong>input gate</strong>, <strong>output gate</strong>, and <strong>forget gate</strong></li>
+<li>$c_t$: <strong>memory cell</strong> containing information about history of inputs</li>
+<li>$h_t$: output activation
+<img src=pics/lstm.png width=700px />
+<span style="color:gray; font-size:10px; float:right">(Figure from Alex Graves)</span></li>
+</ul>
+
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Long-Short-Term-Memory-(LSTM)">Long Short-Term Memory (LSTM)<a class="anchor-link" href="#Long-Short-Term-Memory-(LSTM)">&#182;</a></h3><ul>
+<li>Gating mechanism<ul>
+<li>Input gate: whether to ignore a new input or not</li>
+<li>Output gate: whether to produce an output or not (while preserving the memory cell)</li>
+<li>Forget gate: whether to erase the memory cell or not</li>
+</ul>
+</li>
+<li>Gating is controlled by LSTM's weights that are also learned from data.
+<img src="pics/vanish_lstm.png" alt="">
+<span style="color:gray; font-size:10px; float:right">(Figure from Alex Graves)</span></li>
+</ul>
+
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Residual-Networks-and-Infinite-depth-Models">Residual Networks and Infinite-depth Models<a class="anchor-link" href="#Residual-Networks-and-Infinite-depth-Models">&#182;</a></h2><p>The vanishing gradient problem turns out to be universal in deep learning, e.g. in CNN architectures.</p>
+<p>This leads to the <strong>skip connection</strong> technique (which is now standard) and the Residual Network (ResNet).</p>
+<p><img src=pics/resnet_12.png width=400px /></p>
+<p>Ref: Deep Residual Learning for Image Recognition, arXiv 1512.03385 (200k+ citations as of Mar. 2024...)</p>
+
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Skip-Connection">Skip Connection<a class="anchor-link" href="#Skip-Connection">&#182;</a></h3><p>The ResNet essentially makes the following change:
+$$
+\vx^{(j+1)} = \vF(\vx^{(j)}) \quad\Rightarrow\quad \vx^{(j+1)} = \vx^{(j)} + \vF(\vx^{(j)})
+$$
+to provide a "bypass" for the back-propagation.</p>
+<p><img src=pics/resnet_skip.png width=400px /></p>
+
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="But...-Isn't-that-Euler-method?">But... Isn't that Euler method?<a class="anchor-link" href="#But...-Isn't-that-Euler-method?">&#182;</a></h3><p>Recall for a first-order ordinary differential equation (ODE)
+$$
+\dot\vx = \vf(\vx),\quad \vx(0)=\vx_0,\quad t\in[0,T]
+$$
+Forward Euler method with step size $\Delta t$, $\vx_j=\vx(j\Delta t)$
+$$
+\vx^{j+1} = \vx^{j} + \Delta t\vf(\vx^{j})
+$$
+Then $\Delta t\vf(\vx^{j})$ is as if the ResNet block $\vF(\vx^{(j)})$ in previous slide!</p>
+
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="This-leads-to-Neural-ODEs">This leads to Neural ODEs<a class="anchor-link" href="#This-leads-to-Neural-ODEs">&#182;</a></h3>$$
+\dot\vx = \vf(\vx),\quad \vx(0)=\vx_0,\quad t\in[0,T]
+$$<ul>
+<li>$\vx_0$ is the input</li>
+<li>$\vf(\vx)$ is a neural network</li>
+<li>$\dot\vx = \vf(\vx)$ governs the forward propagation (think in terms of forward Euler)</li>
+<li>$\vx(T)$ is the output</li>
+<li>$t$ is like the "index" of layers - now infinite! <a href="https://arxiv.org/abs/1806.07366">ref</a></li>
+</ul>
+<p><img src=pics/neural_ode.png width=400px /></p>
+
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>But ...</p>
+<ul>
+<li>If $\dot\vx = \vf(\vx)$ is the forward propagation</li>
+<li>What is the back-propagation?<ul>
+<li>We need the continuous adjoint formulation.</li>
+<li>There we will generalize NODE to model dynamical systems.</li>
+</ul>
+</li>
 </ul>
 
 </div>
