@@ -15416,12 +15416,13 @@ This is the <strong>Reverse mode</strong>, good for more inputs than outputs.</p
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="How-about-Implicit-functions?">How about Implicit functions?<a class="anchor-link" href="#How-about-Implicit-functions?">&#182;</a></h3><p>Not unusual - e.g. a linear solve $f(x)=Ax-b=0$</p>
+<h3 id="How-about-Implicit-functions?">How about Implicit functions?<a class="anchor-link" href="#How-about-Implicit-functions?">&#182;</a></h3><p>Not unusual - e.g. a Newton solve for x, $f(x,b)=x^TAx-b=0$, given b</p>
 
-<pre><code>x = np.linalg.solve(A, b)</code></pre>
-<p>where $A^{-1}$ is typically not explicitly defined/computed.</p>
-<blockquote><p>To be discussed later - "implicit layers"</p>
-</blockquote>
+<pre><code>x = minimize(f, x0=init_guess)</code></pre>
+<p>Use implicit function theorem
+$$
+\frac{\partial x}{\partial b} = \left(\frac{\partial f}{\partial x}\right)^{-1} \frac{\partial f}{\partial b}
+$$</p>
 
 </div>
 </div>

@@ -14923,13 +14923,13 @@ $$\tilde{H} = \lambda I + H,\quad \lambda&gt;0$$</li>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Simple-Gradient-Descent">Simple Gradient Descent<a class="anchor-link" href="#Simple-Gradient-Descent">&#182;</a></h2><h3 id="Batch-mode">Batch mode<a class="anchor-link" href="#Batch-mode">&#182;</a></h3><p>Given dataset $\{ (x,t) \}$ and initial guess $\vec{w}_0$, repeat until convergence:</p>
+<h2 id="Simple-Gradient-Descent">Simple Gradient Descent<a class="anchor-link" href="#Simple-Gradient-Descent">&#182;</a></h2><h3 id="Batch-mode">Batch mode<a class="anchor-link" href="#Batch-mode">&#182;</a></h3><p>Given dataset $\{ (x,t) \}$ and initial guess $\theta_0$, repeat until convergence:</p>
 <ul>
-<li>$\vec{w} = \vec{w} - \eta \nabla_\vec{w} E(\vec{w})$</li>
+<li>$\theta = \theta - \eta \nabla_\theta \mathcal{L}(\theta)$</li>
 </ul>
 <p>where $\eta$ is the step size(s), or <strong>learning rate</strong>, and assuming quadratic loss,</p>
 $$
-\nabla_w E(\vec{w}) = \sum_{n=1}^N \left[ f\left( \textbf{x}^{(n)} ; \theta \right) - y^{(n)} \right] \frac{\partial f\left( \textbf{x}^{(n)} ; \theta \right)}{\partial \theta}
+\nabla_\theta \mathcal{L}(\theta) = \sum_{n=1}^N \left[ f\left( \textbf{x}^{(n)} ; \theta \right) - y^{(n)} \right] \frac{\partial f\left( \textbf{x}^{(n)} ; \theta \right)}{\partial \theta}
 $$<ul>
 <li>Disadvantage: Can be slow if the network is large and the dataset is huge</li>
 </ul>
@@ -14947,10 +14947,10 @@ $$<ul>
 <h3 id="Stochastic-mode,-a.k.a.,-Stochastic-Gradient-Descent-(SGD)">Stochastic mode, a.k.a., Stochastic Gradient Descent (SGD)<a class="anchor-link" href="#Stochastic-mode,-a.k.a.,-Stochastic-Gradient-Descent-(SGD)">&#182;</a></h3><p><strong>Main Idea:</strong>  Instead of computing batch gradient (over entire training data), just compute gradient for individual example and update.</p>
 <p><strong>Repeat</strong> until convergence: for $n=1,\dots,N$</p>
 $$
-w := w - \eta \nabla_\vec{w} E(\vec{w} | \vec{x}^{(n)})
+\theta = \theta - \eta \nabla_\theta \mathcal{L}(\textbf{x}^{(n)}; \theta)
 $$<p>where</p>
 $$
-\nabla_w E(\vec{w} | \vec{x}^{(n)}) = \left[ f\left( \textbf{x}^{(n)} ; \theta \right) - y^{(n)} \right] \frac{\partial f\left( \textbf{x}^{(n)} ; \theta \right)}{\partial \theta}
+\nabla_\theta \mathcal{L}(\textbf{x}^{(n)}; \theta) = \left[ f\left( \textbf{x}^{(n)} ; \theta \right) - y^{(n)} \right] \frac{\partial f\left( \textbf{x}^{(n)} ; \theta \right)}{\partial \theta}
 $$<ul>
 <li>Advantage: Easier to compute, esp. when the dataset is huge; sometimes can escape local minima</li>
 <li>Disadvantage: The gradient becomes <strong>noisy</strong> - impacts convergence; the Hessian is <strong>not</strong> well-defined even if we want to use it</li>
@@ -15013,7 +15013,7 @@ $$<ul>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="Practical-SGD-methods">Practical SGD methods<a class="anchor-link" href="#Practical-SGD-methods">&#182;</a></h2>$$
-w := w - \eta \nabla_\vec{w} E(\vec{w} | \vec{x}^{(n)})
+\theta = \theta - \eta \nabla_\theta \mathcal{L}(\textbf{x}^{(n)}, \theta)
 $$<p><img src="pics/learning_rate.png" width=400px /></p>
 <ul>
 <li>How to determine learning rate?</li>
@@ -15045,11 +15045,11 @@ $$<p><img src="pics/learning_rate.png" width=400px /></p>
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="SGD-with-momentum">SGD with momentum<a class="anchor-link" href="#SGD-with-momentum">&#182;</a></h3><p>Let the optimizer remember the previous gradients,
 $$
-v_k = \rho v_{k-1} + (1-\rho)\nabla_w F(w_k)
+v_k = \rho v_{k-1} + (1-\rho)\nabla_\theta F(\theta_k)
 $$
 Then
 $$
-\boxed{ w_{k+1} = w_k - \eta v_k}
+\boxed{ \theta_{k+1} = \theta_k - \eta v_k}
 $$</p>
 <ul>
 <li>Momentum is a weighted sum of gradients, weights for old gradients decay exponentially</li>
@@ -15069,11 +15069,11 @@ $$</p>
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="AdaGrad">AdaGrad<a class="anchor-link" href="#AdaGrad">&#182;</a></h3><p>Let the optimizer tune learning rate automatically,
 $$
-g_k = g_{k-1} + [\nabla_w F(w_k)]^2
+g_k = g_{k-1} + [\nabla_\theta F(\theta_k)]^2
 $$
 Then
 $$
-\boxed{ w_{k+1} = w_k - \frac{\eta}{\sqrt{g_k}+\epsilon} \nabla_w F(w_k)}
+\boxed{ \theta_{k+1} = \theta_k - \frac{\eta}{\sqrt{g_k}+\epsilon} \nabla_\theta F(\theta_k)}
 $$</p>
 <ul>
 <li>Note that the square and sqrt are <em>element-wise</em>, $\epsilon\sim 10^{-6}$ to avoid division by zero</li>
@@ -15093,11 +15093,11 @@ $$</p>
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="RMSProp">RMSProp<a class="anchor-link" href="#RMSProp">&#182;</a></h3><p>Similar to AdaGrad, but allow the optimizer to "forget",
 $$
-g_k = \alpha g_{k-1} + (1-\alpha)[\nabla_w F(w_k)]^2
+g_k = \alpha g_{k-1} + (1-\alpha)[\nabla_\theta F(\theta_k)]^2
 $$
 Then
 $$
-\boxed{ w_{k+1} = w_k - \frac{\eta}{\sqrt{g_k}+\epsilon} \nabla_w F(w_k)}
+\boxed{ \theta_{k+1} = \theta_k - \frac{\eta}{\sqrt{g_k}+\epsilon} \nabla_\theta F(\theta_k)}
 $$</p>
 <ul>
 <li>Like momentum, let old squared gradient decay exponentially.  Typically $\alpha=0.9$.</li>
@@ -15115,14 +15115,14 @@ $$</p>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Adam">Adam<a class="anchor-link" href="#Adam">&#182;</a></h3><p>Combine the best of SGD w/ momentum and RMSProp,
-$$v_k = \beta_1 v_{k-1} + (1-\beta_1)\nabla_w F(w_k)$$
-$$g_k = \beta_2 g_{k-1} + (1-\beta_2)[\nabla_w F(w_k)]^2$$
+$$v_k = \beta_1 v_{k-1} + (1-\beta_1)\nabla_\theta F(\theta_k)$$
+$$g_k = \beta_2 g_{k-1} + (1-\beta_2)[\nabla_\theta F(\theta_k)]^2$$
 Then
 $$
-\boxed{ w_{k+1} = w_k - \frac{\eta}{\sqrt{g_k}+\epsilon} v_k}
+\boxed{ \theta_{k+1} = \theta_k - \frac{\eta}{\sqrt{g_k}+\epsilon} v_k}
 $$</p>
 <ul>
-<li>Sometimes $v_k$ and $g_k$ are corrected before updating $w$,
+<li>Sometimes $v_k$ and $g_k$ are corrected before updating $\theta$,
 $$
 v_k \leftarrow \frac{v_k}{1-\beta_1^k},\quad g_k \leftarrow \frac{g_k}{1-\beta_2^k}
 $$</li>
