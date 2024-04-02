@@ -14658,7 +14658,7 @@ div.jp-OutputPrompt {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Machine-Learning-for-Engineering">Machine Learning for Engineering<a class="anchor-link" href="#Machine-Learning-for-Engineering">&#182;</a></h2><h2 id="High-Dimensional-System:-Spatial-Decomposition">High-Dimensional System: Spatial Decomposition<a class="anchor-link" href="#High-Dimensional-System:-Spatial-Decomposition">&#182;</a></h2><h3 id="Instructor:-Daning-Huang">Instructor: Daning Huang<a class="anchor-link" href="#Instructor:-Daning-Huang">&#182;</a></h3>
+<h2 id="Machine-Learning-for-Engineering">Machine Learning for Engineering<a class="anchor-link" href="#Machine-Learning-for-Engineering">&#182;</a></h2><h2 id="High-Dimensional-System:-Spatial-Decomposition---Linear">High-Dimensional System: Spatial Decomposition - Linear<a class="anchor-link" href="#High-Dimensional-System:-Spatial-Decomposition---Linear">&#182;</a></h2><h3 id="Instructor:-Daning-Huang">Instructor: Daning Huang<a class="anchor-link" href="#Instructor:-Daning-Huang">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -15051,7 +15051,7 @@ $$</p>
 <ul>
 <li>one would want to choose the largest $M$ eigenvalues and the associated eigenvectors.</li>
 <li>These eigenpairs maximizes the variances $\sigma_i^2 = u_i^T S u_i$, and minimizes the projection error $J=\sum_{M+1}^D\lambda_i$.</li>
-<li>One typically choose $M$ such that, for a small number, e.g. $\epsilon=0.99$,
+<li>One typically choose $M$ such that, for a small number, e.g. $\epsilon=0.01$,
 $$
 \frac{\sum_{i=1}^M\lambda_i}{\sum_{i=1}^D\lambda_i} = 1-\frac{J}{\sum_{i=1}^D\lambda_i} \geq 1-\epsilon
 $$</li>
@@ -15365,34 +15365,6 @@ As if working with $S$!</li>
 <li>t-distributed Stochastic Neighbor Embedding (t-SNE)</li>
 </ul>
 <p>There is also methods from a somewhat different world, such as the <a href="http://outlace.com/TDApart1.html">Topological Data Analysis</a>, for extracting nonlinear geometry from data.</p>
-
-</div>
-</div>
-</div>
-</div></section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>There is also, of course, the famous <strong>autoencoder</strong> architecture, that creates general nonlinear embedding of data in a low-dimensional <strong>latent</strong> space.</p>
-<p>While we are not exploring this in detail in this lecture, we will look at one of its applications in modeling nonlinear dynamics.</p>
-<p><img src="pics/autoencoder.png" width="600px"></p>
-
-</div>
-</div>
-</div>
-</div></section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h4 id="Side-Note">Side Note<a class="anchor-link" href="#Side-Note">&#182;</a></h4><p>An interesting variant of autoencoder is the "DeepSDF" model - it directly uses the latent vector to describe a 3D object.</p>
-<p><img src="pics/deepsdf.png" width="800px"></p>
-<p>Ref: J. Park, et al., DeepSDF: Learning Continuous Signed Distance Functions for Shape Representation, 2019</p>
 
 </div>
 </div>
