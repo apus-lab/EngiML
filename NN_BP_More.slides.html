@@ -7479,6 +7479,7 @@ main {
 \newcommand{\vu}{\mathbf{u}}
 \newcommand{\vw}{\mathbf{w}}
 \newcommand{\vtt}{\boldsymbol{\theta}}
+\newcommand{\vtvt}{\boldsymbol{\vartheta}}
 \newcommand{\vtl}{\boldsymbol{\lambda}}
 \newcommand{\vtf}{\boldsymbol{\phi}}
 \newcommand{\vty}{\boldsymbol{\psi}}
@@ -8539,13 +8540,15 @@ where $\ppf{\cJ}{\vtt}=0$ and $\ppf{\cR}{\vtt}=-\ppf{\vb}{\vtt}$</p>
 $$
 \min_\vtt \cJ(\cF_{ND}(\vtt),\vtt)
 $$
-where $\cF_{ND}$ might not be differentiable.  The question is to find the equivalent quantities to
+where $\cF_{ND}$ might not be differentiable.</p>
+<blockquote>
+<p>We assume <strong>scalar</strong> $\cF$ here.</p>
+</blockquote>
+<p>Next we present two routes for finding the equivalent or approximate quantities to
 $$
 \ppf{\cF_{ND}(\vtt)}{\vtt}\text{, or in short, }\nabla_\vtt\cF
-$$</p>
-<blockquote>
-<p>In the following discussion, we assume <strong>scalar</strong> $\cF$</p>
-</blockquote>
+$$
+so that we can work with non-differentiable functions in a differentiable framework.</p>
 </div>
 </div>
 </div>
@@ -8696,7 +8699,25 @@ One can either estimate $b^*$ at each iteration, or simply choose $b^*\approx \c
 </div>
 </div>
 </div>
-</div></div></section></section><section><section>
+</div></div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="Side-Note">Side Note<a class="anchor-link" href="#Side-Note">¶</a></h4><p>Along a similar vein, but a different route, one would get "Evolution Strategy" (ES) type algorithms for optimization.</p>
+<ul>
+<li>ES algorithms have decades of history of development.  One popular variant is <a href="https://en.wikipedia.org/wiki/CMA-ES">CMA-ES</a>.</li>
+</ul>
+<p>One notable instance of ES in ML is the following work from OpenAI:</p>
+<ul>
+<li>Salimans et al. Evolution Strategies as a Scalable Alternative to Reinforcement Learning.  ArXiv 2017.</li>
+</ul>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -8708,12 +8729,10 @@ $$
 \cF(\vtt) = \arg\max_\vu p(\vu;\vtt)
 $$
 i.e., finding the $\vu$ that is "the most probable" in a probability distribution.</p>
-<blockquote>
-<p>Key idea: $\cF$ is non-differentiable, but $p$ <strong>is</strong></p>
-</blockquote>
 <ul>
-<li>This set up is common in reinforcement learning.</li>
-<li>And actually many inner optimizations can be cast in this way - to be discussed at the end.</li>
+<li>Key idea: $\cF$ is non-differentiable, but $p$ <strong>is</strong>.</li>
+<li>This set up is common in reinforcement learning - $p$ is the "policy".</li>
+<li>We will return to the general case in the next route.</li>
 </ul>
 </div>
 </div>
@@ -8822,6 +8841,9 @@ $$</p>
 $$
 \nabla_\vtt \cJ(\cR(\vtt);\vtt) \approx \frac{1}{N}\sum_{i=1}^N (\cJ(\vu_i)-\bar{\cJ}) \nabla_\vtt \log p(\vu_i;\vtt),\quad \bar{\cJ} = \frac{1}{N} \sum_{i=1}^N \cJ(\vu_i)
 $$</p>
+<blockquote>
+<p>The technical term for $\bar{\cJ}$ is "baseline".</p>
+</blockquote>
 </div>
 </div>
 </div>

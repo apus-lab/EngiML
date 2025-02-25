@@ -5,7 +5,7 @@
 <meta content="chrome=1" http-equiv="X-UA-Compatible"/>
 <meta content="yes" name="apple-mobile-web-app-capable"/>
 <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
-<title>index slides</title><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script><script type="module">
+<title>NN_VI slides</title><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script><script type="module">
   import mermaid from 'https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.7.0/mermaid.esm.min.mjs';
   mermaid.initialize({ startOnLoad: true });
 </script>
@@ -7434,194 +7434,290 @@ main {
 <main>
 <div class="reveal">
 <div class="slides"><section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=bf786fc8">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Machine-Learning-for-Engineering">Machine Learning for Engineering<a class="anchor-link" href="#Machine-Learning-for-Engineering">¶</a></h2><h3 id="Instructor:-Daning-Huang">Instructor: <a href="https://apus-lab.github.io">Daning Huang</a><a class="anchor-link" href="#Instructor:-Daning-Huang">¶</a></h3>
+<h2 id="Machine-Learning-for-Engineering">Machine Learning for Engineering<a class="anchor-link" href="#Machine-Learning-for-Engineering">¶</a></h2><h2 id="Neural-Networks:-Variational-Inference-(Draft)">Neural Networks: Variational Inference (Draft)<a class="anchor-link" href="#Neural-Networks:-Variational-Inference-(Draft)">¶</a></h2><h3 id="Instructor:-Daning-Huang">Instructor: Daning Huang<a class="anchor-link" href="#Instructor:-Daning-Huang">¶</a></h3>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=bb113b41">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Introduction">Introduction<a class="anchor-link" href="#Introduction">¶</a></h2><p>This website hosts the slides for several Machine Learning-related courses that are taught at Penn State Aerospace.</p>
+<p>$$
+\newcommand\ddf[2]{\dfrac{\mathrm{d} #1}{\mathrm{d} #2}}
+\newcommand\ppf[2]{\dfrac{\partial #1}{\partial #2}}
+\newcommand{\bE}{\mathbb{E}}
+\newcommand{\cE}{\mathcal{E}}
+\newcommand{\cF}{\mathcal{F}}
+\newcommand{\cJ}{\mathcal{J}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\cM}{\mathcal{M}}
+\newcommand{\cN}{\mathcal{N}}
+\newcommand{\cR}{\mathcal{R}}
+\newcommand{\cU}{\mathcal{U}}
+\newcommand{\vA}{\mathbf{A}}
+\newcommand{\vI}{\mathbf{I}}
+\newcommand{\vK}{\mathbf{K}}
+\newcommand{\vM}{\mathbf{M}}
+\newcommand{\vQ}{\mathbf{Q}}
+\newcommand{\vR}{\mathbf{R}}
+\newcommand{\vU}{\mathbf{U}}
+\newcommand{\vb}{\mathbf{b}}
+\newcommand{\vc}{\mathbf{c}}
+\newcommand{\vd}{\mathbf{d}}
+\newcommand{\vf}{\mathbf{f}}
+\newcommand{\vg}{\mathbf{g}}
+\newcommand{\vm}{\mathbf{m}}
+\newcommand{\vu}{\mathbf{u}}
+\newcommand{\vw}{\mathbf{w}}
+\newcommand{\vtt}{\boldsymbol{\theta}}
+\newcommand{\vtvt}{\boldsymbol{\vartheta}}
+\newcommand{\vtl}{\boldsymbol{\lambda}}
+\newcommand{\vtf}{\boldsymbol{\phi}}
+\newcommand{\vty}{\boldsymbol{\psi}}
+$$</p>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="TODAY:-Neural-Networks">TODAY: Neural Networks<a class="anchor-link" href="#TODAY:-Neural-Networks">¶</a></h2><p>Basic principles of variational inference</p>
+<h3 id="References:">References:<a class="anchor-link" href="#References:">¶</a></h3><ul>
+<li></li>
+</ul>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>In modern ML applications, the NN approximates a distribution, rather than a deterministic function.  This happens in, e.g.,</p>
 <ul>
-<li>The goal is to help you to<ul>
-<li>Understand fundamentals of machine learning</li>
-<li>Learn technical details of ML algorithms</li>
-<li>Learn how to implement some important algorithms</li>
-<li>Use machine learning algorithms for your research and applications</li>
+<li>Bayesian Inference and Uncertainty Quantification</li>
+<li>Latent Variable Models and Generative Models</li>
+<li>Policy Optimization in Reinforcement Learning</li>
+<li>etc.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<blockquote>
+<p>This set of slides are still under construction.</p>
+</blockquote>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Route-2.5:-Gibbs-Distribution">Route 2.5: Gibbs Distribution<a class="anchor-link" href="#Route-2.5:-Gibbs-Distribution">¶</a></h3><p>Now return to the general problem
+$$
+\min_\vtt \cJ(\cF_{ND}(\vtt),\vtt) \equiv \cJ(\vtt)
+$$
+and let's try treating $\cJ$ directly.</p>
+<ul>
+<li>Consider a feasible set $\cU$ for $\vtt$.</li>
+<li>$\cJ(\vtt)$ is a distribution of values over $\cU$.</li>
+</ul>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>We can convert $\cJ$ to a probability distribution by defining
+$$
+\tilde{p}(\vtt) = \exp(-\cJ(\vtt)/\tau)
+$$</p>
+<ul>
+<li>Smaller $\cJ$ means larger $\tilde{p}$</li>
+<li>$\tau$ is "temperature" parameter, which control the spread of distribution<ul>
+<li>For smaller $\tau$, only smaller $\cJ$'s have non-negligible $\tilde{p}$</li>
 </ul>
 </li>
-<li>Prerequisites: multivariate calculus, linear algebra, some familiarity with probability</li>
 </ul>
-<p><code>Use arrows to navigate; esc to see outline view of slides.</code></p>
 </div>
 </div>
 </div>
-</div></section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e3ec6c65-2c30-46a1-9f4b-077f88ede324">
+</div><div class="fragment">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Disclaimer">Disclaimer<a class="anchor-link" href="#Disclaimer">¶</a></h2><p><code>Keep deriving equations until you give up; handle the rest by ML</code></p>
-<p>What we focus on:</p>
+<p>Define a probability distribution
+$$
+p(\vtt) = \frac{1}{\int_\cU \tilde{p}(\vtt) d\vtt}\tilde{p}(\vtt) \equiv \frac{1}{Z}\tilde{p}(\vtt)
+$$</p>
 <ul>
-<li>Regression problems</li>
-<li>Fusion of physics and data</li>
-<li>Dynamical systems</li>
+<li>The integral normalizes $\tilde{p}$ to produce a probability distribution</li>
+<li>Minimizer of $\cJ$ is the maximizer of $p$</li>
 </ul>
-<p>What we don't focus on:</p>
+</div>
+</div>
+</div>
+</div></div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Then we can sample $p(\vtt)$ to find the maximizer</p>
 <ul>
-<li>Classification problems</li>
-<li>Image processing</li>
-<li>Large language model, AIGC, etc.<ul>
-<li>But LLMs are highly recommended to assist your learning...</li>
-<li>But we do cover some recent generative models, e.g., diffusion model</li>
+<li>But how to generate samples of $p(\vtt)$, that are needed by policy gradient?</li>
+<li>Technically we can use sampling methods, such as Markov-Chain Monte Carlo (MCMC).</li>
+<li>Caveat: MCMC is usualy slow to evaluate and likely more suitable for lower-dimensional problems.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="Side-Note">Side Note<a class="anchor-link" href="#Side-Note">¶</a></h4><p>Along a similar vein, but a different route, one would get <a href="https://en.wikipedia.org/wiki/Simulated_annealing">Simulated Annealing</a> algorithm for optimization.</p>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Route-3:-Variational-Approach">Route 3: Variational Approach<a class="anchor-link" href="#Route-3:-Variational-Approach">¶</a></h3><p>Building on the previous general case, an alternative:</p>
+<ul>
+<li>If $p$ is hard to sample, how about replacing it with a simpler distribution $q$?</li>
+<li>e.g., a multivariate Gaussian $q(\vtt;\vtvt)=\cN(\mu,\Sigma)$, with $\vtvt=[\mu,\Sigma]$</li>
+<li>Then we optimize $\vtvt$ instead of $\vtt$.</li>
+</ul>
+<p>Problem: how to choose $\vtvt$ so that $p\approx q$?</p>
+<blockquote>
+<p>Otherwise one gets the wrong optima!</p>
+</blockquote>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Use Kullback-Leibler (KL) divergence to quantify the difference
+$$
+KL(q||p) = \int_\vtt q(\vtt;\vtvt)\log \frac{q(\vtt;\vtvt)}{p(\vtt)} d\vtt = \underbrace{\bE_q[\log q(\vtt;\vtvt)]}_{\equiv -H[q]} - \bE_q[\log p(\vtt)]
+$$</p>
+<ul>
+<li>If $p=q$, $\log=1$ and $KL=0$</li>
+<li>If $p$ and $q$ are more different, $KL$ is larger</li>
+<li>$H(q)$ is called entropy - to be discussed soon</li>
+</ul>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>We know
+$$
+p(\vtt) = \frac{1}{Z}\tilde{p}(\vtt) = \frac{1}{Z} \exp(-\cJ(\vtt)/\tau)
+$$
+so in KL divergence
+$$
+\bE_q[\log p(\vtt)] = \bE_q[-\cJ(\vtt)/\tau - \log Z] \propto \frac{1}{\tau}\bE_q[-\cJ(\vtt)]
+$$
+where $Z$ is a constant that can be ignored.</p>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Then, minimizing KL is equivalent to the following
+$$
+\min_\vtvt KL(q||p) = \underbrace{\bE_q[\cJ(\vtt)]}_{\text{Cost}} - \tau H[q]
+$$</p>
+<ul>
+<li>Now the variable is $\vtvt$ and $KL$ is differentiable!</li>
+<li>Cost is for minimizing $\cJ$ (weighted by $q$)</li>
+<li>Entropy is for regularization<ul>
+<li>e.g., for 1D Gaussian, $-H\propto (\log\sigma)$ - so larger $\sigma$ means larger $(-H)$</li>
+<li>If $q$ is "narrow", minimizer is more "local" $\Leftrightarrow$ $\sigma$ is small, $-H$ is small</li>
+<li>Larger entropy means larger $\sigma$ and promotes exploration</li>
+<li>Lowering $\tau$ narrows down $q$</li>
 </ul>
 </li>
-<li>Reinforcement learning (but might come soon)</li>
-</ul>
-</div>
-</div>
-</div>
-</div></section></section><section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=7b44f98f">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Specifically, the course consists of following topics:</p>
-<ul>
-<li>Mathematical background</li>
-<li>Linear regression</li>
-<li>Gaussian process regression</li>
-<li>Neural networks</li>
-<li>High-Dimensional systems</li>
-<li>Dynamical and differential systems</li>
-</ul>
-<p>Next:</p>
-<ul>
-<li>Move to <strong>right</strong> to access the links to the specific topics, or</li>
-<li>See <a href="index_scope.slides.html">here</a> for a more technical description of the scope.</li>
-</ul>
-</div>
-</div>
-</div>
-</div></section></section><section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0752bf86">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Mathematical background</p>
-<ul>
-<li><a href="Math_LA.slides.html">Linear Algebra</a></li>
-<li><a href="Math_Prob.slides.html">Probability Theory</a>, <a href="Math_Prob_supp_mat.pdf">Supp. notes</a></li>
-<li><a href="Math_Opt.slides.html">Optimization</a></li>
-<li><a href="Math_DE.slides.html">Differential Equations</a></li>
-</ul>
-<p>Linear regression</p>
-<ul>
-<li><a href="LR_Basics.slides.html">Basics</a></li>
-<li><a href="LR_Reg.slides.html">Regularization</a></li>
-<li><a href="LR_Prob.slides.html">Probability Formulation</a></li>
-<li><a href="LR_BiasVar.slides.html">Model Selection</a></li>
-<li><a href="LR_Kern.slides.html">Kernel Method</a></li>
-<li>More Variants <a href="LR_Variants.slides.html">draft</a></li>
 </ul>
 </div>
 </div>
 </div>
 </div></section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=b97ccff1">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Gaussian process regression</p>
-<ul>
-<li><a href="GPR_Basics.slides.html">Basics</a></li>
-<li><a href="GPR_Prob.slides.html">Formulation</a></li>
-<li><a href="GPR_MCMC.slides.html">Markov Chain Monte Carlo</a></li>
-<li><a href="GPR_Sampling.slides.html">Sampling</a></li>
-<li><a href="GPR_BO.pdf">Bayesian Optimization (PDF)</a> <a href="GPR_BO.slides.html">slides (draft)</a></li>
-<li><a href="GPR_Variants.slides.html">Variants</a> / <a href="GPR_Variants.pdf">PDF (older version)</a></li>
-</ul>
-<p>Neural networks</p>
-<ul>
-<li><a href="NN_Basics.slides.html">Basics</a></li>
-<li><a href="NN_GD.slides.html">Training</a></li>
-<li><a href="NN_BP.slides.html">Automatic Differentiation</a> / <a href="NN_BP_More.slides.html">Harder Cases</a></li>
-<li>Variational Inference <a href="NN_VI.slides.html">draft</a></li>
-<li><a href="NN_Variants.slides.html">Common Architectures</a> / <a href="NN_PI.slides.html">Physics-Informed NN</a></li>
-</ul>
-</div>
-</div>
-</div>
-</div></section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=99498427">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>High-Dimensional systems</p>
-<ul>
-<li><a href="HD_Basics.slides.html">Basics</a></li>
-<li><a href="HD_Spatial.slides.html">Spatial Decomposition</a></li>
-<li><a href="HD_VAE.slides.html">Autoencoders</a></li>
-<li><a href="HD_Clustering.slides.html">Clustering</a></li>
-<li><a href="HD_Temporal.slides.html">Temporal Decomposition</a></li>
-</ul>
-<p>Dynamical and differential systems</p>
-<ul>
-<li><a href="DS_Basics.slides.html">Basics</a></li>
-<li><a href="DS_Lin.slides.html">Linear System</a></li>
-<li><a href="DS_Nonnormal.slides.html">Nonnormality</a>, <a href="DS_DMD_Revisit.slides.html">DMD Revisited</a></li>
-<li><a href="DS_NL.slides.html">Tackling Nonlinearity</a></li>
-<li><a href="DS_Regr.slides.html">Sparse Regression</a></li>
-<li><a href="DS_Koopman.slides.html">Koopman Operator Theory</a></li>
-<li><a href="DS_Adj.slides.html">Neural ODEs</a> / <a href="DS_Opt.slides.html">Extra: Differentially-constrained problems</a></li>
-<li><a href="DS_Diffusion.slides.html">Diffusion Models</a></li>
-</ul>
-</div>
-</div>
-</div>
-</div></section></section><section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=af1db368">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="References">References<a class="anchor-link" href="#References">¶</a></h2><ol>
-<li>[PRML] Pattern Recognition and Machine Learning, Christopher Bishop, 2006.</li>
-<li>[MLaPP] Machine Learning: A Probabilistic Perspective, Kevin P. Murphy, 2012.</li>
-<li>[GPML] Gaussian Processes for Machine Learning, C. E. Rasmussen and C. K. I. Williams, 2006.</li>
-<li>[DMSC] Data-driven Modeling and Scientific Computation, Nathan Kutz, 2013.</li>
-</ol>
-<h2 id="Relevant-Courses">Relevant Courses<a class="anchor-link" href="#Relevant-Courses">¶</a></h2><ol>
-<li>More basic ones: <a href="https://www.eecs189.org/">Berkeley CS 189</a>, <a href="https://cs229.stanford.edu/">Stanford CS 229</a></li>
-<li>CNN-specific: <a href="http://cs231n.stanford.edu/">Stanford CS 231n</a></li>
-<li>ML with a Linear Algebra flavor: <a href="https://ocw.mit.edu/courses/mathematics/18-065-matrix-methods-in-data-analysis-signal-processing-and-machine-learning-spring-2018/">MIT 18.065</a></li>
-</ol>
-<h2 id="Credits:">Credits:<a class="anchor-link" href="#Credits:">¶</a></h2><ol>
-<li><a href="https://github.com/thejakeyboy/umich-eecs545-lectures">UMich EECS 545</a> inspired me a lot when I took the course in 2016 and when I initially developed the course myself in 2020.</li>
-<li>@evislomo for generating the initial set of homework solutions</li>
-</ol>
+<h4 id="Reparameterization-trick">Reparameterization trick<a class="anchor-link" href="#Reparameterization-trick">¶</a></h4><p>A technical detail is in the gradient of cost.
+$$
+\bE_q[\cJ(\vtt)] = \int_\vtt q(\vtt;\vtvt)\cJ(\vtt) d\vtt \approx \frac{1}{N} \sum_{i=1}^N \cJ(\vtt_i),\quad \vtt_i\sim q(\vtt_i;\vtvt)
+$$</p>
+<blockquote>
+<p>How to take the gradient of a sample $\cJ(\vtt_i)$?</p>
+</blockquote>
+<p>In the typical choice of $q\sim\cN(\mu,\Sigma)$, $\Sigma=LL^\top$, one can do
+$$
+\cJ(\vtt_i) = \cJ(\mu+L\epsilon_i),\quad \epsilon_i\sim\cN(0,I)
+$$
+Let $\vtvt=[\mu,L]$, the gradient $\nabla_\vtvt\cJ$ can be computed naturally.</p>
 </div>
 </div>
 </div>
