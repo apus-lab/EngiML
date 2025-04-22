@@ -5,7 +5,7 @@
 <meta content="chrome=1" http-equiv="X-UA-Compatible"/>
 <meta content="yes" name="apple-mobile-web-app-capable"/>
 <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
-<title>index slides</title><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script><script type="module">
+<title>DS_Diffusion_cond slides</title><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script><script type="module">
   import mermaid from 'https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.7.0/mermaid.esm.min.mjs';
   mermaid.initialize({ startOnLoad: true });
 </script>
@@ -7434,194 +7434,403 @@ main {
 <main>
 <div class="reveal">
 <div class="slides"><section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=bf786fc8">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=5a8f9f4c">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Machine-Learning-for-Engineering">Machine Learning for Engineering<a class="anchor-link" href="#Machine-Learning-for-Engineering">¶</a></h2><h3 id="Instructor:-Daning-Huang">Instructor: <a href="https://apus-lab.github.io">Daning Huang</a><a class="anchor-link" href="#Instructor:-Daning-Huang">¶</a></h3>
+<h2 id="Machine-Learning-for-Engineering">Machine Learning for Engineering<a class="anchor-link" href="#Machine-Learning-for-Engineering">¶</a></h2><h2 id="Dynamical-System:-Diffusion-Models,-Conditionals">Dynamical System: Diffusion Models, Conditionals<a class="anchor-link" href="#Dynamical-System:-Diffusion-Models,-Conditionals">¶</a></h2><h3 id="Instructor:-Daning-Huang">Instructor: Daning Huang<a class="anchor-link" href="#Instructor:-Daning-Huang">¶</a></h3>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=bb113b41">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=8424b0bd">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Introduction">Introduction<a class="anchor-link" href="#Introduction">¶</a></h2><p>This website hosts the slides for several Machine Learning-related courses that are taught at Penn State Aerospace.</p>
+<p>$$
+\newcommand\norm[1]{{\left\lVert #1 \right\rVert}}
+\newcommand{\bE}{\mathbb{E}}
+\newcommand{\bR}{\mathbb{R}}
+\newcommand{\vf}{\mathbf{f}}
+\newcommand{\vtf}{\boldsymbol{\phi}}
+\newcommand{\Dt}{\Delta t}
+$$</p>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=d911d4e9">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="TODAY:-Diffusion-Models-(DMs)">TODAY: Diffusion Models (DMs)<a class="anchor-link" href="#TODAY:-Diffusion-Models-(DMs)">¶</a></h2><ul>
+<li>Conditioned verion, i.e., DM with inputs</li>
+</ul>
+<p>References:</p>
 <ul>
-<li>The goal is to help you to<ul>
-<li>Understand fundamentals of machine learning</li>
-<li>Learn technical details of ML algorithms</li>
-<li>Learn how to implement some important algorithms</li>
-<li>Use machine learning algorithms for your research and applications</li>
+<li>References in slides</li>
+</ul>
+<blockquote>
+<p>Before you move on, please make sure you have gone through the slides on the unconditioned version.</p>
+</blockquote>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=91c697da">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="The-missing-piece">The missing piece<a class="anchor-link" href="#The-missing-piece">¶</a></h2><p><img alt="No description has been provided for this image" src="pics/dm_eg.png" width="900px"/>
+<span style="color:gray; font-size:10px; float:right">(Figure from Yang2024)</span></p>
+</div>
+</div>
+</div>
+</div><div class="fragment">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=7b255abd">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<ul>
+<li>We have discussed the forward and backwawrd processes in DM<ul>
+<li>Via perspectives of Markov chain, SDE, and ODE.</li>
 </ul>
 </li>
-<li>Prerequisites: multivariate calculus, linear algebra, some familiarity with probability</li>
-</ul>
-<p><code>Use arrows to navigate; esc to see outline view of slides.</code></p>
-</div>
-</div>
-</div>
-</div></section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e3ec6c65-2c30-46a1-9f4b-077f88ede324">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Disclaimer">Disclaimer<a class="anchor-link" href="#Disclaimer">¶</a></h2><p><code>Keep deriving equations until you give up; handle the rest by ML</code></p>
-<p>What we focus on:</p>
-<ul>
-<li>Regression problems</li>
-<li>Fusion of physics and data</li>
-<li>Dynamical systems</li>
-</ul>
-<p>What we don't focus on:</p>
-<ul>
-<li>Classification problems</li>
-<li>Image processing</li>
-<li>Large language model, AIGC, etc.<ul>
-<li>But LLMs are highly recommended to assist your learning...</li>
-<li>But we do cover some recent generative models, e.g., diffusion model</li>
+<li>But we don't have control on the output<ul>
+<li>e.g., if a DM generates images of animals, how to instruct it to generate cat images <strong>only</strong>?</li>
 </ul>
 </li>
-<li>Reinforcement learning (but might come soon)</li>
 </ul>
 </div>
 </div>
 </div>
-</div></section></section><section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=7b44f98f">
+</div></div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=c34938c2">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Specifically, the course consists of following topics:</p>
+<p>To be accurate,</p>
 <ul>
-<li>Mathematical background</li>
-<li>Linear regression</li>
-<li>Gaussian process regression</li>
-<li>Neural networks</li>
-<li>High-Dimensional systems</li>
-<li>Dynamical and differential systems</li>
+<li>Now we know how to sample $p(x)$ by solving
+$$
+\dot{x} = f(x,t) - \frac{1}{2} g(t)^2 \underbrace{\nabla_x \log p(x)}_{\equiv s(x;\theta)} \equiv f(x,t) + \frac{1}{2} \tilde{g}(t)^2 \epsilon(x;\theta)
+$$</li>
+<li>How to sample $p(x|y)$, $y$ as the label?<ul>
+<li>Tricky aspect: $p(x|y)$ is a <strong>different</strong> distribution from $p(x)$.</li>
+<li>You might guess - need to do something on $s(x;\theta)$ and/or $\epsilon(x;\theta)$.</li>
 </ul>
-<p>Next:</p>
-<ul>
-<li>Move to <strong>right</strong> to access the links to the specific topics, or</li>
-<li>See <a href="index_scope.slides.html">here</a> for a more technical description of the scope.</li>
-</ul>
-</div>
-</div>
-</div>
-</div></section></section><section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0752bf86">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Mathematical background</p>
-<ul>
-<li><a href="Math_LA.slides.html">Linear Algebra</a></li>
-<li><a href="Math_Prob.slides.html">Probability Theory</a>, <a href="Math_Prob_supp_mat.pdf">Supp. notes</a></li>
-<li><a href="Math_Opt.slides.html">Optimization</a></li>
-<li><a href="Math_DE.slides.html">Differential Equations</a></li>
-</ul>
-<p>Linear regression</p>
-<ul>
-<li><a href="LR_Basics.slides.html">Basics</a></li>
-<li><a href="LR_Reg.slides.html">Regularization</a></li>
-<li><a href="LR_Prob.slides.html">Probability Formulation</a></li>
-<li><a href="LR_BiasVar.slides.html">Model Selection</a></li>
-<li><a href="LR_Kern.slides.html">Kernel Method</a></li>
-<li>More Variants <a href="LR_Variants.slides.html">draft</a></li>
+</li>
 </ul>
 </div>
 </div>
 </div>
 </div></section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=b97ccff1">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=bbb899bb-3fca-403d-8c57-08d2c8edd841">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Gaussian process regression</p>
-<ul>
-<li><a href="GPR_Basics.slides.html">Basics</a></li>
-<li><a href="GPR_Prob.slides.html">Formulation</a></li>
-<li><a href="GPR_MCMC.slides.html">Markov Chain Monte Carlo</a></li>
-<li><a href="GPR_Sampling.slides.html">Sampling</a></li>
-<li><a href="GPR_BO.pdf">Bayesian Optimization (PDF)</a> <a href="GPR_BO.slides.html">slides (draft)</a></li>
-<li><a href="GPR_Variants.slides.html">Variants</a> / <a href="GPR_Variants.pdf">PDF (older version)</a></li>
+<p>Conceptually, our previous 1D example had a vector field that drives the Gaussian (left) to $U[0,1]$ (right).</p>
+<p>Can we modify $s(x;\theta)$ to instruct DM to drive the Gaussian to $U[0,0.5]$ or $U[0.5,1]$?</p>
+<p><img alt="No description has been provided for this image" src="pics/dm_vec_vpode.png" width="600px"/></p>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=70f1e932-61ab-4e28-a59e-d2d6644f87fb">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Sampler-of-Solutions">Sampler of Solutions<a class="anchor-link" href="#Sampler-of-Solutions">¶</a></h2><ul>
+<li>Make $\epsilon(x;\theta)$ dependent on $y$ as well.<ul>
+<li>During training.  Example: <a href="https://arxiv.org/pdf/1709.07871">Feature‑wise Linear Modulation (FiLM)</a></li>
+<li>After training.  Example: <a href="https://arxiv.org/pdf/2106.09685">Low‑Rank Adaptation (LoRA)</a></li>
 </ul>
-<p>Neural networks</p>
-<ul>
-<li><a href="NN_Basics.slides.html">Basics</a></li>
-<li><a href="NN_GD.slides.html">Training</a></li>
-<li><a href="NN_BP.slides.html">Automatic Differentiation</a> / <a href="NN_BP_More.slides.html">Harder Cases</a></li>
-<li>Variational Inference <a href="NN_VI.slides.html">draft</a></li>
-<li><a href="NN_Variants.slides.html">Common Architectures</a> / <a href="NN_PI.slides.html">Physics-Informed NN</a></li>
+</li>
+<li>Manipulate the sampling process towards the $y$ label.<ul>
+<li>During training.  Example: <a href="https://arxiv.org/pdf/2207.12598">Classifier‑free guidance (CFG)</a></li>
+<li>After training.  Example: <a href="https://arxiv.org/pdf/2105.05233">Classifier guidance (CG)</a></li>
 </ul>
+</li>
+</ul>
+<blockquote>
+<p>But in practice, the above solutions can be</p>
+</blockquote>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=d109076e-8807-4236-8ec9-fd1116e4f8a9">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Solution-1.1:-FiLM">Solution 1.1: FiLM<a class="anchor-link" href="#Solution-1.1:-FiLM">¶</a></h3><p>So we want to directly replace $\epsilon(x;\theta)$ with $\epsilon(x,y;\theta)$.</p>
+<ul>
+<li>Better to preserve the NN architecture of the original $\epsilon(x;\theta)$.</li>
+</ul>
+<p><strong>Idea of FiLM:</strong> Replace weights $W$ in $\epsilon(x;\theta)$ with
+$$
+W' = \gamma(y)W + \beta(y)
+$$
+where $\gamma$ and $\beta$ are small encoding networks.</p>
+</div>
+</div>
+</div>
+</div><div class="fragment">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=d3e52a1b-6dbf-452e-9ced-4552ca6a2d1e">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Now the sampling process:
+$$
+\dot{x} = f(x,t) + \frac{1}{2} \tilde{g}(t)^2 \epsilon(x;{\color{red}{\theta(y)}})
+$$</p>
+<ul>
+<li>$y$ changes weights $\rightarrow$ vector field changes $\rightarrow$ generated sample change.</li>
+</ul>
+</div>
+</div>
+</div>
+</div></div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=3dbbbe23-9b2d-450c-9b00-748c454e0210">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Solution-1.2:-LoRA">Solution 1.2: LoRA<a class="anchor-link" href="#Solution-1.2:-LoRA">¶</a></h3><ul>
+<li>In FiLM, $\gamma$ and $\beta$ are trained <strong>together with</strong> $\epsilon$.<ul>
+<li>Expensive, and inconvenient to change after training (e.g., add new labels/outputs)</li>
+</ul>
+</li>
+<li>Can we use two stages:<ul>
+<li>Pretrain a model: $\epsilon(x;\theta)$</li>
+<li>Modify $\theta$ for some $y$: $\epsilon(x;\theta+{\color{red}{\delta\theta(y)}})$</li>
+</ul>
+</li>
+</ul>
+<p><strong>Idea of LoRA</strong>: Modify weights $W$ in $\epsilon(x;\theta)$ as
+$$
+W' = W + \delta W \equiv W + AB^\top
+$$
+with $A$ and $B$ as learnable low-rank matrices.</p>
 </div>
 </div>
 </div>
 </div></section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=99498427">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=9a29fe12-e047-44fc-9adf-42ac71faa91a">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>High-Dimensional systems</p>
+<p>Low-rank matrices are</p>
 <ul>
-<li><a href="HD_Basics.slides.html">Basics</a></li>
-<li><a href="HD_Spatial.slides.html">Spatial Decomposition</a></li>
-<li><a href="HD_VAE.slides.html">Autoencoders</a></li>
-<li><a href="HD_Clustering.slides.html">Clustering</a></li>
-<li><a href="HD_Temporal.slides.html">Temporal Decomposition</a></li>
+<li>Efficient to store: GB-level pretrained model vs MB-level LoRA modifications</li>
+<li>Efficient to evaluate:
+$$
+W'x = Wx + (A{\color{red}{(B^\top x)}})
+$$</li>
 </ul>
-<p>Dynamical and differential systems</p>
+<p>The catch in LoRA:</p>
 <ul>
-<li><a href="DS_Basics.slides.html">Basics</a></li>
-<li><a href="DS_Lin.slides.html">Linear System</a></li>
-<li><a href="DS_Nonnormal.slides.html">Nonnormality</a>, <a href="DS_DMD_Revisit.slides.html">DMD Revisited</a></li>
-<li><a href="DS_NL.slides.html">Tackling Nonlinearity</a></li>
-<li><a href="DS_Regr.slides.html">Sparse Regression</a></li>
-<li><a href="DS_Koopman.slides.html">Koopman Operator Theory</a></li>
-<li><a href="DS_Adj.slides.html">Neural ODEs</a> / <a href="DS_Opt.slides.html">Extra: Differentially-constrained problems</a></li>
-<li><a href="DS_Diffusion.slides.html">Diffusion Models</a> / <a href="DS_Diffusion_cond.slides.html">Extra: Conditionals</a></li>
+<li>Given new $y$, one needs some additional training</li>
+<li>Potential overfit</li>
 </ul>
 </div>
 </div>
 </div>
 </div></section></section><section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=af1db368">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=b3296bd8-ed1b-4fee-87b5-dd2f3cc89a4b">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="References">References<a class="anchor-link" href="#References">¶</a></h2><ol>
-<li>[PRML] Pattern Recognition and Machine Learning, Christopher Bishop, 2006.</li>
-<li>[MLaPP] Machine Learning: A Probabilistic Perspective, Kevin P. Murphy, 2012.</li>
-<li>[GPML] Gaussian Processes for Machine Learning, C. E. Rasmussen and C. K. I. Williams, 2006.</li>
-<li>[DMSC] Data-driven Modeling and Scientific Computation, Nathan Kutz, 2013.</li>
-</ol>
-<h2 id="Relevant-Courses">Relevant Courses<a class="anchor-link" href="#Relevant-Courses">¶</a></h2><ol>
-<li>More basic ones: <a href="https://www.eecs189.org/">Berkeley CS 189</a>, <a href="https://cs229.stanford.edu/">Stanford CS 229</a></li>
-<li>CNN-specific: <a href="http://cs231n.stanford.edu/">Stanford CS 231n</a></li>
-<li>ML with a Linear Algebra flavor: <a href="https://ocw.mit.edu/courses/mathematics/18-065-matrix-methods-in-data-analysis-signal-processing-and-machine-learning-spring-2018/">MIT 18.065</a></li>
-</ol>
-<h2 id="Credits:">Credits:<a class="anchor-link" href="#Credits:">¶</a></h2><ol>
-<li><a href="https://github.com/thejakeyboy/umich-eecs545-lectures">UMich EECS 545</a> inspired me a lot when I took the course in 2016 and when I initially developed the course myself in 2020.</li>
-<li>@evislomo for generating the initial set of homework solutions</li>
-</ol>
+<h3 id="Solution-2.1:-CG">Solution 2.1: CG<a class="anchor-link" href="#Solution-2.1:-CG">¶</a></h3><p>Now, some less brutal-force approach.</p>
+<p>We want $\nabla_x \log p(x|y)$, but Bayes theorem gives
+$$
+p(x|y) = \frac{p(y|x)p(x)}{p(y)}
+$$
+and hence
+$$
+\nabla_x \log p(x|y) = \underbrace{\nabla_x \log p(y|x)}_{\text{Unknown}} + \underbrace{\nabla_x \log p(x)}_{\text{Trained}} - \underbrace{\nabla_x \log p(y)}_{=0}
+$$</p>
+<ul>
+<li>The only unknown $p(y|x)$ is a simple classifier!</li>
+</ul>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=1c739e1a-d31c-4afb-bb34-96d07c1a8816">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>CG process:</p>
+<ul>
+<li>Starting from a trained model $s(x;\theta)$</li>
+<li>Train an additional classifier $p(y|x)$</li>
+<li>Generate new samples as
+$$
+\begin{aligned}
+\dot{x} &amp;= f(x,t) - \frac{1}{2} g(t)^2 \nabla_x \log p(x|y) \\
+&amp;= f(x,t) - \frac{1}{2} g(t)^2 \left(s(x;\theta) + \nabla_x \log p(y|x) \right)
+\end{aligned}
+$$</li>
+</ul>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e179553f-100a-476d-a48e-cc169cf90392">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>More <strong>refined tuning</strong>
+$$
+\dot{x} = f(x,t) - \frac{1}{2} g(t)^2 \left(s(x;\theta) + {\color{red}\gamma}\nabla_x \log p(y|x) \right)
+$$</p>
+<ul>
+<li>Parameter $\gamma$: balance between relevance and diversity</li>
+<li>If $\gamma&gt;1$: Closer to the labelled samples, but less diverse</li>
+</ul>
+<p>The catch:</p>
+<ul>
+<li>The classifier $p(y|x)$ is used during denoising, so $x$ is noisy<ul>
+<li>The classifier needs to handle noise robustly</li>
+<li>Or alternatively, use $\epsilon(x;\theta)$ to denoise first</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=27f6da53-4503-4276-9ebd-837956dbb7c7">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Solution-2.2:-CFG">Solution 2.2: CFG<a class="anchor-link" href="#Solution-2.2:-CFG">¶</a></h3><blockquote>
+<p>History is a loop</p>
+</blockquote>
+<p>After CG, some people ask: How about we directly learn
+$$
+s(x,y;\theta) = \nabla_x \log p(x|y)
+$$
+Then the sample generation is
+$$
+\dot{x} = f(x,t) - \frac{1}{2} g(t)^2 \underbrace{\nabla_x \log p(x|y)}_{\Rightarrow s(x,y;\theta)}
+$$</p>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=09583cc3-60e9-42a9-a311-d92a1bfd2feb">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>To avoid modifying model architecture, apply the following tricks:</p>
+<ul>
+<li>Allow an "empty label" $\emptyset$, representing <em>any</em> label, so $s(x,\emptyset;\theta)$ represents the usual unconditioned score.</li>
+<li>Train with labelled data samples $(x,y)$, but with "low probability" <strong>drop</strong> the label, so a data sample temporarily becomes $(x,\emptyset)$.</li>
+<li>So $s(x,y;\theta)$ embeds all samples, and somewhat "organized" by their labels.</li>
+</ul>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=f0ec1a85-0623-4005-b6da-9e032ba66cec">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Furthermore, we can do <strong>refined tuning</strong> as well.</p>
+<p>Rewrite the CG version as
+$$
+\begin{aligned}
+&amp;\quad s(x;\theta) + \gamma\nabla_x \log p(y|x) \\
+&amp;= \gamma (\underbrace{s(x;\theta) + \nabla_x \log p(y|x)}_{=\text{Conditioned score}}) + (1-\gamma)(\underbrace{s(x;\theta)}_{=\text{Unconditioned score}}) \\
+&amp;= \gamma s(x,y;\theta) + (1-\gamma) s(x,\emptyset;\theta)
+\end{aligned}
+$$</p>
+<p>Practically, people use $w=\gamma-1$ and
+$$
+(1+w)\epsilon(x,y;\theta) - w\epsilon(x,\emptyset;\theta)
+$$</p>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=6333c9d3-2706-48b5-b874-cda351290c35">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Numerical-Example">Numerical Example<a class="anchor-link" href="#Numerical-Example">¶</a></h2><p>Consider the previous <strong>scalar</strong> example, meaning $x\in\bR$.</p>
+<p>The training dataset consists of samples from uniform distribution over $[0,1]$, i.e., $U[0,1]$.</p>
+<p>The DM has the following vector field that drives the Gaussian (left) to $U[0,1]$ (right).</p>
+<p>Can we instruct DM to drive the Gaussian to $U[0,0.5]$ or $U[0.5,1]$?</p>
+<p><img alt="No description has been provided for this image" src="pics/dm_vec_vpode.png" width="400px"/></p>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0fb512cd-d842-445c-b978-2111e40602bf">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Using CFG, here are the results - did the job as expected.</p>
+<p><img alt="No description has been provided for this image" src="pics/dm_pdf_cfg.png" width="1000px"/></p>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=68d89754-2350-4f1d-a960-bab7ec68b131">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Detailed look - CFG scheduling
+$$
+w_k = 5\left(\frac{i}{100}\right)^5,\quad k=0,1,\cdots,99
+$$</p>
+<ul>
+<li>Initially not much difference; conditioning comes towards the end; distributions not that perfect though.</li>
+</ul>
+<p><img alt="No description has been provided for this image" src="pics/dm_evo_cfg.png" width="400px"/></p>
 </div>
 </div>
 </div>
