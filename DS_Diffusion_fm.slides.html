@@ -5,7 +5,7 @@
 <meta content="chrome=1" http-equiv="X-UA-Compatible"/>
 <meta content="yes" name="apple-mobile-web-app-capable"/>
 <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
-<title>index slides</title><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script><script type="module">
+<title>DS_Diffusion_fm slides</title><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script><script type="module">
   import mermaid from 'https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.7.0/mermaid.esm.min.mjs';
   mermaid.initialize({ startOnLoad: true });
 </script>
@@ -7434,194 +7434,1218 @@ main {
 <main>
 <div class="reveal">
 <div class="slides"><section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=bf786fc8">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=5a8f9f4c">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Machine-Learning-for-Engineering">Machine Learning for Engineering<a class="anchor-link" href="#Machine-Learning-for-Engineering">¶</a></h2><h3 id="Instructor:-Daning-Huang">Instructor: <a href="https://apus-lab.github.io">Daning Huang</a><a class="anchor-link" href="#Instructor:-Daning-Huang">¶</a></h3>
+<h2 id="Machine-Learning-for-Engineering">Machine Learning for Engineering<a class="anchor-link" href="#Machine-Learning-for-Engineering">¶</a></h2><h2 id="Dynamical-System:-Diffusion-Models,-Flow-Matching">Dynamical System: Diffusion Models, Flow Matching<a class="anchor-link" href="#Dynamical-System:-Diffusion-Models,-Flow-Matching">¶</a></h2><h3 id="Instructor:-Daning-Huang">Instructor: Daning Huang<a class="anchor-link" href="#Instructor:-Daning-Huang">¶</a></h3>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=bb113b41">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=8424b0bd">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Introduction">Introduction<a class="anchor-link" href="#Introduction">¶</a></h2><p>This website hosts the slides for several Machine Learning-related courses that are taught at Penn State Aerospace.</p>
+<p>$$
+\newcommand\norm[1]{{\left\lVert #1 \right\rVert}}
+\newcommand{\bE}{\mathbb{E}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\vf}{\mathbf{f}}
+\newcommand{\vtf}{\boldsymbol{\phi}}
+$$</p>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=d911d4e9">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="TODAY:-Diffusion-Models-(DMs)">TODAY: Diffusion Models (DMs)<a class="anchor-link" href="#TODAY:-Diffusion-Models-(DMs)">¶</a></h2><ul>
+<li>Flow matching perspective</li>
+</ul>
+<p>References:</p>
 <ul>
-<li>The goal is to help you to<ul>
-<li>Understand fundamentals of machine learning</li>
-<li>Learn technical details of ML algorithms</li>
-<li>Learn how to implement some important algorithms</li>
-<li>Use machine learning algorithms for your research and applications</li>
+<li>A nice intro blog <a href="https://dl.heeere.com/conditional-flow-matching/blog/conditional-flow-matching/">dl.heeere.com</a> - We acknowledge the authors and used many visualizations from this article</li>
+<li><a href="https://arxiv.org/abs/2209.03003">Liu2022</a></li>
+<li><a href="https://openreview.net/forum?id=PqvMRDCJT9t">Lipman2023</a></li>
+<li><a href="https://arxiv.org/pdf/2302.00482">Tong2023</a></li>
+<li>Other references in slides</li>
+</ul>
+<blockquote>
+<p>Technically, this part can be learned independently from the DM slides.</p>
+</blockquote>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=b2bfa233-13cb-412a-9a73-e3840f0d9f71">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Intuition-of-Flow-Matching">Intuition of Flow Matching<a class="anchor-link" href="#Intuition-of-Flow-Matching">¶</a></h2>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=5d96276e-d23c-42de-ba01-2adef353c8fe">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Rethinking-DM">Rethinking DM<a class="anchor-link" href="#Rethinking-DM">¶</a></h3><p>Recall what a DM entails:</p>
+</div>
+</div>
+</div>
+</div><div class="fragment">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=985facd1-8281-47ce-95fe-b178847f3f97">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<ul>
+<li>A sequence of probability distributions
+$$p(x_0) \longleftrightarrow p(x_1) \longleftrightarrow \cdots \longleftrightarrow p(x_T)$$<ul>
+<li>$p(x_0)$ is easy to sample (e.g., Gaussian), and $p(x_N)$ is the target distribution</li>
 </ul>
 </li>
-<li>Prerequisites: multivariate calculus, linear algebra, some familiarity with probability</li>
 </ul>
-<p><code>Use arrows to navigate; esc to see outline view of slides.</code></p>
 </div>
 </div>
 </div>
-</div></section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e3ec6c65-2c30-46a1-9f4b-077f88ede324">
+</div></div><div class="fragment">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=ae6cc960-8f85-4b5c-a4a6-667a6ac94c01">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Disclaimer">Disclaimer<a class="anchor-link" href="#Disclaimer">¶</a></h2><p><code>Keep deriving equations until you give up; handle the rest by ML</code></p>
-<p>What we focus on:</p>
 <ul>
-<li>Regression problems</li>
-<li>Fusion of physics and data</li>
-<li>Dynamical systems</li>
-</ul>
-<p>What we don't focus on:</p>
-<ul>
-<li>Classification problems</li>
-<li>Image processing</li>
-<li>Large language model, AIGC, etc.<ul>
-<li>But LLMs are highly recommended to assist your learning...</li>
-<li>But we do cover some recent generative models, e.g., diffusion model</li>
+<li>A sequence of samples
+$$x_0 \longleftrightarrow x_1 \longleftrightarrow \cdots \longleftrightarrow x_T$$<ul>
+<li>These are solutions of an ODE/SDE/Markov process, given an initial condition $x_0$</li>
 </ul>
 </li>
-<li>Reinforcement learning (but might come soon)</li>
 </ul>
 </div>
 </div>
 </div>
-</div></section></section><section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=7b44f98f">
+</div></div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=ad0fdced-ac01-4e9f-92bb-d48357a9b631">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Specifically, the course consists of following topics:</p>
+<p>To design a DM,</p>
 <ul>
-<li>Mathematical background</li>
-<li>Linear regression</li>
-<li>Gaussian process regression</li>
-<li>Neural networks</li>
-<li>High-Dimensional systems</li>
-<li>Dynamical and differential systems</li>
-</ul>
-<p>Next:</p>
-<ul>
-<li>Move to <strong>right</strong> to access the links to the specific topics, or</li>
-<li>See <a href="index_scope.slides.html">here</a> for a more technical description of the scope.</li>
+<li><strong>[Probability Path]</strong> First, design the probability distributions, e.g., something like
+$$
+p(x_t|x_0) = N(\alpha_t x_0, \beta_t^2 I)
+$$
+where one chooses $\alpha_t$ and $\beta_t$.</li>
 </ul>
 </div>
 </div>
 </div>
-</div></section></section><section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0752bf86">
+</div><div class="fragment">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=3b5be1c2-e12a-4108-8191-2e2de3a107e4">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Mathematical background</p>
 <ul>
-<li><a href="Math_LA.slides.html">Linear Algebra</a></li>
-<li><a href="Math_Prob.slides.html">Probability Theory</a>, <a href="Math_Prob_supp_mat.pdf">Supp. notes</a></li>
-<li><a href="Math_Opt.slides.html">Optimization</a></li>
-<li><a href="Math_DE.slides.html">Differential Equations</a></li>
+<li><strong>[Velocity Field]</strong> Then find the RHS of differential equation that governs the changes in $p(x)$, e.g., something like
+$$
+\dot{x} = f_t - \frac{1}{2}g_t^2\nabla_x\log p_t(x) \equiv v_\theta(x,t)
+$$
+where $f_t$ and $g_t$ are determined by $\alpha_t$ and $\beta_t$, and $\nabla_x\log p_t(x)$ is learnt from data.</li>
 </ul>
-<p>Linear regression</p>
+</div>
+</div>
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=7ef69af5-87d7-4f65-a471-54afaa884da3">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <ul>
-<li><a href="LR_Basics.slides.html">Basics</a></li>
-<li><a href="LR_Reg.slides.html">Regularization</a></li>
-<li><a href="LR_Prob.slides.html">Probability Formulation</a></li>
-<li><a href="LR_BiasVar.slides.html">Model Selection</a></li>
-<li><a href="LR_Kern.slides.html">Kernel Method</a></li>
-<li>More Variants <a href="LR_Variants.slides.html">draft</a></li>
+<li><strong>[Flow]</strong> Lastly, find the DE solution to generate samples
+$$
+x_t = \psi_t(x_0)
+$$
+where $x_0=\psi_0(x_0)$, $x_T=\psi_T(x_0)$, and $\frac{\partial\psi_t}{\partial t} = v_\theta(x,t)$.</li>
+</ul>
+</div>
+</div>
+</div>
+</div></div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=39d19082-5bcc-4b7a-a1ee-5bd058b9b313">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Ultimately,</p>
+<p><strong>Probability path</strong>, <strong>Velocity field</strong>, and <strong>Flow</strong> are equivalent descriptions of the same (diffusion) model</p>
+<blockquote>
+<p>Up to some technical constraints - to be discussed later.</p>
+</blockquote>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=8d48517a-9a90-45fa-88a9-03c8025aaa87">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Visualizing-the-equivalence">Visualizing the equivalence<a class="anchor-link" href="#Visualizing-the-equivalence">¶</a></h3><p><strong>Probability path</strong>: continuously deform from $p(x_0)$ (blue, Gaussian) to $p(x_T)$ (red, arbitrary)</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=8aa7964b-cb39-48d3-923d-69ce279fe6c9">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [3]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="n">pp_html</span><span class="p">))</span>  <span class="c1"># Taken from the heeere blog</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
+<div class="scaled-iframe"> <iframe src="./pics/dm_fm_pp.html"></iframe> </div> <style> .scaled-iframe {   transform: scale(0.6);   transform-origin: top left;   width: 1000px;   height: 450px;   overflow: hidden; } .scaled-iframe iframe {   width: 1000px;   height: 450px;   border: 0; } </style>
+</div>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=35168d5f-ff88-407b-83ee-d7bdb700698a">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<ul>
+<li><strong>Velocity field</strong>: the vectors - how particles move instantaneously</li>
+<li><strong>Flow</strong>: the trajectory of a particle - a sample $x_0$ from $p(x_0)$ to a target $x_T$ in $p(x_T)$</li>
+</ul>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=1b118970-992e-4979-89b8-0b88514b08f3">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [4]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># This example aims to transform a Gaussian (blue, left) to two Gaussians (red, right)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="n">vf_html</span><span class="p">))</span>  <span class="c1"># Taken from the heeere blog</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
+<div class="l-page" style="--ar: calc(218 / 161)"> <img alt="No description has been provided for this image" src="./pics/dm_fm_vf.svg" style="vertical-align: top; width: calc(100% * var(--ar) / ( 1 + 2 * var(--ar)));"/> <iframe frameborder="0" scrolling="no" src="./pics/dm_fm_fl.html" style="aspect-ratio: var(--ar); margin: 0 -5px; width: calc(100% * var(--ar) / ( 1 + 2 * var(--ar)));"></iframe> </div>
+</div>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e951e66b-57b9-481c-a540-744d45c7b428">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="The-complaints-in-DM">The complaints in DM<a class="anchor-link" href="#The-complaints-in-DM">¶</a></h3><ul>
+<li>Low training efficiency (need to learn the noise prediction, denoising function, or score function)</li>
+<li>Low sampling efficiency (need to solve a differential equation every time)</li>
+</ul>
+<p>Question</p>
+<ul>
+<li>Both issues are somewhat because the <strong>vector field</strong> is highly nonlinear - difficult to learn, many steps to solve</li>
+<li>Can we directly design the <strong>flow</strong> in a simpler form (instead of starting from <strong>probability path</strong>)</li>
 </ul>
 </div>
 </div>
 </div>
 </div></section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=b97ccff1">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=5f23f7d3-7869-4428-9099-7bbd34bb39ca">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Gaussian process regression</p>
+<h3 id="A-possible-solution-by-FM">A possible solution by FM<a class="anchor-link" href="#A-possible-solution-by-FM">¶</a></h3><p>Let's start from the flow,
+$$
+x_t = \psi_t(x_0),\quad t\in[0,T]
+$$</p>
+<p>By definition
+$$
+x_0=\psi_0(x_0),\quad x_T=\psi_T(x_0)
+$$
+and we need them to follow the correct distributions
+$$
+x_0\sim p(x_0),\quad x_T\sim p(x_T)
+$$</p>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=8365f0c7-23bb-4224-8fa4-533f79b8f4d9">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>If one pick a pair $(x_0,x_T)$, the simplest possible flow is perhaps (assuming $T=1$)
+$$
+x_t = \psi_t(x_0{\color{red}{,x_T}}) = t {\color{red}{x_T}} + (1-t)x_0
+$$</p>
+<p>This produces a vector field that <em>appears</em> simple
+$$
+\dot{x} = \frac{\partial \psi_t}{\partial t} = {\color{red}{x_T}} - x_0
+$$</p>
+</div>
+</div>
+</div>
+</div><div class="fragment">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=b64258e0-aaf8-4ea8-8a3b-cd7fe851dfff">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>But the ODE is somewhat ill-defined,</p>
 <ul>
-<li><a href="GPR_Basics.slides.html">Basics</a></li>
-<li><a href="GPR_Prob.slides.html">Formulation</a></li>
-<li><a href="GPR_MCMC.slides.html">Markov Chain Monte Carlo</a></li>
-<li><a href="GPR_Sampling.slides.html">Sampling</a></li>
-<li><a href="GPR_BO.pdf">Bayesian Optimization (PDF)</a> <a href="GPR_BO.slides.html">slides (draft)</a></li>
-<li><a href="GPR_Variants.slides.html">Variants</a> / <a href="GPR_Variants.pdf">PDF (older version)</a></li>
+<li>Starting from $x_0$, one needs $x_T$ to compute the $\dot{x}$ to solve the ODE</li>
+<li>But without solving ODE, one cannot compute $x_T$!</li>
 </ul>
-<p>Neural networks</p>
+</div>
+</div>
+</div>
+</div></div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=99f7df74-bb33-4def-a5f3-cc3082db0e18">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Perhaps we can approximate the vector field by a model
+$$
+v_\theta(x,t) = x_T - x_0
+$$
+by minimizing
+$$
+\bE_{x_0,x_T}\norm{v_\theta(x,t) - (x_T - x_0)}^2
+$$
+or equivalently
+$$
+\bE_{x_0,x_t}\norm{v_\theta(x,t) - \frac{x_t - x_0}{t}}^2
+$$</p>
+<blockquote>
+<p>This is essentially the Rectified Flow model [Liu2022]</p>
+</blockquote>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=3901ebe6-b5a0-4a1b-bb02-88bd02de6892">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="The-subtleties">The subtleties<a class="anchor-link" href="#The-subtleties">¶</a></h3><p>The solution seems simple, but there are two subtle problems:</p>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=3f9c9e9a-5c94-45ab-a5bb-39925bca6339">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>First, how to verify that the flow designed earlier produces the correct target distribution?</p>
 <ul>
-<li><a href="NN_Basics.slides.html">Basics</a></li>
-<li><a href="NN_GD.slides.html">Training</a></li>
-<li><a href="NN_BP.slides.html">Automatic Differentiation</a> / <a href="NN_BP_More.slides.html">Harder Cases</a></li>
-<li>Variational Inference <a href="NN_VI.slides.html">draft</a></li>
-<li><a href="NN_Variants.slides.html">Common Architectures</a> / <a href="NN_PI.slides.html">Physics-Informed NN</a></li>
+<li>For example, in $\dot{x}=x_T-x_0$, the RHS seems a "constant", meaning simple translation.</li>
+<li>This means uniformly translating $p(x_0)$ along $x$ axis; the shape of $p(x_t)$ is always like $p(x_0)$.  [Left image]</li>
+<li>Then, how come we would be getting the target $p(x_T)$, that is very different from $p(x_0)$?  [Right image]</li>
+</ul>
+<p><img alt="No description has been provided for this image" src="pics/dm_fm_sub2_1.svg" width="250px"> <img alt="No description has been provided for this image" src="pics/dm_fm_sub2_2.svg" width="250px"/>
+<span style="color:gray; font-size:10px; float:right">(Figure from heeere)</span></img></p>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=4f823b81-d9e6-4138-8e98-ca535c90c5e0">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Second, the choice of $(x_0,x_T)$ seems arbitrary, so different trajectories might intersect at the same point $(t,x_t)$</p>
+<ul>
+<li>Then the flow itself is ill-defined - at every point there are multiple possible velocity vectors.</li>
+</ul>
+<p><img alt="No description has been provided for this image" src="pics/dm_fm_sub1.png" width="400px"/>
+<span style="color:gray; font-size:10px; float:right">(Figure from heeere)</span></p>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=a08aed79-a44b-4a72-8a3a-0d19fdef17e5">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Key-Formulations">Key Formulations<a class="anchor-link" href="#Key-Formulations">¶</a></h2><p>Addressing the two subtleties will bring us to Flow Matching.</p>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=dff01a1f-5b1c-4810-87ec-c03fdb276433">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Subtlety-1:-Continuity-equation">Subtlety 1: Continuity equation<a class="anchor-link" href="#Subtlety-1:-Continuity-equation">¶</a></h3><p>Earlier we only said that the following three are equivalent:
+$$
+\boxed{\text{Prob. path}} \begin{array}{c}
+\xrightarrow{\text{Derive}} \\
+\color{red}{\xleftarrow[\text{Cont. Eqn.}]{}}
+\end{array} \boxed{\text{Velo. field}} \begin{array}{c}
+\xrightarrow{\text{Solve}} \\
+\xleftarrow[\text{Differentiate}]{}
+\end{array}  \boxed{\text{Flow}}
+$$
+But actually there is a $\color{red}{\text{constraint}}$ between <strong>Probability path</strong> and <strong>Velocity field</strong>.</p>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=7039742b-dbce-42a8-a4d0-e200bd144fb4">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>At any time $t$ and states $x$, the probability $p=p(x_t)$ and the velocity field $v=v(x_t,t)$ should satisfy the <strong>Continuity equation</strong>
+$$
+\dot{p} + \nabla\cdot(p v) = 0
+$$</p>
+<ul>
+<li>$\nabla$ is short-hand for gradients w.r.t. $x$</li>
+<li>This guarantees the conservation of probability over time (need $\int p(x)dx=1$ at any time)</li>
+</ul>
+<blockquote>
+<p>If you are familiar with fluid mechanics, this is nothing but mass conservation law</p>
+</blockquote>
+<ul>
+<li>In our context, we also have the boundary conditions:
+$$
+\text{Initial: }p(t=0)=p(x_0),\quad \text{Target: }p(t=T)=p(x_T)
+$$</li>
 </ul>
 </div>
 </div>
 </div>
 </div></section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=99498427">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=c792a961-5b14-48eb-bb21-438d70096397">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>High-Dimensional systems</p>
+<h4 id="Example">Example<a class="anchor-link" href="#Example">¶</a></h4><p>Say for the earlier example, the probability path and the velocity field are, respectively
+$$
+p(x_t) = N(at+b,\sigma^2),\quad \dot{x} = v(x,t) = a
+$$
+where $a$ is a (negative) constant, so everything translates in the negative $x$ direction, starting from $b$.</p>
 <ul>
-<li><a href="HD_Basics.slides.html">Basics</a></li>
-<li><a href="HD_Spatial.slides.html">Spatial Decomposition</a></li>
-<li><a href="HD_VAE.slides.html">Autoencoders</a></li>
-<li><a href="HD_Clustering.slides.html">Clustering</a></li>
-<li><a href="HD_Temporal.slides.html">Temporal Decomposition</a></li>
+<li>If they satisfy the continuity equation, then the velocity field does generate the probability path.</li>
 </ul>
-<p>Dynamical and differential systems</p>
+<p><img alt="No description has been provided for this image" src="pics/dm_fm_sub2_1.svg" width="250px"/></p>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=b5acc402-398b-4d8a-af45-264dfe40248d">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Derivation:</p>
+<p>To make things easier, let's transform the continuity equation a bit
+$$
+\begin{aligned}
+\dot{p} &amp;= -\nabla\cdot(pv) = -\nabla p\cdot v - p\nabla\cdot v \\
+\Rightarrow \dot{p}/p &amp;= -(\nabla p/p)\cdot v - \nabla\cdot v \\
+\dot{(\log p)} &amp;= -\nabla(\log p)\cdot v - \nabla\cdot v
+\end{aligned}
+$$</p>
+</div>
+</div>
+</div>
+</div><div class="fragment">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=79345048-e88d-4ebd-a0b5-8044deaa276c">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Next, in this example, $\log p = -\frac{(x-at-b)^2}{2\sigma^2} + \text{const}$ and $\nabla\cdot v=0$, so
+$$
+\begin{aligned}
+\dot{(\log p)} + \nabla(\log p)\cdot v + \nabla\cdot v &amp;= \frac{\partial}{\partial t} \left(-\frac{(x-at-b)^2}{2\sigma^2}\right) + \frac{\partial}{\partial x} \left(-\frac{(x-at-b)^2}{2\sigma^2}\right) a \\
+&amp;= -\frac{-2a(x-at-b)}{2\sigma^2} + \left(-\frac{2(x-at-b)}{2\sigma^2}\right) a = 0
+\end{aligned}
+$$</p>
+<p>Indeed the continuity equation is satisfied!</p>
+</div>
+</div>
+</div>
+</div></div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=32de6b5c-51c8-4c85-b95e-3881aae9dfbb">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Subtlety-2:-Conditioned-vs-Marginal">Subtlety 2: Conditioned vs Marginal<a class="anchor-link" href="#Subtlety-2:-Conditioned-vs-Marginal">¶</a></h3>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0129d298-51e5-48b2-9d2e-ef5676d198df">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>The prev. example essentially shows the following pair satisfies the continuity equation
+$$
+p(x_t) = N(t x_T + (1-t)x_0,\sigma^2),\quad v(x,t) = x_T-x_0
+$$
+where $a=x_T-x_0$ and $b=x_0$.</p>
+<p>These are <strong>conditional</strong>, because they depend on $x_0$ and $x_T$.  The accurate notations are
+$$
+p(x_t{\color{red}{\mid x_0,x_T}}) = N(t x_T + (1-t)x_0,\sigma^2),\quad v(x,t{\color{red}{\mid x_0,x_T}}) = x_T-x_0
+$$</p>
+<p>What we really want is the <strong>marginal</strong>,
+$$
+p(x_t)=\bE_{x_0,x_T}[p(x_t{\color{red}{\mid x_0,x_T}})] = \int p(x_t{\color{red}{\mid x_0,x_T}}) p(x_0)p(x_T)dx_0dx_T
+$$</p>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=070703f3-5453-4535-86ec-32ee23a87471">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Now the question is what is the correct <strong>marginal</strong> velocity field $\tilde{v}(x,t)$?</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>......Probability Path......</th>
+<th>....Vector Field....</th>
+<th>Satisfy C.E.?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Conditional (left)</td>
+<td>$p(x_t\mid x_0,x_T)$</td>
+<td>$v(x,t\mid x_0,x_T)$</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Marginal (right)</td>
+<td>$p(x_t)=\mathbb{E}_{x_0,x_T}[p(x_t\mid x_0,x_T)]$</td>
+<td>${\color{red}{\tilde{v}(x,t)}}$</td>
+<td>${\color{red}{??}}$</td>
+</tr>
+</tbody>
+</table>
+<p><img alt="No description has been provided for this image" src="pics/dm_fm_sub2_1.svg" width="250px"/> <img alt="No description has been provided for this image" src="pics/dm_fm_sub2_2.svg" width="250px"/>
+<span style="color:gray; font-size:10px; float:right">(Figure from heeere)</span></p>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=1bbedb26-69ab-4b38-8325-ae6081ccc899">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Let's pose the question as follows:</p>
+<p>For some latent variable $z\sim p(z)$ (e.g., $z=[x_0,x_T]$)</p>
 <ul>
-<li><a href="DS_Basics.slides.html">Basics</a></li>
-<li><a href="DS_Lin.slides.html">Linear System</a></li>
-<li><a href="DS_Nonnormal.slides.html">Nonnormality</a>, <a href="DS_DMD_Revisit.slides.html">DMD Revisited</a></li>
-<li><a href="DS_NL.slides.html">Tackling Nonlinearity</a></li>
-<li><a href="DS_Regr.slides.html">Sparse Regression</a></li>
-<li><a href="DS_Koopman.slides.html">Koopman Operator Theory</a></li>
-<li><a href="DS_Adj.slides.html">Neural ODEs</a> / <a href="DS_Opt.slides.html">Extra: Differentially-constrained problems</a></li>
-<li><a href="DS_Diffusion.slides.html">Diffusion Models</a> / <a href="DS_Diffusion_cond.slides.html">Extras: Conditionals</a>, <a href="DS_Diffusion_fm.slides.html">Flow Matching</a></li>
+<li>If $p(x_t|z)$ and $v(x,t|z)$ satisfy the C.E.,</li>
+<li>What is the $\tilde{v}(x,t)$ that satisfies the C.E. with $p(x_t)$?</li>
 </ul>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e4322206-e1f5-4e98-86ce-6b61d199b9a3">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>First assume partial derivatives and integrals can exchange order, and we get
+$$
+\begin{aligned}
+\frac{\partial p}{\partial t}(x_t) &amp;= \frac{\partial}{\partial t} \int p(x_t|z)p(z) dz = -\int \frac{\partial p}{\partial t}(x_t|z)p(z) dz \\
+&amp;= -\int \nabla\cdot\left(p(x_t|z)v(x,t|z)\right)p(z) dz = -\nabla\cdot {\color{red}{\int p(x_t|z)v(x,t|z)p(z) dz}}
+\end{aligned}
+$$</p>
+</div>
+</div>
+</div>
+</div><div class="fragment">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cdbe08cd-2d2b-464a-8662-0cf617bee9ce">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>We hope to get
+$$
+\frac{\partial p}{\partial t}(x_t) = -\nabla\cdot {\color{red}{(p(x_t)\tilde{v}(x,t))}}
+$$</p>
+</div>
+</div>
+</div>
+</div></div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=8646491b-5210-402d-95a5-3aca70bce05a">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Comparing the red parts, we get
+$$
+\begin{aligned}
+\tilde{v}(x,t) &amp;= \frac{1}{p(x_t)}\int p(x_t|z)v(x,t|z)p(z) dz = \int \frac{p(x_t|z)v(x,t|z)}{p(x_t)}p(z) dz \\
+&amp;= \bE_z\left[ \frac{p(x_t|z)v(x,t|z)}{p(x_t)} \right]
+\end{aligned}
+$$</p>
+</div>
+</div>
+</div>
+</div><div class="fragment">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=85ee42a4-dac3-48f1-8ea6-609a887571f9">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>This is the <strong>marginal</strong> velocity field that</p>
+<ul>
+<li>is independent of $x_0,x_T$, or any other $z$</li>
+<li>will not have multiple velocities at the same point</li>
+<li>can be used to generate samples of $p(x_T)$</li>
+</ul>
+</div>
+</div>
+</div>
+</div></div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=b5fbf6f9-64a5-48f9-b88a-0800a3d0d04d">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Subtlety-2,-continued:-Conditional-loss">Subtlety 2, continued: Conditional loss<a class="anchor-link" href="#Subtlety-2,-continued:-Conditional-loss">¶</a></h3><p>Now we know the earlier loss
+$$
+\bE_{x_0,x_t}\norm{v_\theta(x,t) - \frac{x_t - x_0}{t}}^2
+$$
+matches $v_\theta(x,t)$ to the <strong>conditional</strong> velocity field.</p>
+<p>Then, how to get the marginal, $\tilde{v}_\theta(x,t)$?</p>
+<blockquote>
+<p>Computing by the $\mathbb{E}_z$ definition is probably intractable.</p>
+</blockquote>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=c29385c7-c02f-4f27-a6dd-c18424082965">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Let's pose the question as follows,</p>
+<p>For the conditional, we minimize the following, given a conditional target $u(x,t|z)$ (e.g., $(x_t-x_0)/t$)
+$$
+\cL_{CFM} = \bE_{t,z,x_t|z} \norm{v_\theta(x,t) - u(x,t|z)}^2
+$$</p>
+<p>Ideally we want to minimize the following, given a marginal target $\tilde{u}(x,t)$
+$$
+\cL_{FM} = \bE_{t,x_t} \norm{\tilde{v}_\theta(x,t) - \tilde{u}(x,t)}^2
+$$</p>
+<p>How do $\cL_{CFM}$ and $\cL_{FM}$ relate?</p>
+</div>
+</div>
+</div>
+</div><div class="fragment">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=18bcc818-008b-4fab-8aa0-b8f7ac5ebbfc">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<blockquote>
+<p>The short answer is that they are equivalent.</p>
+</blockquote>
+</div>
+</div>
+</div>
+</div></div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=33ca0ab2-fe7a-451c-8b0a-8c0286a5f0e1">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Here the equivalence means
+$$
+\nabla_\theta\cL_{CFM} = \nabla_\theta\cL_{FM}
+$$
+so -</p>
+<ul>
+<li>The conditional $v_\theta$ learned from $\cL_{CFM}$ (easy to evaluate) is exactly the marginal $\tilde{v}_\theta$.</li>
+<li>No longer need the $\cL_{FM}$, which is impractical to evaluate anyways.</li>
+</ul>
+<blockquote>
+<p>Due to the equivalence, we will uniformly use $v_\theta$ next.</p>
+</blockquote>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=ffdf7612-951c-4b92-90f8-d762e4d4161b">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Proof: For CFM loss
+$$
+\cL_{CFM} = \norm{v_\theta(x,t) - u(x,t|z)}^2 = \norm{v_\theta(x,t)}^2 - 2v_\theta(x,t)^\top u(x,t|z) + \norm{u(x,t|z)}^2
+$$
+Assuming expectation and gradient can swap order, and the last term is independent of $\theta$
+$$
+\nabla_\theta \cL_{CFM} = \bE_{t,z,x_t|z} \left[\nabla_\theta \norm{v_\theta(x,t)}^2\right] - 2\bE_{t,z,x_t|z} \left[\nabla_\theta v_\theta(x,t)^\top u(x,t|z)\right]
+$$
+Similarly, for FM loss
+$$
+\nabla_\theta \cL_{FM} = \bE_{t,x_t} \left[\nabla_\theta \norm{v_\theta(x,t)}^2\right] - 2\bE_{t,x_t} \left[\nabla_\theta v_\theta(x,t)^\top \tilde{u}(x,t)\right]
+$$</p>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=80af2249-b2a4-4758-9b6e-d5e489eb66aa">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Next we show that the terms in $\nabla_\theta \cL_{CFM}$ and $\nabla_\theta \cL_{FM}$ are the same.
+$$
+\bE_{t,z,x_t|z} \left[\nabla_\theta \norm{v_\theta(x,t)}^2\right] = \bE_{t,{\color{red}{x_t}}} \left[\nabla_\theta \norm{v_\theta(x,t)}^2\right]\quad (\text{Integrand does not have }z)
+$$
+$$
+\begin{aligned}
+\bE_{t,z,x_t|z} \left[\nabla_\theta v_\theta(x,t)^\top u(x,t|z)\right] &amp;= \iint \nabla_\theta v_\theta(x,t)^\top u(x,t|z) p(x_t|z)p(z) dx_tdz \\
+&amp;= \iint \nabla_\theta v_\theta(x,t)^\top \frac{u(x,t|z) p(x_t|z)p(z)}{p(x_t)}p(x_t) dx_tdz \\
+&amp;= \int \nabla_\theta v_\theta(x,t)^\top \left[\int\frac{u(x,t|z) p(x_t|z)p(z)}{p(x_t)}dz \right]p(x_t) dx_t \\
+&amp;= \int \nabla_\theta v_\theta(x,t)^\top \tilde{u}(x,t)p(x_t) dx_t \\
+&amp;= \bE_{t,{\color{red}{x_t}}} \left[\nabla_\theta v_\theta(x,t)^\top \tilde{u}(x,t)\right]
+\end{aligned}
+$$</p>
 </div>
 </div>
 </div>
 </div></section></section><section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=af1db368">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=a350bda6-059b-4e75-b54e-a08c4ef6e4b1">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="References">References<a class="anchor-link" href="#References">¶</a></h2><ol>
-<li>[PRML] Pattern Recognition and Machine Learning, Christopher Bishop, 2006.</li>
-<li>[MLaPP] Machine Learning: A Probabilistic Perspective, Kevin P. Murphy, 2012.</li>
-<li>[GPML] Gaussian Processes for Machine Learning, C. E. Rasmussen and C. K. I. Williams, 2006.</li>
-<li>[DMSC] Data-driven Modeling and Scientific Computation, Nathan Kutz, 2013.</li>
-</ol>
-<h2 id="Relevant-Courses">Relevant Courses<a class="anchor-link" href="#Relevant-Courses">¶</a></h2><ol>
-<li>More basic ones: <a href="https://www.eecs189.org/">Berkeley CS 189</a>, <a href="https://cs229.stanford.edu/">Stanford CS 229</a></li>
-<li>CNN-specific: <a href="http://cs231n.stanford.edu/">Stanford CS 231n</a></li>
-<li>ML with a Linear Algebra flavor: <a href="https://ocw.mit.edu/courses/mathematics/18-065-matrix-methods-in-data-analysis-signal-processing-and-machine-learning-spring-2018/">MIT 18.065</a></li>
-</ol>
-<h2 id="Credits:">Credits:<a class="anchor-link" href="#Credits:">¶</a></h2><ol>
-<li><a href="https://github.com/thejakeyboy/umich-eecs545-lectures">UMich EECS 545</a> inspired me a lot when I took the course in 2016 and when I initially developed the course myself in 2020.</li>
-<li>@evislomo for generating the initial set of homework solutions</li>
-</ol>
+<h3 id="Summary-of-key-elements">Summary of key elements<a class="anchor-link" href="#Summary-of-key-elements">¶</a></h3><p>Given $p(x_0)$ (source, easy to sample) and $p(x_T)$ (target, sample from dataset)</p>
+<ul>
+<li>Design <strong>conditional</strong> flow from $x_0\sim p(x_0)$ to $x_T\sim p(x_T)$, e.g., $x_t=tx_T+(1-t)x_0$</li>
+<li>Determine the <strong>conditional</strong> velocity field, e.g., $u(x,t|x_0,x_T)$</li>
+<li>Learn the <strong>marginal</strong> velocity field $v_\theta(x,t)$ using <strong>conditional</strong> loss $\cL_{CFM}$</li>
+<li>Use $v_\theta(x,t)$ to generate new samples in $p(x_T)$</li>
+</ul>
+<p>In the middle, $v_\theta(x,t)$ is theoretically guaranteed to map $p(x_0)$ to $p(x_T)$ by the <strong>Continuity Equation</strong>.</p>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=f6250338-8323-4cf8-bffd-b71fd69932ac">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Design-of-Flow">Design of Flow<a class="anchor-link" href="#Design-of-Flow">¶</a></h2><p>Now we know the basic principles, and can design any FM models as we like.</p>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=40ec9da9-f5c0-4846-91a1-b21135b6f666">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Examples-of-FM">Examples of FM<a class="anchor-link" href="#Examples-of-FM">¶</a></h3><p>First consider a generic case.</p>
+<p>Suppose the conditional probabilities are Gaussian
+$$
+p(x_t|z)=N(\mu_t(z),\sigma_t(z)^2)
+$$
+for some latent variable $z$ (formally called the <strong>coupling variables</strong>)</p>
+<blockquote>
+<p>The user gets to choose what $z$, $\mu_t$, $\sigma_t$ are.</p>
+</blockquote>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=4e3e8ed4-392a-44ba-b854-6cff3a6cc2a7">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<blockquote>
+<p>For conciseness, on this slide we drop $z$.</p>
+</blockquote>
+<p>Suppose along one flow $x_t = \psi_t(x_0)$,
+$$
+\frac{x_t-\mu_t}{\sigma_t} = \frac{x_0-\mu_0}{\sigma_0}\quad \text{(Optimal transport between Gaussians)}
+$$</p>
+<p>This means
+$$
+x_t = \mu_t + \sigma_t \left( \frac{x_0-\mu_0}{\sigma_0} \right)
+$$</p>
+<p>The velocity is
+$$
+\dot{x}_t = \dot{\mu}_t + \dot{\sigma}_t \left( \frac{x_0-\mu_0}{\sigma_0} \right) = \dot{\mu}_t + \dot{\sigma}_t \left( \frac{x_t-\mu_t}{\sigma_t} \right)
+$$</p>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=112c4c4e-5b52-4fd2-be85-b7dad2b7f74c">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>The conditional velocity field is thus
+$$
+v(x,t|z) = \dot{\mu}_t(z) + \frac{\dot{\sigma}_t(z)}{\sigma_0(z)}\left( x_0-\mu_0(z) \right) \quad\text{or}\quad \dot{\mu}_t(z) + \frac{\dot{\sigma}_t(z)}{\sigma_t(z)}\left( x_t-\mu_t(z) \right)\quad \text{(whichever is easier)}
+$$</p>
+<ul>
+<li>One can verify that the conditionals $p(x_t|z)$ and $v(x,t|z)$ satisies the C.E.</li>
+<li>Then the marginal $\tilde{v}(x,t)$ should produce $p(x_T)$</li>
+</ul>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=4a8db66e-3f8b-44d4-a0cd-cfcf8a3b26ca">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="Rectified-flow">Rectified flow<a class="anchor-link" href="#Rectified-flow">¶</a></h4><p>In our motivating example, we simply chose
+$$
+z=[x_0,x_T],\quad \mu_t(z)=tx_T + (1-t)x_0,\quad \sigma_t(z)=\sigma
+$$
+This gives us (as seen earlier)
+$$
+v(x,t|z) = x_T - x_0
+$$</p>
+<p>Again, the left is the conditional (used in training); the right is the marginal (used in generation)</p>
+<p><img alt="No description has been provided for this image" src="pics/dm_fm_sub2_1.svg" width="250px"/> <img alt="No description has been provided for this image" src="pics/dm_fm_sub2_2.svg" width="250px"/>
+<span style="color:gray; font-size:10px; float:right">(Figure from heeere)</span></p>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=eef35145-f560-4fe8-a8ce-b82ef67c2f65">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="Optimal-transport">Optimal transport<a class="anchor-link" href="#Optimal-transport">¶</a></h4><p>OT is about transforming $p(x_0)$ to $p(x_T)$ with a <strong>minimal</strong> cost (in a certain sense).</p>
+<ul>
+<li>Theoretically the "optimal" way to do flow matching</li>
+<li>But extremely hard to compute, esp. for high-dim case</li>
+</ul>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=e78a4b20-6a08-4907-ac64-e59f80879b5d">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [5]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="n">pp_html</span><span class="p">))</span>  <span class="c1"># Taken from the heeere blog</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
+<div class="scaled-iframe"> <iframe src="./pics/dm_fm_pp.html"></iframe> </div> <style> .scaled-iframe {   transform: scale(0.6);   transform-origin: top left;   width: 1000px;   height: 450px;   overflow: hidden; } .scaled-iframe iframe {   width: 1000px;   height: 450px;   border: 0; } </style>
+</div>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=5d5ff030-4f95-43ad-8846-69d135d21378">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>[Liu2022] The rectified flow provides an efficient "reflow" approach to approximate OT.  Video below -</p>
+<ul>
+<li>Non-optimal: Some samples did not flow to the nearest targets - this is during the training (the conditionals)</li>
+<li>Sub-optimal: Most samples flow to the nearest targets, but not the shortest path - this is after training once</li>
+<li>Near-optimal: Most samples flow <strong>straight</strong> to the nearest targets!<ul>
+<li>this is a re-trained rectified flow model with the matched pairs from sub-optimal case</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=34f67a01-0994-497c-8c77-5aa35ef1d80b">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [6]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">Video</span><span class="p">(</span><span class="n">rf_mp4</span><span class="p">)</span>   <span class="c1"># From authors of [Liu2022]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[6]:</div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
+<video controls="" src="./pics/dm_rec_flow.mp4">
+      Your browser does not support the <code>video</code> element.
+    </video>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=4c07c9bf-ee40-4a18-b1b3-e883e9ddaa60">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<blockquote>
+<p>See also [Tong2023] for more techniques.</p>
+</blockquote>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e8762e08-382a-401e-9b07-e7c700a45db2">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Connecting-to-diffusion-models">Connecting to diffusion models<a class="anchor-link" href="#Connecting-to-diffusion-models">¶</a></h3>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=ef10a590-2d88-41e5-9390-1505e9750187">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="Training">Training<a class="anchor-link" href="#Training">¶</a></h4><p>Recall one form of DM is
+$$
+x_t = \alpha_t x_T + \sigma_t\epsilon
+$$</p>
+<p>This defines a probability path that corresponds to
+$$
+z=x_T,\quad \mu_t(z)=\alpha_tx_T,\quad \sigma_t(z)=\sigma_t
+$$
+with user-defined $\alpha_t$ and $\sigma_t$.</p>
+<p>Then the conditional velocity field is
+$$
+v(x,t|z) = \frac{\dot{\sigma}_t}{\sigma_t}x + \alpha_t \left( \frac{\dot{\alpha}_t}{\alpha_t} - \frac{\dot{\sigma}_t}{\sigma_t} \right) x_T \equiv \frac{\dot{\sigma}_t}{\sigma_t}x + \sigma_t^2 \left( \frac{\dot{\alpha}_t}{\alpha_t} - \frac{\dot{\sigma}_t}{\sigma_t} \right) \underbrace{\nabla\log p(x_t)}_{\text{Score function again!}}
+$$</p>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=9c8106d3-0354-4609-87fa-9e3b04111a94">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Conversely, one can also start from the ODE/SDE view of DM,
+$$
+\dot{x} = f(t)x - \frac{1}{2}g(t)^2 s_\theta(x,t)
+$$
+The entire RHS is the marginal velocity field!</p>
+<p>Instead of matching the score, one can directly learn the velocity field from the conditional loss.</p>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=f82c7d9b-f6dd-47de-9723-cb8836c61eee">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Specific instances of correspondence between FM and DMs are listed below [Tong2023]</p>
+<p><img alt="No description has been provided for this image" src="pics/dm_vs_fm.png" width="800px"/></p>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=44fedbac-cbcb-48e9-9eac-164cf57abe42">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="Conditioning">Conditioning<a class="anchor-link" href="#Conditioning">¶</a></h4><p>We can control output given some input/label $y$, using the same techniques from DM:</p>
+<blockquote>
+<p>In DM we manipulated the noise $\epsilon_\theta$, and now we manipulate the velocity $v_\theta$</p>
+</blockquote>
+</div>
+</div>
+</div>
+</div><div class="fragment">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cae147f2-9ed3-4367-963a-b3a01068090a">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<ul>
+<li>Make $v_\theta(x,t)$ dependent on $y$ as well.<ul>
+<li>During training.  Example: Feature‑wise Linear Modulation (FiLM) <a href="https://arxiv.org/pdf/2302.00482v1">Tong2023</a></li>
+<li>After training.  Example: Low‑Rank Adaptation (LoRA)</li>
+</ul>
+</li>
+<li>Manipulate the sampling process towards the $y$ label.<ul>
+<li>During training.  Example: Classifier‑free guidance (CFG) <a href="https://arxiv.org/pdf/2311.13443">Zheng2023</a>, <a href="https://arxiv.org/pdf/2503.18886">Fan2025</a></li>
+<li>After training.  Example: Classifier guidance (CG)</li>
+</ul>
+</li>
+</ul>
+<p>A seemingly general framework: <a href="https://arxiv.org/pdf/2502.02150">Feng2025</a></p>
+</div>
+</div>
+</div>
+</div></div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=d39df168-8d7a-4051-acb1-86a486a1bb0b">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Examples">Examples<a class="anchor-link" href="#Examples">¶</a></h2>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=52eea58d-60de-40c2-91d6-0b2f462123ca">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="1D-example-revisited">1D example revisited<a class="anchor-link" href="#1D-example-revisited">¶</a></h3><p>Our previous 1D example had a vector field that drives a Gaussian to Uniform $U[0,1]$.</p>
+<p>Let's now compare</p>
+<ul>
+<li>DM, standard score matching (from prev example)</li>
+<li>DM, but using flow matching loss</li>
+<li>Pure flow matching (by rectified flow)</li>
+</ul>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=4516a57e-4985-4b58-a9af-1edd330c0cc3">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Note the straighter velocity fields and smoother output distributions in the FM cases</p>
+<p><img alt="No description has been provided for this image" src="pics/dm_fm_eg1.png" width="800px"/></p>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=1dde3d6a-e347-441d-bdee-b6d7a12f2af1">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Straighter velocity fields means fewer steps for sampling generation.  Compare -</p>
+<ul>
+<li>DM with score matching - non-smooth output even at 100 steps</li>
+</ul>
+<p><img alt="No description has been provided for this image" src="pics/dm_fm_eg_dms.png" width="800px"/></p>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=2546e3b1-933f-4222-a70a-97e889a80730">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<ul>
+<li>DM with flow matching - already working at 10 steps</li>
+</ul>
+<p><img alt="No description has been provided for this image" src="pics/dm_fm_eg_dmf.png" width="800px"/></p>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=657d72d9-ddd3-4459-9ce2-fb365981e043">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<ul>
+<li>Pure flow matching - also working at 10 steps, (and simpler formulation!)</li>
+</ul>
+<p><img alt="No description has been provided for this image" src="pics/dm_fm_eg_fmo.png" width="800px"/></p>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=7c41dca2-b47b-4e2d-962a-af8bf0ce9000">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Conditioned-case">Conditioned case<a class="anchor-link" href="#Conditioned-case">¶</a></h3><p>With better computational efficiency of FM, we can show an image example, instead of a 1D problem.</p>
+<ul>
+<li>The goal is to generate hand-written digits given the labels (0, 1, 2, ..., 9)</li>
+<li>Use a simple FiLM-like structure, so the label directly controls the velocity field</li>
+</ul>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=d81db9a6-4075-48b4-a537-62038b8987cf">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Some random samples for digits 0-9</p>
+<p><img alt="No description has been provided for this image" src="pics/dm_fm_digit.png" width="800px"/></p>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=ab33e358-8713-4eb2-a3bc-cb8de8fe6f9d">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Animated generation of digits 0-9 (after this, we clamp the pixel values to 0-1 to produce the final sample)</p>
+<p><img alt="No description has been provided for this image" src="pics/dm_fm_digit.gif" width="800px"/></p>
 </div>
 </div>
 </div>
