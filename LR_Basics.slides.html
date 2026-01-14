@@ -7493,14 +7493,14 @@ main {
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h2 id="Notation">Notation<a class="anchor-link" href="#Notation">¶</a></h2><p>In this lecture, we will use</p>
 <ul>
-<li>Data $x \in R^D$ (scalar- or vector-valued)</li>
-<li>Features $\phi(x) \in R^M$ for data $x$</li>
-<li>Continuous-valued labels $t \in R$ (target values)</li>
+<li>Data $x \in \mathbb{R}^D$ (scalar- or vector-valued)</li>
+<li>Features $\phi(x) \in \mathbb{R}^M$ for data $x$</li>
+<li>Continuous-valued labels $t \in \mathbb{R}$ (target values)</li>
 </ul>
-<p>We will interchangeably use</p>
+<p>We will use</p>
 <ul>
-<li>$x^{(n)}, x_n$ to denote the $n^\text{th}$ training example.</li>
-<li>$t^{(n)}, t_n$ to denote the $n^\text{th}$ target value.</li>
+<li>$x^{(n)}$ to denote the $n^\text{th}$ training example.</li>
+<li>$t^{(n)}$ to denote the $n^\text{th}$ target value.</li>
 </ul>
 </div>
 </div>
@@ -7514,14 +7514,14 @@ main {
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h2 id="Linear-Regression-(1d-inputs)">Linear Regression (1d inputs)<a class="anchor-link" href="#Linear-Regression-(1d-inputs)">¶</a></h2><ul>
 <li>Consider 1d case (e.g. D=1)<ul>
-<li>Given a set of observations $x_1, \dots, x_N$</li>
-<li>and corresponding target values $t_1, \dots, t_N$</li>
+<li>Given a set of observations $x^{(1)}, \dots, x^{(N)}$</li>
+<li>and corresponding target values $t^{(1)}, \dots, t^{(N)}$</li>
 </ul>
 </li>
-<li>We want to learn a function $y(x, \vec{w}) \approx t$ to predict future values.</li>
+<li>We want to learn a function $y(x, {w}) \approx t$ to predict future values.</li>
 </ul>
 <p>$$
-y(x, \vec{w})
+y(x, {w})
 = w_0 + w_1 x + w_2 x^2 + \dots w_M x^M
 = \sum_{k=0}^M w_k x^k
 $$</p>
@@ -7698,15 +7698,15 @@ $$</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Linear-Regression-(General-Case)">Linear Regression (General Case)<a class="anchor-link" href="#Linear-Regression-(General-Case)">¶</a></h2><p>The function $y(\vec{x}, \vec{w})$ is linear in parameters $\vec{w}$.</p>
+<h2 id="Linear-Regression-(General-Case)">Linear Regression (General Case)<a class="anchor-link" href="#Linear-Regression-(General-Case)">¶</a></h2><p>The function $y({x}, {w})$ is linear in parameters ${w}$.</p>
 <ul>
-<li><strong>Goal:</strong> Find the best value for the weights, $\vec{w}$.</li>
-<li>For simplicity, add a <strong>bias term</strong> $\phi_0(\vec{x}) = 1$.</li>
+<li><strong>Goal:</strong> Find the best value for the weights, ${w}$.</li>
+<li>For simplicity, add a <strong>bias term</strong> $\phi_0({x}) = 1$.</li>
 </ul>
 <p>$$
-y(\vec{x}, \vec{w}) 
-= w_0 + \sum_{j=0}^{M-1} w_j \phi_j(\vec{x})
-= \vec{w}^T \phi(\vec{x})
+y({x}, {w}) 
+= w_0 + \sum_{j=0}^{M-1} w_j \phi_j({x})
+= {w}^T \phi({x})
 $$</p>
 </div>
 </div>
@@ -7718,7 +7718,7 @@ $$</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Basis-Functions">Basis Functions<a class="anchor-link" href="#Basis-Functions">¶</a></h2><p>The basis functions $\phi_j(\vec{x})$ need not be linear.</p>
+<h2 id="Basis-Functions">Basis Functions<a class="anchor-link" href="#Basis-Functions">¶</a></h2><p>The basis functions $\phi_j({x})$ need not be linear.</p>
 </div>
 </div>
 </div>
@@ -7764,9 +7764,9 @@ $$</p>
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h2 id="Least-Squares:--Objective-Function">Least Squares:  Objective Function<a class="anchor-link" href="#Least-Squares:--Objective-Function">¶</a></h2><p>Minimize the residual error over the training data.</p>
 <p>$$
-E(\vec{w}) 
-= \frac12 \sum_{n=1}^N (y(x_n, \vec{w}) - t_n)^2
-= \frac12 \sum_{n=1}^N \left( \sum_{j=0}^{M-1} w_j\phi_j(\vec{x}^{(n)}) - t^{(n)} \right)^2
+E({w}) 
+= \frac12 \sum_{n=1}^N (y(x^{(n)}, {w}) - t^{(n)})^2
+= \frac12 \sum_{n=1}^N \left( \sum_{j=0}^{M-1} w_j\phi_j({x}^{(n)}) - t^{(n)} \right)^2
 $$</p>
 <img alt="No description has been provided for this image" src="pics/least-squares-objective.png"/>
 </div>
@@ -7791,21 +7791,21 @@ $$</p>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h3 id="Closed-Form-Solution:--Derivation">Closed Form Solution:  Derivation<a class="anchor-link" href="#Closed-Form-Solution:--Derivation">¶</a></h3><p>$$
-\begin{align}
-\mbox{Scarlar Form: } E(\vec{w}) 
-&amp;=  \frac12 \sum_{n=1}^N \left( 
+\begin{align*}
+\text{Scalar Form: } E({w}) &amp;=  \frac12 \sum_{n=1}^N \left( 
         \sum_{j=0}^{M-1} 
-           w_j \phi_j(\vec{x}^{(n)}) - t^{(n)} 
+           w_j \phi_j({x}^{(n)}) - t^{(n)} 
     \right)^2 \\
 &amp;=  \frac12 \sum_{n=1}^N \left(
-        \vec{w}^T \phi(\vec{x}^n) - t^{(n)}
+        {w}^T \phi({x}^n) - t^{(n)}
     \right)^2 \\
-&amp;= \frac12 \sum_{n=1}^N  (\vec{w}^T \phi( \vec{x}^{(n)} ) )^2
- -         \sum_{n=1}^N  t^{(n)} \vec{w}^T \phi( \vec{x}^{(n)} )
+&amp;= \frac12 \sum_{n=1}^N  ({w}^T \phi( {x}^{(n)} ) )^2
+ -         \sum_{n=1}^N  t^{(n)} {w}^T \phi( {x}^{(n)} )
  + \frac12 \sum_{n=1}^N  (t^{(n)})^2 \\
-\mbox{Vector Form: } E(\vec{w}) &amp;= \frac12 \|\Phi \vec{w} - \vec{t}\|^2 \\
-&amp;= \frac12 \vec{w}^T \Phi^T \Phi \vec{w} - \vec{w}^T \Phi^T \vec{t} + \frac12 \vec{t}^T \vec{t}
-\end{align}$$</p>
+\mbox{Vector Form: } E({w}) &amp;= \frac12 \|\Phi {w} - {t}\|^2 \\
+&amp;= \frac12 {w}^T \Phi^T \Phi {w} - {w}^T \Phi^T {t} + \frac12 {t}^T {t}
+\end{align*}
+$$</p>
 </div>
 </div>
 </div>
@@ -7816,20 +7816,20 @@ $$</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Closed-Form-Solution:--Data-Matrix">Closed Form Solution:  Data Matrix<a class="anchor-link" href="#Closed-Form-Solution:--Data-Matrix">¶</a></h2><p>The <strong>design matrix</strong> is a matrix $\Phi \in R^{N \times M}$, applying</p>
+<h2 id="Closed-Form-Solution:--Data-Matrix">Closed Form Solution:  Data Matrix<a class="anchor-link" href="#Closed-Form-Solution:--Data-Matrix">¶</a></h2><p>The <strong>design matrix</strong> is a matrix $\Phi \in \mathbb{R}^{N \times M}$, applying</p>
 <ul>
 <li>the $M$ basis functions (columns)</li>
 <li>to $N$ data points (rows)</li>
 </ul>
 <p>$$
 \Phi = \begin{bmatrix}
-\phi_0(\vec{x}_1) &amp; \phi_1(\vec{x}_1) &amp; \cdots &amp; \phi_{M-1}(\vec{x}_1) \\
-\phi_0(\vec{x}_2) &amp; \phi_1(\vec{x}_2) &amp; \cdots &amp; \phi_{M-1}(\vec{x}_2) \\
+\phi_0({x}^{(1)}) &amp; \phi_1({x}^{(1)}) &amp; \cdots &amp; \phi_{M-1}({x}^{(1)}) \\
+\phi_0({x}^{(2)}) &amp; \phi_1({x}^{(2)}) &amp; \cdots &amp; \phi_{M-1}({x}^{(2)}) \\
 \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
-\phi_0(\vec{x}_N) &amp; \phi_1(\vec{x}_N) &amp; \cdots &amp; \phi_{M-1}(\vec{x}_N) \\
+\phi_0({x}^{(N)}) &amp; \phi_1({x}^{(N)}) &amp; \cdots &amp; \phi_{M-1}({x}^{(N)}) \\
 \end{bmatrix}
 $$</p>
-<p><strong>Goal:</strong> $\Phi \vec{w} \approx \vec{t}$</p>
+<p><strong>Goal:</strong> $\Phi {w} \approx {t}$</p>
 </div>
 </div>
 </div>
@@ -7843,22 +7843,24 @@ $$</p>
 <h2 id="Least-Squares:--Gradient-via-Matrix-Calculus">Least Squares:  Gradient via Matrix Calculus<a class="anchor-link" href="#Least-Squares:--Gradient-via-Matrix-Calculus">¶</a></h2><ul>
 <li>Compute the gradient and set to zero</li>
 </ul>
-<p>\begin{align}
-    \nabla_\vec{w} E(\vec{w})
-    &amp;= \nabla_\vec{w} \left[ 
-           \frac12 \vec{w}^T \Phi^T \Phi \vec{w} - \vec{w}^T \Phi^T \vec{t} + \frac12 \vec{t}^T \vec{t} 
+<p>$$
+\begin{align*}
+    \nabla_{w} E({w})
+    &amp;= \nabla_{w} \left[ 
+           \frac12 {w}^T \Phi^T \Phi {w} - {w}^T \Phi^T {t} + \frac12 {t}^T {t} 
        \right] \\
-    &amp;= \Phi^T \Phi \vec{w} - \Phi^T \vec{t} = 0
-\end{align}</p>
+    &amp;= \Phi^T \Phi {w} - \Phi^T {t} = 0
+\end{align*}
+$$</p>
 <ul>
 <li>Solve the resulting <strong>normal equation</strong>:
 $$
-  \Phi^T \Phi \vec{w} = \Phi^T \vec{t},\quad 
-  \vec{w} = (\Phi^T \Phi)^{-1} \Phi^T \vec{t}
+  \Phi^T \Phi {w} = \Phi^T {t},\quad 
+  {w} = (\Phi^T \Phi)^{-1} \Phi^T {t}
   $$</li>
 </ul>
 <blockquote>
-<p>This is the <em>Moore-Penrose pseudoinverse</em>, $\Phi^\dagger = (\Phi^T \Phi)^{-1} \Phi^T$ applied to solve the linear system $\Phi \vec{w} \approx \vec{t}$.</p>
+<p>This is the <em>Moore-Penrose pseudoinverse</em>, $\Phi^\dagger = (\Phi^T \Phi)^{-1} \Phi^T$ applied to solve the linear system $\Phi {w} \approx {t}$.</p>
 </blockquote>
 </div>
 </div>
@@ -7887,10 +7889,10 @@ $$
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h3 id="Alternative-View:-Projection-onto-subspace">Alternative View: Projection onto subspace<a class="anchor-link" href="#Alternative-View:-Projection-onto-subspace">¶</a></h3><ul>
-<li>Columns of $\Phi$ forms a subspace and we are essentially projecting $\vec{t}$ onto $\Phi$ when doing $\Phi \vec{x}=\vec{t}$</li>
+<li>Columns of $\Phi$ forms a subspace and we are essentially projecting ${t}$ onto $\Phi$ when doing $\Phi {x}={t}$</li>
 <li>The SVD $\Phi=U\Sigma V^T$ produces the orthonormal basis $U$ and transformation matrix $T=\Sigma V^T$</li>
-<li>Recall from review of linear algebra, let $\vec{y}=T\vec{x}$, then $U\vec{y}=\vec{t}$ and $\vec{y}\approx U^T\vec{t}$</li>
-<li>Then $\vec{x}=T^{-1}\vec{y}=V\Sigma^\dagger U^T \vec{t}=\Phi^\dagger \vec{t}$</li>
+<li>Recall from review of linear algebra, let ${y}=T{x}$, then $U{y}={t}$ and ${y}\approx U^T{t}$</li>
+<li>Then ${x}=T^{-1}{y}=V\Sigma^\dagger U^T {t}=\Phi^\dagger {t}$</li>
 </ul>
 </div>
 </div>
@@ -7915,8 +7917,8 @@ $$
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h2 id="Least-Squares:--Gradient-Calculation">Least Squares:  Gradient Calculation<a class="anchor-link" href="#Least-Squares:--Gradient-Calculation">¶</a></h2><p>To minimize the error, take partial derivatives w.r.t. each weight $w_j$:</p>
 <p>$$
-\frac{\partial E(\vec{w})}{\partial w_k}= \frac{\partial}{\partial w_k} \left[ 
-    \frac12 \sum_{n=1}^N \left( \sum_{j=0}^{M-1} w_j\phi_j(\vec{x}^{(n)}) - t^{(n)} \right)^2
+\frac{\partial E({w})}{\partial w_k}= \frac{\partial}{\partial w_k} \left[ 
+    \frac12 \sum_{n=1}^N \left( \sum_{j=0}^{M-1} w_j\phi_j({x}^{(n)}) - t^{(n)} \right)^2
     \right]
 $$</p>
 </div>
@@ -7931,8 +7933,8 @@ $$</p>
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p>Apply the chain rule:</p>
 <p>$$
-= \sum_{n=1}^N \left[ \left( \sum_{j=0}^{M-1} w_j\phi_j(\vec{x}^{(n)}) - t^{(n)} \right)
-  \frac{\partial}{\partial w_k}  \left[ \sum_{j=0}^{M-1} w_j\phi_j(\vec{x}^{(n)}) - t^{(n)} \right] \right]
+= \sum_{n=1}^N \left[ \left( \sum_{j=0}^{M-1} w_j\phi_j({x}^{(n)}) - t^{(n)} \right)
+  \frac{\partial}{\partial w_k}  \left[ \sum_{j=0}^{M-1} w_j\phi_j({x}^{(n)}) - t^{(n)} \right] \right]
 $$</p>
 </div>
 </div>
@@ -7946,8 +7948,8 @@ $$</p>
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p>$$
 = \sum_{n=1}^N \left[ 
-    \left( \sum_{j=0}^{M-1} w_j\phi_j(\vec{x}^{(n)}) - t^{(n)} \right)
-    \phi_k(\vec{x}^{(n)}) 
+    \left( \sum_{j=0}^{M-1} w_j\phi_j({x}^{(n)}) - t^{(n)} \right)
+    \phi_k({x}^{(n)}) 
   \right]
 $$</p>
 </div>
@@ -7961,11 +7963,11 @@ $$</p>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h2 id="Least-Squares:--Vectorized-Gradient">Least Squares:  Vectorized Gradient<a class="anchor-link" href="#Least-Squares:--Vectorized-Gradient">¶</a></h2><p>$$
-\begin{align}
-\nabla_w E(\vec{w})
-&amp;= \sum_{n=1}^N \left( \sum_{j=0}^{M-1} w_j \phi_j(\vec{x}^{(n)}) - t^{(n)} \right) \phi(\vec{x}^{(n)}) \\
-&amp;= \sum_{n=1}^N \left( \vec{w}^T \phi(\vec{x}^{(n)}) - t^{(n)} \right) \phi(\vec{x}^{(n)})
-\end{align}
+\begin{align*}
+\nabla_w E({w})
+&amp;= \sum_{n=1}^N \left( \sum_{j=0}^{M-1} w_j \phi_j({x}^{(n)}) - t^{(n)} \right) \phi({x}^{(n)}) \\
+&amp;= \sum_{n=1}^N \left( {w}^T \phi({x}^{(n)}) - t^{(n)} \right) \phi({x}^{(n)})
+\end{align*}
 $$</p>
 </div>
 </div>
@@ -7979,7 +7981,7 @@ $$</p>
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h2 id="Closed-Form-Solution">Closed Form Solution<a class="anchor-link" href="#Closed-Form-Solution">¶</a></h2><p><strong>Main Idea:</strong>  Compute gradient and set to gradient to zero, solving in closed form.</p>
 <ul>
-<li>Objective function:  $$E(\vec{w}) = \frac12 \sum_{n=1}^N \left( \sum_{j=0}^{M-1} w_j\phi_j(\vec{x}^{(n)})- t^{(n)}\right)^2$$</li>
+<li>Objective function:  $$E({w}) = \frac12 \sum_{n=1}^N \left( \sum_{j=0}^{M-1} w_j\phi_j({x}^{(n)})- t^{(n)}\right)^2$$</li>
 <li>We will derive the gradient using matrix calculus.</li>
 </ul>
 </div>
@@ -8003,14 +8005,14 @@ $$</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Matrix-Calculus:--The-Gradient">Matrix Calculus:  The Gradient<a class="anchor-link" href="#Matrix-Calculus:--The-Gradient">¶</a></h2><p>Suppose that $f : R^{m \times n} \mapsto R$, that is, the function $f$</p>
+<h2 id="Matrix-Calculus:--The-Gradient">Matrix Calculus:  The Gradient<a class="anchor-link" href="#Matrix-Calculus:--The-Gradient">¶</a></h2><p>Suppose that $f : \mathbb{R}^{m \times n} \mapsto \mathbb{R}$, that is, the function $f$</p>
 <ul>
-<li>takes as input a matrix $A \in R^{m\times n} = [a_{ij}]$</li>
+<li>takes as input a matrix $A \in \mathbb{R}^{m\times n} = [a_{ij}]$</li>
 <li>returns a real value</li>
 </ul>
 <p>Then, the <strong>gradient</strong> of $f$ with respect to $A$ is:</p>
 <p>$$
-\nabla_A f(A) \in R^{m \times n} = \begin{bmatrix}
+\nabla_A f(A) \in \mathbb{R}^{m \times n} = \begin{bmatrix}
 %
 \frac{\partial f}{\partial a_{11}}
     &amp; \frac{\partial f}{\partial a_{12}} 
@@ -8040,7 +8042,7 @@ $$</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Matrix-Calculus:--The-Gradient">Matrix Calculus:  The Gradient<a class="anchor-link" href="#Matrix-Calculus:--The-Gradient">¶</a></h2><p>Note that the size of $\nabla_A f(A)$ is always the same as the size of $A$.  In particular, for vectors $x \in R^n$,</p>
+<h2 id="Matrix-Calculus:--The-Gradient">Matrix Calculus:  The Gradient<a class="anchor-link" href="#Matrix-Calculus:--The-Gradient">¶</a></h2><p>Note that the size of $\nabla_A f(A)$ is always the same as the size of $A$.  In particular, for vectors $x \in \mathbb{R}^n$,</p>
 <p>$$
 \nabla_x f(x) = \begin{bmatrix}
     \frac{\partial f}{\partial x_1} &amp;
@@ -8049,7 +8051,7 @@ $$</p>
     \frac{\partial f}{\partial x_n}
 \end{bmatrix}^T
 $$</p>
-<p>The gradient is a <strong>linear operator</strong> from $R^n \mapsto R^n$:</p>
+<p>The gradient is a <strong>linear operator</strong> from $\mathbb{R}^n \mapsto \mathbb{R}^n$:</p>
 <ul>
 <li>$ \nabla_x (f + g) = \nabla_x f + \nabla_x g $</li>
 <li>$ \forall\, c \in R, \nabla_x (c f) = c \nabla_x f$</li>
@@ -8149,7 +8151,7 @@ $$
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h3 id="Root-of-Mean-Squared-Error,-RMSE">Root of Mean-Squared Error, RMSE<a class="anchor-link" href="#Root-of-Mean-Squared-Error,-RMSE">¶</a></h3><p>$$
-E_{RMS} = \sqrt{2E(w^*) / N} = \sqrt{\frac{1}{N}\sum_{i=1}^N[f(x_i)-t_i]^2}
+E_{RMS} = \sqrt{2E(w^*) / N} = \sqrt{\frac{1}{N}\sum_{i=1}^N[f(x^{(i)})-t^{(i)}]^2}
 $$</p>
 <ul>
 <li>Easy to compute</li>
@@ -8202,11 +8204,13 @@ $$</p>
 <ul>
 <li>Let $\bar{t}$ be average of $\{t_i\}$</li>
 <li>Residual sum of squares:
-$$SS_{res}=\sum_i[f(x_i)-t_i]^2$$</li>
+$$SS_{res}=\sum_i[f(x^{(i)})-t^{(i)}]^2$$</li>
 <li>Total sum of squares:
-$$SS_{tot}=\sum_i[t_i-\bar{t}]^2$$</li>
+$$SS_{tot}=\sum_i[t^{(i)}-\bar{t}]^2$$</li>
 <li>Explained sum of squares:
-$$SS_{reg}=\sum_i[f(x_i)-\bar{t}]^2$$</li>
+$$SS_{reg}=\sum_i[f(x^{(i)})-\bar{t}]^2$$</li>
+<li>In simple least squares:
+$$SS_{tot}=SS_{reg}+SS_{res}$$</li>
 </ul>
 </div>
 </div>
