@@ -7791,7 +7791,7 @@ $$</p>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h3 id="Closed-Form-Solution:--Derivation">Closed Form Solution:  Derivation<a class="anchor-link" href="#Closed-Form-Solution:--Derivation">¶</a></h3><p>$$
-\begin{align*}
+\begin{aligned}
 \text{Scalar Form: } E({w}) &amp;=  \frac12 \sum_{n=1}^N \left( 
         \sum_{j=0}^{M-1} 
            w_j \phi_j({x}^{(n)}) - t^{(n)} 
@@ -7804,7 +7804,7 @@ $$</p>
  + \frac12 \sum_{n=1}^N  (t^{(n)})^2 \\
 \mbox{Vector Form: } E({w}) &amp;= \frac12 \|\Phi {w} - {t}\|^2 \\
 &amp;= \frac12 {w}^T \Phi^T \Phi {w} - {w}^T \Phi^T {t} + \frac12 {t}^T {t}
-\end{align*}
+\end{aligned}
 $$</p>
 </div>
 </div>
@@ -7844,13 +7844,13 @@ $$</p>
 <li>Compute the gradient and set to zero</li>
 </ul>
 <p>$$
-\begin{align*}
+\begin{aligned}
     \nabla_{w} E({w})
     &amp;= \nabla_{w} \left[ 
            \frac12 {w}^T \Phi^T \Phi {w} - {w}^T \Phi^T {t} + \frac12 {t}^T {t} 
        \right] \\
     &amp;= \Phi^T \Phi {w} - \Phi^T {t} = 0
-\end{align*}
+\end{aligned}
 $$</p>
 <ul>
 <li>Solve the resulting <strong>normal equation</strong>:
@@ -7963,11 +7963,11 @@ $$</p>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h2 id="Least-Squares:--Vectorized-Gradient">Least Squares:  Vectorized Gradient<a class="anchor-link" href="#Least-Squares:--Vectorized-Gradient">¶</a></h2><p>$$
-\begin{align*}
+\begin{aligned}
 \nabla_w E({w})
 &amp;= \sum_{n=1}^N \left( \sum_{j=0}^{M-1} w_j \phi_j({x}^{(n)}) - t^{(n)} \right) \phi({x}^{(n)}) \\
 &amp;= \sum_{n=1}^N \left( {w}^T \phi({x}^{(n)}) - t^{(n)} \right) \phi({x}^{(n)})
-\end{align*}
+\end{aligned}
 $$</p>
 </div>
 </div>
@@ -8088,7 +8088,7 @@ $$</p>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h2 id="Gradient:--Quadratic-Forms">Gradient:  Quadratic Forms<a class="anchor-link" href="#Gradient:--Quadratic-Forms">¶</a></h2><ul>
-<li>Every symmetric $A \in R^{n \times n}$ corresponds to a <strong>quadratic form</strong>:
+<li>Every symmetric $A \in \mathbb{R}^{n \times n}$ corresponds to a <strong>quadratic form</strong>:
 $$ f(x) = \sum_{i=1}^n \sum_{j=1}^n x_i A_{ij} x_j = x^T A x $$</li>
 <li>The partial derivatives are
 $$ 

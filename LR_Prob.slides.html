@@ -7533,6 +7533,9 @@ p(t|X,w,\beta)
 = \prod_{n=1}^N \mathcal{N}(t_n|w^T\phi(x_n),\beta^{-1})
 $$</li>
 </ul>
+<blockquote>
+<p>For conciseness, now we use $\Box_n$ to denote the $n$th sample, instead of $\Box^{(n)}$</p>
+</blockquote>
 </div>
 </div>
 </div>
@@ -7550,16 +7553,16 @@ $$
 $$
 where
 $$
-E_D(w) = \frac{1}{2} \sum_{n=1}^N \left[ t_n-w^T\phi(x_n) \right]^2 = \frac{1}{2} ||t-\Phi w||^2
+E_D(w) = \frac{1}{2} \sum_{n=1}^N \left[ t_n-w^T\phi(x_n) \right]^2 = \frac{1}{2} \|t-\Phi w\|^2
 $$</p>
 </li>
 <li><p>Recall the design matrix $\Phi$:
 $$
 \Phi = \begin{bmatrix}
-\phi_0(\vec{x}_1) &amp; \phi_1(\vec{x}_1) &amp; \cdots &amp; \phi_{M-1}(\vec{x}_1) \\
-\phi_0(\vec{x}_2) &amp; \phi_1(\vec{x}_2) &amp; \cdots &amp; \phi_{M-1}(\vec{x}_2) \\
+\phi_0({x}_1) &amp; \phi_1({x}_1) &amp; \cdots &amp; \phi_{M-1}({x}_1) \\
+\phi_0({x}_2) &amp; \phi_1({x}_2) &amp; \cdots &amp; \phi_{M-1}({x}_2) \\
 \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
-\phi_0(\vec{x}_N) &amp; \phi_1(\vec{x}_N) &amp; \cdots &amp; \phi_{M-1}(\vec{x}_N) \\
+\phi_0({x}_N) &amp; \phi_1({x}_N) &amp; \cdots &amp; \phi_{M-1}({x}_N) \\
 \end{bmatrix}
 $$</p>
 </li>
@@ -7574,13 +7577,13 @@ $$</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Details-of-Derivation---Skip-in-class">Details of Derivation - Skip in class<a class="anchor-link" href="#Details-of-Derivation---Skip-in-class">¶</a></h3><p>From $P(t| x,w) = \sqrt\frac{\beta}{2\pi} \exp(-\frac{\beta}{2} || t-w^T \phi(x) ||^2)$ we have
+<h3 id="Details-of-Derivation---1/2">Details of Derivation - 1/2<a class="anchor-link" href="#Details-of-Derivation---1/2">¶</a></h3><p>From $P(t| x,w) = \sqrt\frac{\beta}{2\pi} \exp(-\frac{\beta}{2} \| t-w^T \phi(x) \|^2)$ we have
 $$
-\begin{align}
+\begin{aligned}
 &amp;\;  \ln P(t_1, \dots, t_N | x,w) \\
 =&amp;\; \ln \prod_{k=1}^N \mathcal{N}(t_k| w^T \phi(x^{(k)}), \beta^{-1}) \\
-=&amp; \sum_{k=1}^N \ln \left[ \sqrt\frac{\beta}{2\pi} \exp \left( -\frac{\beta}{2} \cdot || t_k-w^T \phi(x^{(k)}) ||^2 \right) \right]
-\end{align}
+=&amp; \sum_{k=1}^N \ln \left[ \sqrt\frac{\beta}{2\pi} \exp \left( -\frac{\beta}{2} \| t_k-w^T \phi(x^{(k)}) \|^2 \right) \right]
+\end{aligned}
 $$</p>
 </div>
 </div>
@@ -7592,12 +7595,12 @@ $$</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Details-of-Derivation---Skip-in-class">Details of Derivation - Skip in class<a class="anchor-link" href="#Details-of-Derivation---Skip-in-class">¶</a></h3><p>$$
-\begin{align}
+<h3 id="Details-of-Derivation---2/2">Details of Derivation - 2/2<a class="anchor-link" href="#Details-of-Derivation---2/2">¶</a></h3><p>$$
+\begin{aligned}
 =&amp;\; \sum_{k=1}^N \ln \left[ \sqrt\frac{\beta}{2\pi} \exp(-\frac{\beta}{2} ( t_k-w^T \phi(x^{(k)}) )^2) \right] \\
 =&amp;\; \sum_{k=1}^N \left[ \frac{1}{2} \ln\beta - \frac{1}{2}\ln{2\pi} - \frac{\beta}{2}( t_k - w^T\phi(x_k) )^2 \right] \\
 =&amp;\; \frac{N}{2} \ln\beta - \frac{N}{2} \ln{2\pi} - \beta \sum_{k=1}^N \frac{1}{2}( t_k - w^T\phi(x_k) )^2 \\
-\end{align}
+\end{aligned}
 $$</p>
 </div>
 </div>
@@ -7614,12 +7617,12 @@ $$</p>
 </li>
 <li><p>Set gradient of log-likelihood to zero,
 $$
-\begin{align}
+\begin{aligned}
 \nabla_w \ln p(t | w, \beta)
 &amp;= \nabla_w \left[ \frac{N}{2}\ln\beta - \frac{N}{2}\ln{2\pi} - \beta E_D(w) \right] = 0 \\
-&amp;\Rightarrow \nabla_w \left[ \frac{1}{2} ||t-\Phi w||^2 \right] \\
+&amp;\Rightarrow \nabla_w \left[ \frac{1}{2} \|t-\Phi w\|^2 \right] \\
 &amp;\Rightarrow \boxed{(\Phi^T \Phi) w = \Phi^T t}
-\end{align}
+\end{aligned}
 $$</p>
 </li>
 </ul>
@@ -7634,7 +7637,7 @@ $$</p>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h3 id="Scalar-version-of-derivation---Skip-in-class">Scalar version of derivation - Skip in class<a class="anchor-link" href="#Scalar-version-of-derivation---Skip-in-class">¶</a></h3><p>$$
-\begin{align}
+\begin{aligned}
 \nabla_w \ln p(t | w, \beta)
 &amp;= \nabla_w \left[ \frac{N}{2}\ln\beta - \frac{N}{2}\ln{2\pi} - \beta \sum_{n=1}^N \frac{1}{2} \left( t_n - w^T \phi(x_n) \right)^2 \right] = 0 \\
 &amp;\Rightarrow \nabla_w \left[ - \beta \sum_{n=1}^N \frac{1}{2} \left( t_n - w^T \phi(x_n) \right)^2 \right] \\
@@ -7642,7 +7645,7 @@ $$</p>
 &amp;= \beta \sum_{n=1}^N \left[ t_n - w^T \phi(x_n) \right] \phi(x_n)^T = 0 \\
 &amp;\Rightarrow \sum_{n=1}^N \left[ t_n - w^T \phi(x_n) \right] \phi(x_n)^T = 0 \\
 0 &amp;= \sum_{n=1}^N t_n \phi(x_n)^T - w^T \left[ \sum_{n=1}^N \phi(x_n) \phi(x_n)^T \right]
-\end{align}
+\end{aligned}
 $$</p>
 </div>
 </div>
@@ -7657,12 +7660,12 @@ $$</p>
 <ul>
 <li>Similarly, one can determine $\beta$, i.e. the precision of the prediction,
 $$
-\begin{align}
+\begin{aligned}
 \nabla_\beta \ln p(t | w, \beta)
 &amp;= \nabla_\beta \left[ \frac{N}{2}\ln\beta - \frac{N}{2}\ln{2\pi} - \beta E_D(w) \right] = 0 \\
 &amp;\Rightarrow \frac{N}{2\beta} - \sum_{n=1}^N \frac{1}{2} \left[ t_n - w^T \phi(x_n) \right]^2 = 0 \\
 &amp;\Rightarrow \beta^{-1} = \frac{1}{N}\sum_{n=1}^N \left[ t_n - w^T \phi(x_n) \right]^2 = \frac{E_D(w)}{N}
-\end{align}
+\end{aligned}
 $$</li>
 </ul>
 </div>
@@ -7706,9 +7709,9 @@ $$</li>
 <h3 id="Problem-setup">Problem setup<a class="anchor-link" href="#Problem-setup">¶</a></h3><ul>
 <li><p>Again we assume a stochastic model
 $$
-\begin{gather}
-t = y(x,w) + \epsilon \\ \epsilon \sim \mathcal{N}(0, \beta^{-1})
-\end{gather}
+\begin{aligned}
+t &amp;= y(x,w) + \epsilon \\ \epsilon &amp;\sim \mathcal{N}(0, \beta^{-1})
+\end{aligned}
 $$
 where $\beta$ represents accuracy.</p>
 </li>
@@ -7740,7 +7743,7 @@ means $w$ should be centered around zero, i.e. unlikely to have large values.</l
 $$
 \mathcal{N}(\mu, \Sigma) = \frac{1}{\sqrt{(2\pi)^k|\Sigma|}} \exp \left[ -\frac{1}{2}(x-\mu)^T\Sigma^{-1}(x-\mu)) \right]
 $$
-where $\mu\in\R^k$, $\Sigma\in\R^{k\times k}$</li>
+where $\mu\in\mathbb{R}^k$, $\Sigma\in\mathbb{R}^{k\times k}$</li>
 </ul>
 </div>
 </div>
@@ -7759,10 +7762,10 @@ p(w|t,\alpha,\beta) \propto p(t|w,\beta)p(w|\alpha)
 $$</li>
 <li>Taking the logarithm again,
 $$
-\begin{align}
+\begin{aligned}
 \ln p(w|t,\alpha,\beta) &amp;= \color{red}{\ln p(t|w,\beta)} + \color{blue}{\ln p(w|\alpha)} + const \\
 &amp;= \color{red}{\frac{N}{2} \ln\beta - \frac{\beta}{2} \sum_{k=1}^N ( t_k - w^T\phi(x_k) )^2} \color{blue}{- \frac{\alpha}{2} ||w||^2} + const
-\end{align}
+\end{aligned}
 $$</li>
 <li>Looking familiar?  Essentially the regularized objective function from optimization approach
 $$
@@ -7786,18 +7789,18 @@ p(w|t,\alpha,\beta) = \mathcal{N}(m_N,S_N)
 $$
 where $m_N$ is the estimated parameter, and $S_N$ is the precision,
 $$
-\begin{align}
+\begin{aligned}
 m_N &amp;= \beta S_N \Phi^T t \\
 S_N^{-1} &amp;= \alpha I + \beta \Phi^T\Phi
-\end{align}
+\end{aligned}
 $$</li>
 <li><strong>[Gaussian Identity I]</strong> Above result is due to a nice property of Gaussian distribution: If the likelihood and prior are Gaussian, then the posterior is Gaussian
 $$
-\begin{align}
+\begin{aligned}
 p(x) &amp;= \mathcal{N}(x|\mu,\Lambda^{-1}) \\
 p(y|x) &amp;= \mathcal{N}(y|Ax+b,L^{-1}) \\
 \Rightarrow p(x|y) &amp;= \mathcal{N}(x|\Sigma[A^TL(y-b)+\Lambda\mu],\Sigma)
-\end{align}
+\end{aligned}
 $$
 where $\Sigma=(\Lambda + A^TLA)^{-1}$.<ul>
 <li>Further explanation: See extra material on the <strong>exponential family</strong></li>
@@ -7842,11 +7845,11 @@ $$
 $$</li>
 <li><strong>[Gaussian Identity II]</strong> Above result is due to another nice property of Gaussian distribution:
 $$
-\begin{align}
+\begin{aligned}
 p(x) &amp;= \mathcal{N}(x|\mu,\Lambda^{-1}) \\
 p(y|x) &amp;= \mathcal{N}(y|Ax+b,L^{-1}) \\
 \Rightarrow p(y) &amp;= \mathcal{N}(y|A\mu+b,L^{-1}+A\Lambda^{-1}A^T)
-\end{align}
+\end{aligned}
 $$</li>
 <li>The Bayesian approach provides the <strong>error estimate</strong> of the ridge regression, something missing from the optimization approach.</li>
 </ul>
@@ -8113,10 +8116,10 @@ $$</li>
 <ul>
 <li>After some math we can see that
 $$
-\begin{align}
+\begin{aligned}
 \ln p(t|\alpha, \beta) &amp;= \frac{M}{2}\ln\alpha + \frac{N}{2}\ln\beta - E(m_N) - \frac{1}{2}\ln|S_N^{-1}| - \frac{N}{2}\ln(2\pi) \\
 E(m_N) &amp;= \frac{\beta}{2}||t-\Phi m_N||^2 + \frac{\alpha}{2}m_N^T m_N
-\end{align}
+\end{aligned}
 $$</li>
 </ul>
 </div>
@@ -8132,10 +8135,10 @@ $$</li>
 <ul>
 <li>Setting the gradients of $\ln p(t|\alpha, \beta)$ w.r.t. $\alpha$, $\beta$ to be zero, we can find the <strong>re-estimation</strong> equations for $\alpha$ and $\beta$
 $$
-\begin{align}
+\begin{aligned}
 \alpha &amp;= \frac{\gamma}{m_N^T m_N},\quad \gamma = \sum_{i=1}^M \frac{\lambda_i}{\alpha+\lambda_i} \\
 \beta^{-1} &amp;= \frac{1}{N-\gamma} ||t-\Phi m_N||^2
-\end{align}
+\end{aligned}
 $$
 where $\lambda_i$ are eigenvalues of $\beta\Phi^T\Phi$</li>
 <li>To the bravest, derive the above results as practice.</li>
