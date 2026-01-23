@@ -8062,6 +8062,249 @@ $$</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Extra:-Solving-the-L1-case">Extra: Solving the L1 case<a class="anchor-link" href="#Extra:-Solving-the-L1-case">¶</a></h2><ul>
+<li>The L2 regularization $\|w\|_2^2$ is smooth and differentiable, and hence easy to solve.</li>
+<li>But how about the L1 case $\|w\|_1$?  The objective is <strong>not</strong> differentiable whenever one $w_j$ is zero.</li>
+</ul>
+<p>Here we briefly discuss the <strong>Proximal Gradient Descent</strong> (PGD) method to solve this problem.</p>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="The-algorithm">The algorithm<a class="anchor-link" href="#The-algorithm">¶</a></h3><p>Formally, let's consider
+$$
+\min_w F(w) = h(w) + r(w)
+$$
+where $h(w)$ is differentiable and $r(w)$ is not.  In the L1 example,</p>
+<p>$$
+h(w) = \|\Phi w-t\|^2,\quad r(w) = \lambda \|w\|_1
+$$</p>
+<blockquote>
+<p>But here we still assume both $h$ and $r$ are convex.</p>
+</blockquote>
+</div>
+</div>
+</div>
+</div><div class="fragment">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>In short, PGD does the following,
+$$
+w_{k+1} = \text{prox}_{\alpha r}(w_k - \alpha\nabla h(w_k))
+$$</p>
+<ul>
+<li>Regular GD for $h$ with a step size $\alpha$</li>
+<li>A special "proximal operator" for $r$</li>
+</ul>
+</div>
+</div>
+</div>
+</div></div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>The proximal operator does the following,
+$$
+\text{prox}_{\alpha r}(v) = \arg\min_{u} \frac{1}{2}\|u-v\|^2 + \alpha r(u)
+$$</p>
+<ul>
+<li>$v$ is the update based on the smooth part of objective</li>
+<li>$u$ is the modification to $v$ considering the non-smooth part</li>
+<li>$u$ is as close to $v$ as possible (1st term), while minimizing $r$ (2nd term)</li>
+</ul>
+</div>
+</div>
+</div>
+</div><div class="fragment">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>For typical regularizers, the proximal operators have closed-form solutions.</p>
+<p>For example, in the L0 case, we simply zero out values smaller than a threshold.</p>
+<img align="middle" alt="No description has been provided for this image" src="pics/proximal.png" width="400px"/>
+</div>
+</div>
+</div>
+</div></div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="How-it-works">How it works<a class="anchor-link" href="#How-it-works">¶</a></h3><p>Recall, if the objective were differentiable, e.g., without $r(w)$, the optimality condition is simply
+$$
+\nabla F(w) = \nabla h(w) = 0
+$$</p>
+<p>From the optimality condition, if we have an iterate $w_k$, the next iterate that we pick satisfies
+$$
+0 = \nabla h(w_{k+1}) \approx \nabla h(w_k) + \frac{w_{k+1} - w_k}{\alpha} \quad\Rightarrow \quad w_{k+1} = w_k - \alpha \nabla h(w_k)
+$$</p>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>In the non-differentiable case, the optimality condition generalizes to
+$$
+\partial F(w) = \nabla h(w) + \partial r(w)\quad\text{and}\quad 0\in \partial F(w)
+$$
+where $\partial r(w)$ is a special notation called <strong>subgradient</strong> - a <strong>set</strong> of vectors $g$ such that for all $v$
+$$
+r(v) \geq r(w) + g^T (v-w)
+$$</p>
+<img align="middle" alt="No description has been provided for this image" src="pics/subgradients.png" width="600px"/>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>In analogy to the smooth case, during iterations, we would like
+$$
+0\in \partial F(w) = \nabla h(w_{k+1}) + \partial r(w_{k+1}) \approx \nabla h(w_k) + \frac{w_{k+1} - w_k}{\alpha} + \partial r(w_{k+1})
+$$</p>
+<p>If we choose
+$$
+v = w_k - \alpha\nabla h(w_k),\quad u = w_{k+1}
+$$
+then optimality condition is equivalent to
+$$
+0\in (u-v) + \alpha\partial r(u)
+$$</p>
+</div>
+</div>
+</div>
+</div><div class="fragment">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>But the above is exactly the subgradient in the proximal step:
+$$
+(u-v) + \alpha \partial r(u) = \partial\left( \frac{1}{2}\|u-v\|^2 + \alpha r(u) \right)
+$$</p>
+<p>In other words, the following two are <strong>equivalent</strong>:</p>
+<ul>
+<li>Evaluating the proximal step</li>
+<li>Satisfying the optimality condition of the original problem (up to the first-order approximation)</li>
+</ul>
+</div>
+</div>
+</div>
+</div></div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="Scalar-example">Scalar example<a class="anchor-link" href="#Scalar-example">¶</a></h4><p>Next we take a scalar L1 case as an example, so $\|w\|_1=|w|$, and let $w^*$ be a constant,
+$$
+\min_w \frac{1}{2}(w-w^*)^2 + \lambda |w|
+$$</p>
+<blockquote>
+<p>If $\lambda=0$, the solution is apparently $w=w^*$.</p>
+</blockquote>
+<p>We want
+$$
+0\in w-w^* + \lambda \partial |w|
+$$</p>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>If $w&gt;0$, then $\partial |w|=\nabla w=1$, and the equation simplifies
+$$
+0 = w-w^* + \lambda \Rightarrow w = w^* - \lambda
+$$</p>
+<p>But this relation requires $w&gt;0$, or $w^* &gt; \lambda$.</p>
+<p>So, when $w^* &gt; \lambda$, the solution is $w = w^* - \lambda$.</p>
+</div>
+</div>
+</div>
+</div><div class="fragment">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>If $w&lt;0$, similarly, we would get: when $w^* &lt; -\lambda$, the solution is $w = w^* + \lambda$.</p>
+</div>
+</div>
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>If $w=0$, then $\partial |w|=[-1,1]$, and
+$$
+0\in w-w^* + \lambda [-1, 1] = -w^* + [-\lambda, \lambda]\quad \text{or}\quad w^* \in [-\lambda, \lambda]
+$$
+This means, when $|w^*|\leq \lambda$, we simply zero out $w=0$ - this is where the sparsity comes in.</p>
+<blockquote>
+<p>The above recovers the L1 proximal operator.</p>
+</blockquote>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="Some-notes">Some notes<a class="anchor-link" href="#Some-notes">¶</a></h4><ul>
+<li>More information on proximal gradient method <a href="https://en.wikipedia.org/wiki/Proximal_gradient_method">wiki</a> and <a href="https://web.stanford.edu/~boyd/papers/pdf/prox_algs.pdf">an introductory text</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div></div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h2 id="Examples:-Regularized-regression">Examples: Regularized regression<a class="anchor-link" href="#Examples:-Regularized-regression">¶</a></h2>
 </div>
 </div>
