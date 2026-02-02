@@ -5,7 +5,7 @@
 <meta content="chrome=1" http-equiv="X-UA-Compatible"/>
 <meta content="yes" name="apple-mobile-web-app-capable"/>
 <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
-<title>LR_Kern slides</title><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script><script type="module">
+<title>KGP_Kern slides</title><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script><script type="module">
   import mermaid from 'https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.7.0/mermaid.esm.min.mjs';
   mermaid.initialize({ startOnLoad: true });
 </script>
@@ -7995,11 +7995,11 @@ $$ \kappa(x,z) = \exp \left\{-\frac{\|x-z\|^2}{2\sigma^2} \right\} $$</p>
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h3 id="Example:-Similarity">Example: Similarity<a class="anchor-link" href="#Example:-Similarity">¶</a></h3><p>Conventionally the similarity between two points $x$ and $z$ can be quantified as the "angle" between vectors
 $$
-s(x,z) = \frac{x^T z}{\|x\|^2}
+s(x,z) = \frac{x^T z}{\|x\|\|z\|}
 $$</p>
 <p>In feature space, we can generalize as
 $$
-s(x,z) = \frac{\phi(x)^T \phi(z)}{\|\phi(x)\|^2}
+s(x,z) = \frac{\phi(x)^T \phi(z)}{\|\phi(x)\|\|\phi(z)\|}
 $$</p>
 </div>
 </div>
@@ -8013,7 +8013,7 @@ $$</p>
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p>But this is simply
 $$
-s(x,z) = \frac{k(x,z)}{k(x,x)}
+s(x,z) = \frac{k(x,z)}{\sqrt{k(x,x)k(z,z)}}
 $$</p>
 </div>
 </div>
@@ -8385,7 +8385,71 @@ $$</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Perspective-of-Bias-Variance-Trade-Off">Perspective of Bias-Variance Trade-Off<a class="anchor-link" href="#Perspective-of-Bias-Variance-Trade-Off">¶</a></h3><p>Recall from Ridge Regression with $m$ features and $n$ data points, we had
+<h3 id="Two-More-Perspectives">Two More Perspectives<a class="anchor-link" href="#Two-More-Perspectives">¶</a></h3>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="Kernel-itself-as-features">Kernel itself as features<a class="anchor-link" href="#Kernel-itself-as-features">¶</a></h4><p>For a dataset $\{x_i\}_{i=1}^N$, pick a kernel $\kappa$ and define features as
+$$
+\tilde{\phi}_i(x) = \kappa(x,x_i)
+$$
+i.e., each sample corresponds to one feature.</p>
+</div>
+</div>
+</div>
+</div><div class="fragment">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>The KRR model is
+$$
+y(x) = \sum_{i=1}^N a_i\kappa(x,x_i) \equiv \tilde{\phi}(x)^T a
+$$</p>
+<p>So we could have treated KRR as a regular ridge regression.</p>
+<ul>
+<li>In fitting, $\tilde{\phi}_i$ forms a $\Phi$ that is exactly $K$.</li>
+<li>The difference: the regularization in KRR $\|a\|_K^2$ but RR would use $\|a\|_2^2$.</li>
+</ul>
+</div>
+</div>
+</div>
+</div></div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>This view has a deep connection to the Reproducing Kernel Hilbert Space (RKHS).</p>
+<ul>
+<li>The collection $\{f(x) \mid f(x)=\sum_{i=1}^N a_i\kappa(x,x_i),\, a_i\in\mathbb{R}\}$ is a function space</li>
+<li>Upon "completion", the space becomes RKHS</li>
+<li>The many nice properties of RKHS guarantee the nice properties of KRR</li>
+</ul>
+<blockquote>
+<p>See the theoretical slides for more details.</p>
+</blockquote>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="Bias-variance-trade-off">Bias-variance trade-off<a class="anchor-link" href="#Bias-variance-trade-off">¶</a></h4><p>Recall from Ridge Regression with $m$ features and $n$ data points, we had
 $$
 \mathbb{E}[(y - \hat{f})^2] = \underbrace{O({\sigma^2})}_\text{irreducible error} + \underbrace{O(\sigma^2\frac{{\tilde{m}}}{n})}_\text{Variance} + \underbrace{O({\tilde{m}}^{-p})}_{\text{Bias}^2}
 $$
