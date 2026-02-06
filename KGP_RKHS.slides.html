@@ -5,7 +5,7 @@
 <meta content="chrome=1" http-equiv="X-UA-Compatible"/>
 <meta content="yes" name="apple-mobile-web-app-capable"/>
 <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
-<title>index slides</title><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script><script type="module">
+<title>KGP_RKHS slides</title><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script><script type="module">
   import mermaid from 'https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.7.0/mermaid.esm.min.mjs';
   mermaid.initialize({ startOnLoad: true });
 </script>
@@ -7434,193 +7434,1457 @@ main {
 <main>
 <div class="reveal">
 <div class="slides"><section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=bf786fc8">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Machine-Learning-for-Engineering">Machine Learning for Engineering<a class="anchor-link" href="#Machine-Learning-for-Engineering">¶</a></h2><h3 id="Instructor:-Daning-Huang">Instructor: <a href="https://apus-lab.github.io">Daning Huang</a><a class="anchor-link" href="#Instructor:-Daning-Huang">¶</a></h3>
+<h2 id="Machine-Learning-for-Engineering">Machine Learning for Engineering<a class="anchor-link" href="#Machine-Learning-for-Engineering">¶</a></h2><h2 id="Kernels-and-Gaussian-Processes:-RKHS">Kernels and Gaussian Processes: RKHS<a class="anchor-link" href="#Kernels-and-Gaussian-Processes:-RKHS">¶</a></h2><h3 id="Instructor:-Daning-Huang">Instructor: Daning Huang<a class="anchor-link" href="#Instructor:-Daning-Huang">¶</a></h3>
 </div>
 </div>
 </div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=bb113b41">
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Introduction">Introduction<a class="anchor-link" href="#Introduction">¶</a></h2><p>This website hosts the slides for several Machine Learning-related courses that are taught at Penn State Aerospace.</p>
+<h2 id="TODAY:-Kernels-and-GP">TODAY: Kernels and GP<a class="anchor-link" href="#TODAY:-Kernels-and-GP">¶</a></h2><p>Theoretical perspective on kernel ridge regression: Reproducing Kernel Hilbert Space (RKHS)</p>
 <ul>
-<li>The goal is to help you to<ul>
-<li>Understand fundamentals of machine learning</li>
-<li>Learn technical details of ML algorithms</li>
-<li>Learn how to implement some important algorithms</li>
-<li>Use machine learning algorithms for your research and applications</li>
+<li>Preliminaries and definitions</li>
+<li>Moore-Aronszajn Theorem (kernel-RKHS correspondence)</li>
+<li>Mercer's Theorem (kernel construction)</li>
+<li>Examples of RKHS for specific kernels</li>
+<li>RKHS-view of KRR</li>
+</ul>
+<h3 id="References">References<a class="anchor-link" href="#References">¶</a></h3><ul>
+<li>[GPML] Chp. 6</li>
+<li>Tutorials <a href="https://teazrq.github.io/SMLR/reproducing-kernel-hilbert-space.html">here</a> and <a href="https://www.researchgate.net/profile/Dino-Sejdinovic/publication/265437652_What_is_an_RKHS/links/55c73c8d08aebc967df54aa0/What-is-an-RKHS.pdf">here</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Hilbert-Space">Hilbert Space<a class="anchor-link" href="#Hilbert-Space">¶</a></h2><p>To understand RKHS, we certainly need to understand the "HS" first, i.e., the Hilbert space.</p>
+<p>To do so, let's review a hierarchy of spaces:</p>
+<p>$$
+\begin{align*}
+&amp;\ \boxed{\text{Vector Space}} \\
+&amp;\xrightarrow{\text{Add }\langle \cdot, \cdot \rangle} \boxed{\text{Inner Product Space}} \\
+&amp;\xrightarrow{\text{Induce }d(\cdot,\cdot)} \boxed{\text{Pre-Hilbert Space}} \\
+&amp;\xrightarrow{\text{Completion}} \boxed{\text{Hilbert Space}}
+\end{align*}
+$$</p>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Vector-Space">Vector Space<a class="anchor-link" href="#Vector-Space">¶</a></h3><p>A vector space has 4 elements</p>
+<ul>
+<li>A nonempty set $V$ of <strong>vectors</strong> (e.g., conventional "vectors" $\mathbb{R}^n$ in undergrad linear algebra)</li>
+<li>A field $F$ of <strong>scalars</strong> (e.g., conventional scalars like $\mathbb{R}$)</li>
+<li>An operation: <strong>vector addition</strong>
+$$
++ : V \times V \to V
+$$</li>
+<li>A function: <strong>scalar multiplication</strong>
+$$
+\cdot : F \times V \to V
+$$</li>
+</ul>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>For a combination $(V,F,+,\cdot)$ to be vector space, the following axioms must hold for all $u,v,w \in V$ and all $a,b \in F$.</p>
+<p>For vector addition:</p>
+<ul>
+<li>Associativity
+$$
+u + (v + w) = (u + v) + w.
+$$</li>
+<li>Commutativity
+$$
+u + v = v + u.
+$$</li>
+<li>Identity element - exists a zero element $0 \in V$
+$$
+v + 0 = v \quad \text{for all } v \in V.
+$$</li>
+<li>Inverse elements - exists an "additive inverse" $-v \in V$
+$$
+v + (-v) = 0.
+$$</li>
+</ul>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>For scalar multiplication:</p>
+<ul>
+<li>Compatibility with field multiplication
+$$
+a(bv) = (ab)v.
+$$</li>
+<li>Identity element - with $1$ as the multiplicative identity in $F$
+$$
+1v = v.
+$$</li>
+<li>Distributivity with respect to vector addition
+$$
+a(u + v) = au + av.
+$$</li>
+<li>Distributivity with respect to field addition
+$$
+(a + b)v = av + bv.
+$$</li>
+</ul>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="Examples">Examples<a class="anchor-link" href="#Examples">¶</a></h4><p>One of the simplest vector spaces is the usual Euclidean space that you have seen in undergrad linear algebra.</p>
+<ul>
+<li>For example, let $V=\mathbb{R}^d$ and $F=\mathbb{R}$.</li>
+</ul>
+</div>
+</div>
+</div>
+</div><div class="fragment">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>A more non-trivial example is when $V$ is a set of functions, say polynomials up to $p$-th order $P^p$ with real coefficients.  Choosing $F=\mathbb{R}$ and the usual $+$ and $\cdot$ of polynomials, one can verify that $P^p$ is a vector space.</p>
+<ul>
+<li>This space is still finite-dimensional - we can use $(p+1)$ basis functions $\{1,x,\cdots,x^p\}$ to represent any element in $P^p$.</li>
+</ul>
+</div>
+</div>
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>A even more non-trivial example is picking $V$ as square-integral functions on interval $[0,1]$, denoted $L^2[0,1]$.</p>
+<ul>
+<li>These are functions such that $\int_0^1 |f(x)|^2 dx &lt; \infty$.</li>
+<li>This space is infinite-dimensional - where infinite number of basis functions are needed to represent all elements.</li>
+</ul>
+</div>
+</div>
+</div>
+</div></div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Inner-Product-Space">Inner Product Space<a class="anchor-link" href="#Inner-Product-Space">¶</a></h3><p>The next level up is to equip a vector space with an <strong>inner product</strong>,
+$$
+\langle \cdot , \cdot \rangle : V \times V \to F
+$$</p>
+<p>The operation satisfies the following three properties for all vectors $x,y,z \in V$ and all scalars $a,b \in F$.</p>
+<ul>
+<li>Conjugate symmetry
+$$
+\langle x, y \rangle = \overline{\langle y, x \rangle}.
+$$
+Or ordinary symmetry $\langle x, y \rangle = {\langle y, x \rangle}$ if $F = \mathbb{R}$.</li>
+<li>Linearity in the first argument
+$$
+\langle ax + by, z \rangle
+= a \langle x, z \rangle + b \langle y, z \rangle.
+$$</li>
+<li>Positive-definiteness - for $x \neq 0$,
+$$
+\langle x, x \rangle &gt; 0.
+$$</li>
+</ul>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="Examples">Examples<a class="anchor-link" href="#Examples">¶</a></h4><p>One of the simplest inner product spaces is again the finite-dimensional vector space, where $\langle x, y \rangle = x^T y$.</p>
+<p>A more interesting example is $L^2[0,1]$ with an inner product
+$$
+\langle f, g \rangle = \int_0^1 f(x)\overline{g(x)} dx
+$$</p>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Pre-Hilbert-Space">Pre-Hilbert Space<a class="anchor-link" href="#Pre-Hilbert-Space">¶</a></h3><p>Over a vector space, one can define a <strong>norm</strong>
+$$
+\|\cdot\| : V \to \mathbb{R},
+$$
+satisfying, for all $x,y \in V$ and all $\lambda \in F$:</p>
+<ul>
+<li><p>Non-negativity
+$$
+\|x\| \ge 0.
+$$</p>
+</li>
+<li><p>Positive definiteness
+$$
+\|x\| = 0 \quad \text{iff} \quad x = 0.
+$$</p>
+</li>
+<li><p>Absolute homogeneity
+$$
+\|\lambda x\| = |\lambda|\,\|x\|.
+$$</p>
+</li>
+<li><p>Triangle inequality
+$$
+\|x + y\| \le \|x\| + \|y\|.
+$$</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>The inner product is a natural way to define a norm, or "induce" a norm, by
+$$
+\|\cdot\| = \sqrt{\langle \cdot, \cdot \rangle}
+$$</p>
+</div>
+</div>
+</div>
+</div><div class="fragment">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>With a norm one can define a distance function, or a <strong>metric</strong>
+$$
+d : V \times V \to \mathbb{R}
+$$
+satisfying, for all $x,y,z \in V$:</p>
+<ul>
+<li>Identity of indiscernibles: $d(x,x) = 0.$</li>
+<li>Positivity: For $x \neq y$, $d(x,y) &gt; 0.$</li>
+<li>Symmetry: $d(x,y) = d(y,x).$</li>
+<li>Triangle inequality</li>
+</ul>
+<p>$$d(x,z) \le d(x,y) + d(y,z).$$</p>
+</div>
+</div>
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>The norm induced by the inner product is a natural way to define a metric,
+$$
+d(x,y) = \|x-y\| = \sqrt{\langle x-y, x-y \rangle}
+$$</p>
+</div>
+</div>
+</div>
+</div></div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="Examples">Examples<a class="anchor-link" href="#Examples">¶</a></h4><ul>
+<li>The Euclidean space, with $d(x,y)=\|x-y\|$, i.e., the Euclidean distance.</li>
+<li>$L^2[0,1]$ space, with
+$$
+d(f,g) = \left(\int (f(x)-g(x))^2 dx\right)^{1/2}
+$$</li>
+</ul>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>The <strong>pre-Hilbert space</strong>, denoted $H_0$, is an inner product space with a metric induced by the inner product.</p>
+<ul>
+<li>So technically all inner product spaces can be pre-Hilbert spaces.</li>
+<li>All previous examples of inner product spaces are thus also for pre-Hilbert spaces.</li>
+</ul>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Caveat:</p>
+<ul>
+<li>The above means an inner product space is a normed vector space, which is a metric space.</li>
+<li>But the reverse is not necessarily true, as one can define metrics and norms in many different ways.</li>
+</ul>
+</div>
+</div>
+</div>
+</div><div class="fragment">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>For example,</p>
+<ul>
+<li>$d(x,y)=1$ if $x\neq y$ otherwise $0$ is a metric, but cannot be a norm (fails homogeneity).</li>
+<li>$\|x\|_1=\sum_i |x_i|$ is a norm, but does not correspond to an inner product.</li>
+</ul>
+</div>
+</div>
+</div>
+</div></div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Hilbert-Space">Hilbert Space<a class="anchor-link" href="#Hilbert-Space">¶</a></h3><p>Lastly, we <strong>complete</strong> pre-Hilbert space to attain Hilbert space.</p>
+<p>To understand completeness, let's first define a Cauchy sequence $\{f_n\} \subset H_0$, which satisfies</p>
+<ul>
+<li>for any $\epsilon &gt; 0$, there exists an integer $N$ such that for all $m,n &gt; N$, $\|f_n - f_m\| &lt; \epsilon.$</li>
+</ul>
+</div>
+</div>
+</div>
+</div><div class="fragment">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>The completeness means:</p>
+<ul>
+<li>Every <strong>Cauchy sequence</strong> converges with respect to the chosen $\|\cdot\|$ to an element in the space.</li>
+<li>Hilbert space $H = \overline{H_0}$ is $H_0$ plus all the limits of all Cauchy sequences in $H_0$.</li>
+</ul>
+</div>
+</div>
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Further implication:</p>
+<ul>
+<li>The requirement effectively says the space is "dense", and limits always exist, so that one can do the usual (functional) analysis.</li>
+<li>We can perform analysis in $H_0$ and extend results to $H$.</li>
+</ul>
+</div>
+</div>
+</div>
+</div></div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Example:</p>
+<ul>
+<li>A space $V_0$ of piecewise linear functions on an interval $[0,1]$, with an arbitrary number of nodes and the inner product for $L^2[0,1]$.</li>
+<li>Function $f(x)=x^2$ is smooth and apparently not in $V_0$.</li>
+<li>Now we approximate $f$ by a piecewise linear function $f_n$ using $n$ evenly distributed points over $[0,1]$.</li>
+<li>All $f_n\in V_0$, but $\lim_{n\rightarrow\infty} f_n =f \notin V_0$.</li>
+</ul>
+<p>Hence, $V_0$ is a pre-Hilbert space, as the limit of a Cauchy sequence like $\{f_n\}$ is not in $V_0$.</p>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Summary:-What-each-space-gives-us">Summary: What each space gives us<a class="anchor-link" href="#Summary:-What-each-space-gives-us">¶</a></h3><h4 id="(Raw)-vector-space">(Raw) vector space<a class="anchor-link" href="#(Raw)-vector-space">¶</a></h4><ul>
+<li>We have Vector addition and Scalar multiplication</li>
+<li>Gives us <strong>linearity</strong></li>
+<li>We can<ul>
+<li>Form linear combinations and linear superposition</li>
+<li>Talk about linear dependence / independence</li>
+<li>Define span, subspaces, basis, dimension</li>
+<li>Solve linear equations (e.g., determine coefficients of linear combinations)</li>
 </ul>
 </li>
-<li>Prerequisites: multivariate calculus, linear algebra, some familiarity with probability</li>
 </ul>
-<p><code>Use arrows to navigate; esc to see outline view of slides.</code></p>
 </div>
 </div>
 </div>
-</div></section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e3ec6c65-2c30-46a1-9f4b-077f88ede324">
+</div><div class="fragment">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Disclaimer">Disclaimer<a class="anchor-link" href="#Disclaimer">¶</a></h2><p><code>Keep deriving equations until you give up; handle the rest by ML</code></p>
-<p>What we focus on:</p>
-<ul>
-<li>Regression problems</li>
-<li>Fusion of physics and data</li>
-<li>Dynamical systems</li>
-</ul>
-<p>What we don't focus on:</p>
-<ul>
-<li>Classification problems</li>
-<li>Image processing</li>
-<li>Large language model, AIGC, etc.<ul>
-<li>But LLMs are highly recommended to assist your learning...</li>
-<li>But we do cover some recent generative models, e.g., diffusion model</li>
+<p>Then we can express data/signal/function/etc. as a linear combination of basis, e.g.,</p>
+<p>$$
+x=\sum_{i=1}^N c_i v_i
+$$</p>
+</div>
+</div>
+</div>
+</div></div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="Vector-space-with-metric">Vector space with metric<a class="anchor-link" href="#Vector-space-with-metric">¶</a></h4><ul>
+<li>We add a distance function as metric</li>
+<li>Gives us <strong>distance</strong> between vectors</li>
+<li>We can<ul>
+<li>Define convergence of sequences, and then continuity and limits</li>
+<li>Discuss completeness (Cauchy sequences)</li>
 </ul>
 </li>
-<li>Reinforcement learning (but might come soon)</li>
 </ul>
 </div>
 </div>
 </div>
-</div></section></section><section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=7b44f98f">
+</div><div class="fragment">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Specifically, the course consists of following topics:</p>
-<ul>
-<li>Mathematical background</li>
-<li>Linear regression</li>
-<li>Gaussian process regression</li>
-<li>Neural networks</li>
-<li>High-Dimensional systems</li>
-<li>Dynamical and differential systems</li>
-</ul>
-<p>Next:</p>
-<ul>
-<li>Move to <strong>right</strong> to access the links to the specific topics, or</li>
-<li>See <a href="index_scope.slides.html">here</a> for a more technical description of the scope.</li>
-</ul>
+<p>Then we can talk about, e.g., convergence, say
+$$
+x_k = \sum_{i=1}^k c_iv_i
+$$
+and as $k\rightarrow\infty$, does $x_k\rightarrow x^*$?  This means</p>
+<p>$$d(x_k,x^*)\rightarrow 0$$</p>
 </div>
 </div>
 </div>
-</div></section></section><section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0752bf86">
+</div></div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Mathematical background</p>
-<ul>
-<li><a href="Math_LA.slides.html">Linear Algebra</a></li>
-<li><a href="Math_Prob.slides.html">Probability Theory</a>, <a href="Math_Prob_supp_mat.pdf">Supp. notes</a></li>
-<li><a href="Math_Opt.slides.html">Optimization</a></li>
-<li><a href="Math_DE.slides.html">Differential Equations</a></li>
+<h4 id="Normed-vector-space">Normed vector space<a class="anchor-link" href="#Normed-vector-space">¶</a></h4><ul>
+<li>We add a norm, which induces metric</li>
+<li>Gives us <strong>magnitude</strong> of a vector</li>
+<li>We can<ul>
+<li>Quantify approximation error</li>
+<li>Define convergence and stability consistent with linearity</li>
+<li>Compare rates of convergence</li>
+<li>Induce operator norms and define boundedness</li>
 </ul>
-<p>Linear regression</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div><div class="fragment">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Then we can talk about, e.g., approximation errors - such as
+$$
+\|x^*-x_k\|=\epsilon_k
+$$
+and then convergence: how does $\epsilon_k$ decrease as $k$ increases?</p>
+</div>
+</div>
+</div>
+</div></div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="Inner-product-space">Inner product space<a class="anchor-link" href="#Inner-product-space">¶</a></h4><ul>
+<li>We add an inner product, which induces norm and then metric</li>
+<li>Gives us <strong>angle</strong> between two vectors</li>
+<li>We can<ul>
+<li>Define orthogonality and build orthonormal bases</li>
+<li>Perform projections and decompositions (would give us, e.g., least-squares solution)</li>
+<li>Use spectral theory (eigenvalues, modes)</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div><div class="fragment">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Then we can try to find coefficients in an approximation, e.g.,
+$$
+x_k = \sum_{i=1}^k c_iv_i
+$$
+by choosing some dual basis $u_j$ such that $\langle u_j, v_i \rangle=1$ if $i=j$ else $0$.  This way
+$$
+c_i = \langle u_i, x_k \rangle
+$$</p>
+</div>
+</div>
+</div>
+</div></div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="Hilbert-Space-(Complete-Inner-Product-Space)">Hilbert Space (Complete Inner Product Space)<a class="anchor-link" href="#Hilbert-Space-(Complete-Inner-Product-Space)">¶</a></h4><ul>
+<li>We add completeness with respect to the induced norm</li>
+<li>Gives us <strong>"well-posedness"</strong>, or "limits stay in space"</li>
+<li>We have<ul>
+<li>Every Cauchy sequence converges</li>
+<li>Limits of approximations stay inside the space: Fourier, eigenfunction, kernel expansions, etc.</li>
+<li>Closed subspaces admit unique orthogonal projections, and thus guarantee existence and uniqueness of projections</li>
+<li>Spectral theory is fully valid</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div><div class="fragment">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>This makes sure, e.g., for
+$$
+x_k = \sum_{i=1}^k c_iv_i \in V
+$$
+the limit is also in $V$
+$$
+x^* = \lim_{k\rightarrow\infty} x_k \in V
+$$
+In other words, $x^*$ has the same (nice) properties as $x_k$ (e.g., maintaining continuity/smoothness/etc.).</p>
+</div>
+</div>
+</div>
+</div></div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Reproducing-Kernel-Hilbert-Space">Reproducing Kernel Hilbert Space<a class="anchor-link" href="#Reproducing-Kernel-Hilbert-Space">¶</a></h2>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Kernel">Kernel<a class="anchor-link" href="#Kernel">¶</a></h3><p>Consider input space $X$.  A kernel function is a map
+$$
+\kappa(\cdot,\cdot) : X \times X \to \mathbb{R}.
+$$
+By fixing one argument $x_1 \in X$, the function
+$$
+\kappa(\cdot, x_1) : X \to \mathbb{R}
+$$
+defines a real-valued function on $X$.</p>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Towards RKHS, we also require two additional requirements on kernel:</p>
 <ul>
-<li><a href="LR_Basics.slides.html">Basics</a></li>
-<li><a href="LR_Reg.slides.html">Regularization</a></li>
-<li><a href="LR_Prob.slides.html">Probability Formulation</a></li>
-<li><a href="LR_BiasVar.slides.html">Model Selection</a></li>
-<li>More Variants <a href="LR_Variants.slides.html">draft</a></li>
+<li>Symmetry: $\kappa(x_i,x_j) = \kappa(x_j,x_i)$</li>
+<li>Positive-definiteness: for any $n \in \mathbb{N}$,
+any $\{x_1,\dots,x_n\} \subset X$, and any $\{\alpha_1,\dots,\alpha_n\} \subset \mathbb{R}$,
+$$
+\sum_{i=1}^n \sum_{j=1}^n \alpha_i \alpha_j \kappa(x_i,x_j) \ge 0.
+$$</li>
+</ul>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Construction-of-RKHS">Construction of RKHS<a class="anchor-link" href="#Construction-of-RKHS">¶</a></h3><p>Given points $x_1,\dots,x_n \in X$, we define the space
+$$
+H_0 =
+\left\{
+f : f(\cdot) = \sum_{i=1}^n \alpha_i \kappa(\cdot,x_i),
+\ \alpha_i \in \mathbb{R},\ x_i \in X,\ n \in \mathbb{N}
+\right\}.
+$$
+This space consists of finite linear combinations of kernel functions centered at points in $X$.</p>
+<blockquote>
+<p>One can verify this is a vector space.</p>
+</blockquote>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>To make $H_0$ a pre-Hilbert space, let's first define an inner product.</p>
+<p>For two functions
+$$
+f(\cdot) = \sum_{i=1}^n \alpha_i \kappa(\cdot,x_i),
+\quad
+g(\cdot) = \sum_{j=1}^m \beta_j \kappa(\cdot,x_j),
+$$
+define
+$$
+\langle f,g \rangle_{H_0}
+\equiv
+\sum_{i=1}^n \sum_{j=1}^m \alpha_i \beta_j \kappa(x_i,x_j) \equiv \alpha^T K_{nm}\beta.
+$$</p>
+<p>In particular,
+$$
+\langle \kappa(\cdot,x_i), \kappa(\cdot,x_j) \rangle_{H_0} = \kappa(x_i,x_j).
+$$</p>
+</div>
+</div>
+</div>
+</div><div class="fragment">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<ul>
+<li>With symmetry and positive-definiteness, one can verify $\langle f,g \rangle_{H_0}$ is indeed an inner product.</li>
+<li>Here, we effectively require $\kappa$ itself to be the inner product.</li>
+</ul>
+</div>
+</div>
+</div>
+</div></div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Then, let $H = \overline{H_0}$ be the completion of $H_0$ under the inner product $\langle \cdot,\cdot \rangle_{H_0}$.</p>
+<p>The space $H$ is the desired <strong>reproducing kernel Hilbert space</strong> (RKHS).</p>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="Theoretically-...">Theoretically ...<a class="anchor-link" href="#Theoretically-...">¶</a></h4><p><strong>Moore-Aronszajn Theorem</strong> establishes the existence and uniqueness of RKHS, and its correspondence to kernels.</p>
+<ul>
+<li>For any symmetric positive-definite kernel $\kappa : X \times X \to \mathbb{R}$, there exists a unique RKHS $H$ with reproducing kernel $\kappa$.</li>
+<li>Conversely, any RKHS admits a unique symmetric positive-definite reproducing kernel.</li>
+</ul>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="RKHS-Properties">RKHS Properties<a class="anchor-link" href="#RKHS-Properties">¶</a></h2>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="The-Reproducing-Property">The Reproducing Property<a class="anchor-link" href="#The-Reproducing-Property">¶</a></h3><p>First is the namesake of RKHS.</p>
+<p>For any $f \in H$ and any $x \in X$, the reproducing property holds:
+$$
+f(x) = \langle f, \kappa(\cdot,x) \rangle_H.
+$$</p>
+<ul>
+<li>This means, if $f\in H$, we do not need to evaluate $f(x)$ itself, but an inner product of $f$ and $\kappa$.</li>
+<li>This is beneficial if $f$ is expensive to evaluate.</li>
 </ul>
 </div>
 </div>
 </div>
 </div></section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=b97ccff1">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Kernels and Gaussian processes (GP)</p>
 <ul>
-<li><a href="KGP_Kern.slides.html">Kernel Method</a> / <a href="KGP_RKHS.slides.html">Theoretical View</a></li>
-<li><a href="KGP_Prob.slides.html">GP Formulation</a></li>
-<li><a href="KGP_MCMC.slides.html">Markov Chain Monte Carlo</a></li>
-<li><a href="KGP_Sampling.slides.html">Sampling</a></li>
-<li><a href="KGP_BO.pdf">Bayesian Optimization (Full, PDF)</a> <a href="KGP_BO.slides.html">slides (Visual only)</a></li>
-<li><a href="KGP_Variants.slides.html">Variants</a></li>
+<li>Furthermore, the inner product can be completely represented using $\kappa$, and thus $f$ itself is no longer needed.</li>
 </ul>
-<p>Neural networks</p>
+<p>For $f(\cdot) = \sum_{i=1}^n \alpha_i \kappa(\cdot,x_i) \in H_0$,
+$$
+\begin{aligned}
+f(x)
+&amp;= \sum_{i=1}^n \alpha_i \kappa(x_i,x) \\
+&amp;= \sum_{i=1}^n \alpha_i \langle \kappa(\cdot,x_i), \kappa(\cdot,x) \rangle_{H_0} \\
+&amp;= \left\langle \sum_{i=1}^n \alpha_i \kappa(\cdot,x_i), \kappa(\cdot,x) \right\rangle_{H_0} \\
+&amp;= \langle f, \kappa(\cdot,x) \rangle_{H_0}.
+\end{aligned}
+$$
+By continuity, this extends to all $f \in H$.</p>
+</div>
+</div>
+</div>
+</div><div class="fragment">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <ul>
-<li><a href="NN_Basics.slides.html">Basics</a></li>
-<li><a href="NN_GD.slides.html">Training</a></li>
-<li><a href="NN_BP.slides.html">Automatic Differentiation</a> / <a href="NN_BP_More.slides.html">Harder Cases</a></li>
-<li>Variational Inference <a href="NN_VI.slides.html">draft</a></li>
-<li><a href="NN_Variants.slides.html">Common Architectures</a> / <a href="NN_PI.slides.html">Physics-Informed NN</a></li>
+<li>The above means, the direct evaluation of $f$ is avoided if we can represent it by a series of coefficients $\alpha_1,\alpha_2,\cdots,\alpha_n$.</li>
+<li>This is the basis for kernel ridge regression!</li>
 </ul>
+</div>
+</div>
+</div>
+</div></div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Norm-and-Metric">Norm and Metric<a class="anchor-link" href="#Norm-and-Metric">¶</a></h3><p>With inner product we can define norm and metric as discussed before.</p>
 </div>
 </div>
 </div>
 </div></section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=99498427">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>High-Dimensional systems</p>
+<h4 id="Norm">Norm<a class="anchor-link" href="#Norm">¶</a></h4><p>For $f(\cdot)=\kappa(\cdot,x_i)$,</p>
+<p>$$
+\|f\|_H = \sqrt{\langle f, f \rangle_H} = \sqrt{\kappa(x_i,x_i)}
+$$</p>
+</div>
+</div>
+</div>
+</div><div class="fragment">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>For $f(\cdot) = \sum_{i=1}^n \alpha_i \kappa(\cdot,x_i)$, one can show
+$$
+\|f\|_H = \sqrt{\alpha^T K\alpha}
+$$
+where $[K]_{ij} = \kappa(x_i,x_j)$.</p>
+<blockquote>
+<p>Proof left as exercise</p>
+</blockquote>
+</div>
+</div>
+</div>
+</div></div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="Metric">Metric<a class="anchor-link" href="#Metric">¶</a></h4><p>For $f(\cdot)=\kappa(\cdot,x_i)$ and $g(\cdot)=\kappa(\cdot,x_j)$,</p>
+<p>$$
+\begin{align*}
+d_H(f,g)^2 &amp;= \|f-g\|_H^2 = \langle f-g, f-g \rangle \\
+&amp;= \langle f, f \rangle + \langle g, g \rangle - 2\langle f, g \rangle \\
+&amp;= \kappa(x_i,x_i) + \kappa(x_j,x_j) - 2 \kappa(x_i,x_j)
+\end{align*}
+$$</p>
+</div>
+</div>
+</div>
+</div><div class="fragment">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>More generally, for $f(\cdot) = \sum_{i=1}^n \alpha_i \kappa(\cdot,x_i)$ and $g(\cdot) = \sum_{j=1}^m \beta_j \kappa(\cdot,x_j)$</p>
+<p>$$
+d_H(f,g) = \sqrt{\alpha^T K_n\alpha + \beta^T K_m \beta - 2 \alpha^T K_{nm}\beta}
+$$</p>
+<blockquote>
+<p>Proof left as exercise</p>
+</blockquote>
+</div>
+</div>
+</div>
+</div></div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Smoothness">Smoothness<a class="anchor-link" href="#Smoothness">¶</a></h3><p>For any $f \in H$ and any $x,x' \in X$,
+$$
+\begin{aligned}
+|f(x) - f(x')|
+&amp;= |\langle f, \kappa(\cdot,x) - \kappa(\cdot,x') \rangle_H|\quad \text{(Reproducing prop.)} \\
+&amp;\le \|f\|_H \, \|\kappa(\cdot,x) - \kappa(\cdot,x')\|_H\quad \text{(Cauchy–Schwarz inequality)} \\
+&amp;= \|f\|_H \, d_H(x,x').\quad \text{(Kernel-induced metric)}
+\end{aligned}
+$$</p>
 <ul>
-<li><a href="HD_Basics.slides.html">Basics</a></li>
-<li><a href="HD_Spatial.slides.html">Spatial Decomposition</a></li>
-<li><a href="HD_VAE.slides.html">Autoencoders</a></li>
-<li><a href="HD_Clustering.slides.html">Clustering</a></li>
-<li><a href="HD_Temporal.slides.html">Temporal Decomposition</a></li>
-</ul>
-<p>Dynamical and differential systems</p>
-<ul>
-<li><a href="DS_Basics.slides.html">Basics</a></li>
-<li><a href="DS_Lin.slides.html">Linear System</a></li>
-<li><a href="DS_Nonnormal.slides.html">Nonnormality</a>, <a href="DS_DMD_Revisit.slides.html">DMD Revisited</a></li>
-<li><a href="DS_NL.slides.html">Tackling Nonlinearity</a></li>
-<li><a href="DS_Regr.slides.html">Sparse Regression</a></li>
-<li><a href="DS_Koopman.slides.html">Koopman Operator Theory</a></li>
-<li><a href="DS_Adj.slides.html">Neural ODEs</a> / <a href="DS_Opt.slides.html">Extra: Differentially-constrained problems</a></li>
-<li><a href="DS_Diffusion.slides.html">Diffusion Models</a> / <a href="DS_Diffusion_cond.slides.html">Extras: Conditionals</a>, <a href="DS_Diffusion_fm.slides.html">Flow Matching</a></li>
+<li>In other words, the RKHS norm controls smoothness and stability.</li>
+<li>This motivates the use of RKHS norm to promote smoothness in kernel ridge regression.</li>
 </ul>
 </div>
 </div>
 </div>
 </div></section></section><section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=af1db368">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="References">References<a class="anchor-link" href="#References">¶</a></h2><ol>
-<li>[PRML] Pattern Recognition and Machine Learning, Christopher Bishop, 2006.</li>
-<li>[MLaPP] Machine Learning: A Probabilistic Perspective, Kevin P. Murphy, 2012.</li>
-<li>[GPML] Gaussian Processes for Machine Learning, C. E. Rasmussen and C. K. I. Williams, 2006.</li>
-<li>[DMSC] Data-driven Modeling and Scientific Computation, Nathan Kutz, 2013.</li>
-</ol>
-<h2 id="Relevant-Courses">Relevant Courses<a class="anchor-link" href="#Relevant-Courses">¶</a></h2><ol>
-<li>More basic ones: <a href="https://www.eecs189.org/">Berkeley CS 189</a>, <a href="https://cs229.stanford.edu/">Stanford CS 229</a></li>
-<li>CNN-specific: <a href="http://cs231n.stanford.edu/">Stanford CS 231n</a></li>
-<li>ML with a Linear Algebra flavor: <a href="https://ocw.mit.edu/courses/mathematics/18-065-matrix-methods-in-data-analysis-signal-processing-and-machine-learning-spring-2018/">MIT 18.065</a></li>
-</ol>
-<h2 id="Credits:">Credits:<a class="anchor-link" href="#Credits:">¶</a></h2><ol>
-<li><a href="https://github.com/thejakeyboy/umich-eecs545-lectures">UMich EECS 545</a> inspired me a lot when I took the course in 2016 and when I initially developed the course myself in 2020.</li>
-<li>@evislomo for generating the initial set of homework solutions</li>
-</ol>
+<h2 id="More-on-Kernel:-Mercer's-theorem">More on Kernel: Mercer's theorem<a class="anchor-link" href="#More-on-Kernel:-Mercer's-theorem">¶</a></h2><p>Before we look at examples of RKHS, it is beneficial to introduce Mercer's theorem to provide a deeper understanding of kernels.</p>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>A kernel $\kappa : X\times X \rightarrow \mathbb{R}$ induces an integral operator $T_\kappa : L^2(X) \to L^2(X)$
+$$
+[T_\kappa f](x) = \int_X \kappa(x,z) f(z)\, dz,
+$$
+where $L^2(X)$ denotes the space of square-integrable functions on $X$.</p>
+<blockquote>
+<p>To be rigorous, we need compact $X$ and continuous $\kappa$ for Mercer.</p>
+</blockquote>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Note that $T_\kappa$ is a linear operator, so it has a spectral decomposition similar to the matrices.</p>
+<ul>
+<li>The difference is that, instead of eigenvectors, $T_\kappa$ admits <strong>eigenfunctions</strong>, e.g.,
+$$
+T_\kappa\varphi = \lambda \varphi,\quad\text{or}\quad [T_\kappa \varphi](x) = \int_X \kappa(x,z) \varphi(z)\, dz = \lambda \varphi(x),
+$$</li>
+<li>General linear operators can have generalized versions of eigenvalues and eigenfunctions, which do not have direct analogy in matrices.<ul>
+<li>But $T_\kappa$ happens to be "compact, continuous, self-adjoint, and positive", so generalized eigenpairs are not a concern.</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>By the spectral theorem for self-adjoint operators, all the eigenpairs of $T_\kappa$ satisfy
+$$
+T_\kappa \varphi_i(x) = \sigma_i \varphi_i(x),
+$$
+such that</p>
+<ul>
+<li>The eigenvalues are at most a countable decreasing sequence $\{\sigma_i\}_{i \ge 1}$ such that $\lim_{i \to \infty} \sigma_i = 0$,</li>
+<li>and $\sigma_i &gt; 0$ for all $i$.</li>
+<li>The eigenfunctions $\{\varphi_i\}$ form an orthonormal basis of $L^2(X)$.</li>
+</ul>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Mercer's theorem leads to the <strong>Mercer representation</strong> of the kernel,
+$$
+\kappa(x,y) = \sum_{i=1}^{\infty} \sigma_i \varphi_i(x)\varphi_i(y),
+$$
+which converges uniformly,
+$$
+\lim_{n \to \infty}
+\sup_{u,v \in X}
+\left|
+\kappa(u,v) - \sum_{i=1}^{n} \sigma_i \varphi_i(u)\varphi_i(v)
+\right| = 0.
+$$</p>
+</div>
+</div>
+</div>
+</div><div class="fragment">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Furthermore, the RKHS $H$ associated with $\kappa$ is given by
+$$
+H =
+\left\{
+f \in L^2(X)
+\;\middle|\;
+\sum_{i=1}^{\infty}
+\frac{\langle f, \varphi_i \rangle_{L^2}^2}{\sigma_i}
+&lt; \infty
+\right\},
+$$</p>
+<p>with inner product
+$$
+\langle f, g \rangle_H
+=
+\sum_{i=1}^{\infty}
+\frac{\langle f, \varphi_i \rangle_{L^2}
+      \langle g, \varphi_i \rangle_{L^2}}{\sigma_i}.
+$$</p>
+</div>
+</div>
+</div>
+</div></div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Examples-of-RKHS">Examples of RKHS<a class="anchor-link" href="#Examples-of-RKHS">¶</a></h2>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="One-Dimensional-Linear-Kernel">One-Dimensional Linear Kernel<a class="anchor-link" href="#One-Dimensional-Linear-Kernel">¶</a></h3><p>Starting from a trivial case:
+$$
+\kappa(x,y) = xy, \quad x,y \in [0,1].
+$$</p>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="Check-if-kernel">Check if kernel<a class="anchor-link" href="#Check-if-kernel">¶</a></h4><ul>
+<li>Symmetry is apparent (we will skip this for the other examples)</li>
+<li>Positive definiteness
+$$
+\sum_{i,j=1}^n \alpha_i \alpha_j \kappa(x_i,x_j)
+= \left( \sum_{i=1}^n \alpha_i x_i \right)^2 \ge 0,
+$$</li>
+</ul>
+<p>So $\kappa$ is a kernel.</p>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="What-space-is-the-RKHS">What space is the RKHS<a class="anchor-link" href="#What-space-is-the-RKHS">¶</a></h4><p>By construction, the RKHS contains
+$$
+f(x') = \sum_{i=1}^n \alpha_i\kappa(x',x_i) = \left(\sum_{i=1}^n \alpha_ix_i\right)x' \equiv a x'
+$$
+Due to arbitariness of $\alpha_i$ and $x_i$, we see
+$$
+H = \{ f : f(x) = ax,\ a \in \mathbb{R} \}.
+$$</p>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="Reproducing-property">Reproducing property<a class="anchor-link" href="#Reproducing-property">¶</a></h4><p>For $f(x)=ax$, which is $\kappa(\cdot,a)$
+$$
+\langle f, \kappa(\cdot,x) \rangle_H
+= \langle \kappa(\cdot,a), \kappa(\cdot,x) \rangle_H
+=\kappa(a,x)
+= ax = f(x).
+$$</p>
+<p>The second equality is the definition of $H$ norm.</p>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="Mercer-expansion">Mercer expansion<a class="anchor-link" href="#Mercer-expansion">¶</a></h4><p>The integral operator is
+$$
+(T_\kappa f)(x) = \int_0^1 xy f(y)\,dy = \left(\int_0^1 y f(y)\,dy\right)x \equiv \mu x,
+$$
+where $\mu$ is a certain constant.
+This indicates the eigenfunction must be a linear function $\varphi(x)=\mu x$.</p>
+<p>We also know $\varphi(x)$ is orthonormal w.r.t. $L^2$ norm, so
+$$
+\|\varphi\|_{L^2}^2 = \int_0^1 (\mu x)^2 dx = 1\quad \Rightarrow\quad \mu=\sqrt{3},
+$$
+and $\varphi(x)=\sqrt{3}x$ with eigenvalue $1/3$.</p>
+<p>And this is the only eigenfunction - i.e., this RKHS is 1D.</p>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Second-Order-Polynomial-Kernel">Second-Order Polynomial Kernel<a class="anchor-link" href="#Second-Order-Polynomial-Kernel">¶</a></h3><p>Slightly more complex - generalizable to kernels based on finite number of features</p>
+<p>$$
+\kappa(x,y) = (1 + xy)^2, \quad x,y \in [-1,1].
+$$</p>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="Check-if-kernel-(positive-definiteness)">Check if kernel (positive definiteness)<a class="anchor-link" href="#Check-if-kernel-(positive-definiteness)">¶</a></h4><p>Using the feature map approach, and let
+$$
+\phi(x) = [1, \sqrt{2}x, x^2]^T,
+$$
+then
+$$
+\kappa(x,y) = \phi(x)^T\phi(y)
+$$
+and
+$$
+\sum_{i,j=1}^n \alpha_i \alpha_j \kappa(x_i,x_j) = \sum_{i,j=1}^n \alpha_i \alpha_j \phi(x_i)^T\phi(x_j)
+= \left\| \sum_{i=1}^n \alpha_i \phi(x_i) \right\|^2 \ge 0,
+$$
+So $\kappa$ is a kernel.</p>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="What-space-is-the-RKHS">What space is the RKHS<a class="anchor-link" href="#What-space-is-the-RKHS">¶</a></h4><p>By construction, the RKHS contains
+$$
+f(x') = \sum_{i=1}^n \alpha_i\kappa(x',x_i) = \left(\sum_{i=1}^n \alpha_i\phi(x_i)\right)\phi(x') \equiv a^T \phi(x')
+$$
+Due to arbitariness of $\alpha_i$ and $x_i$, we see $H$ as all second-order polynomials on $[-1,1]$,
+$$
+H = \{ f : f(x) = a^T\phi(x),\ a \in \mathbb{R}^3 \}.
+$$</p>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="Reproducing-property">Reproducing property<a class="anchor-link" href="#Reproducing-property">¶</a></h4><p>For $f(x)=ax^2+bx+c$ with arbitrary $a,b,c\in\mathbb{R}^3$, one can choose $x_i$, $i=1,2,3$, such that $\phi(x_i)$ are linearly independent, and can represent</p>
+<p>$$
+[a,b/\sqrt{2},c]^T = \sum_{i=1}^3\alpha_i \phi(x_i).
+$$</p>
+<p>Then
+$$
+f(x) = [a,b/\sqrt{2},c]\phi(x) =  \sum_{i=1}^3\alpha_i \phi(x_i)^T\phi(x) = \sum_{i=1}^3\alpha_i \kappa(x,x_i),
+$$
+and
+$$
+\langle f, \kappa(\cdot,x) \rangle_H
+= \left\langle \sum_{i=1}^3\alpha_i \kappa(\cdot,x_i), \kappa(\cdot,x) \right\rangle_H
+= \sum_{i=1}^3\alpha_i \kappa(x,x_i) = f(x).
+$$</p>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="Mercer-expansion">Mercer expansion<a class="anchor-link" href="#Mercer-expansion">¶</a></h4><p>The integral operator is
+$$
+(T_\kappa f)(x) = \int_{-1}^1 \phi(x)^T\phi(y) f(y)\,dy = \phi(x)^T\left(\int_{-1}^1 \phi(y) f(y)\,dy\right) \equiv w^T \phi(x),
+$$
+which indicates the eigenfunctions must be a linear combination of $\phi(x)$, i.e., a quadratic polynomial.</p>
+<p>Assume $\varphi_i(x) = \phi(x)^T w_i$, the eigenvalue problem reduces to that of a $3\times 3$ matrix
+$$
+\int_{-1}^1 \phi(x)^T\phi(y) \phi(y)^T w_i\,dy = \lambda_i \phi(x)^T w_i\,\Rightarrow\, \left(\int_{-1}^1 \phi(y) \phi(y)^T\,dy\right) w_i = \lambda_i w_i
+$$
+The solution is not shown here, but one would get 3 real eigenvalues and 3 eigenfunctions of polynomials up to 2nd-order.</p>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Brownian-Motion-Kernel">Brownian Motion Kernel<a class="anchor-link" href="#Brownian-Motion-Kernel">¶</a></h3><p>A more interesting kernel having infinitely many features,
+$$
+\kappa(x,x') = \min(x,x'), \quad x,x' \in [0,1].
+$$</p>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="Check-if-kernel-(positive-definiteness)">Check if kernel (positive definiteness)<a class="anchor-link" href="#Check-if-kernel-(positive-definiteness)">¶</a></h4><p>The trick is to use an indicator function $\mathbb{1}_x(t)$ that is $1$ when $t&lt;x$ otherwise 0.</p>
+<p>Then the kernel is represented as an inner product in $L^2$
+$$
+\kappa(x,x') = \int_0^1 \mathbb{1}_x(t)\mathbb{1}_y(t) dt = \langle\mathbb{1}_x, \mathbb{1}_y\rangle_{L^2}
+$$
+and
+$$
+\sum_{i,j=1}^n \alpha_i \alpha_j \kappa(x_i,x_j) = \sum_{i,j=1}^n \alpha_i \alpha_j \langle\mathbb{1}_{x_i}, \mathbb{1}_{x_j}\rangle
+= \left\| \sum_{i=1}^n \alpha_i \mathbb{1}_{x_i} \right\|^2 \ge 0,
+$$
+So $\kappa$ is a kernel.</p>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="What-space-is-the-RKHS">What space is the RKHS<a class="anchor-link" href="#What-space-is-the-RKHS">¶</a></h4><p>Here we do not prove in detail, but the RKHS is
+$$
+H = \left\{
+f : [0,1] \to \mathbb{R} \mid f,f' \in L^2[0,1], \ f(0)=0
+\right\},
+$$
+with inner product
+$$
+\langle f,g \rangle_H = \int_0^1 f'(x) g'(x)\,dx.
+$$</p>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="Reproducing-property">Reproducing property<a class="anchor-link" href="#Reproducing-property">¶</a></h4><p>Note that the derivative $\kappa'(\cdot,x)=\mathbb{1}_x(\cdot)$.  Then, between kernels</p>
+<p>$$
+\langle \kappa(\cdot,x), \kappa(\cdot,x') \rangle_H = \int_0^1 \mathbb{1}_{x}(t)\mathbb{1}_{x'}(t) dt = \min(x,x') = \kappa(x,x')
+$$</p>
+<p>and for a function $f\in H$ (so $f(0)=0$)</p>
+<p>$$
+\langle f, \kappa(\cdot,x) \rangle_H = \int_0^1 f'(t)\mathbb{1}_{x}(t)\,dt = \int_0^x f'(t) dt = f(x)
+$$</p>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="Mercer-expansion">Mercer expansion<a class="anchor-link" href="#Mercer-expansion">¶</a></h4><p>The eigenproblem of the integral operator is
+$$
+(T_\kappa \varphi)(x) = \int_0^1 \min(x,y) \varphi(y)\,dy = \int_0^x y\varphi(y) dy + \int_x^1 x\varphi(y) dy = \lambda \varphi(x),
+$$
+The integral equation can be converted to an ODE
+$$
+\lambda \varphi''(x) + \varphi(x) = 0,\quad \varphi(0)=0,\, \lambda\varphi(1) = \int_0^1 y\varphi(y) dy
+$$
+The eigenpair is thus, with a normalizing factor $C_i$,
+$$
+\varphi_i(x) = C_i\sin \frac{x}{\sqrt{\lambda_i}},\quad \lambda_i = \left(\frac{2}{(2i-1)\pi}\right)^2
+$$</p>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Translation-Invariant-Periodic-Kernel">Translation-Invariant Periodic Kernel<a class="anchor-link" href="#Translation-Invariant-Periodic-Kernel">¶</a></h3><p>This is a large class of kernels of the form
+$$
+\kappa(x,y) = \psi(x-y),
+$$
+for $x,y\in \mathbb{R}$ and an even and $p$-periodic function $\psi$.  For simplicity, let $p=2\pi$.</p>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="Mercer-expansion">Mercer expansion<a class="anchor-link" href="#Mercer-expansion">¶</a></h4><p>Because it is a generic kernel, we just look at the eigenpairs.  Over one period, the integral operator is
+$$
+\int_{-\pi}^\pi \psi(x-y)\varphi(y)dy = \lambda\varphi(x)
+$$</p>
+<p>One can verify that $\sin$/$\cos$ functions are the eigenfunctions, and the kernel expansion turns out to be precisely the cosine series
+$$
+\kappa(x,y) = \psi(x-y) = \sum_{n=0}^{\infty} \lambda_n \cos(n(x-y))
+$$
+where the eigenvalues are the cosine series coefficient of $\psi$.</p>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="The-RKHS">The RKHS<a class="anchor-link" href="#The-RKHS">¶</a></h4><p>From Mercer's theorem,</p>
+<ul>
+<li>$\kappa(x,y)$ is a kernel if and only if $\lambda_n &gt; 0$ for all $n$.</li>
+<li>In this case, the RKHS is the set of $p$-periodic functions, whose Fourier coefficients are square-summable with respect to $\lambda_n^{-1}$.</li>
+</ul>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Kernel-Ridge-Regression-Revisited">Kernel Ridge Regression Revisited<a class="anchor-link" href="#Kernel-Ridge-Regression-Revisited">¶</a></h2><p>Now we look at KRR from the RKHS view.</p>
+<p>Assume a dataset $\{(x_i,y_i)\}_{i=1}^n$ and a kernel $\kappa$.</p>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Kernel-Regression">Kernel Regression<a class="anchor-link" href="#Kernel-Regression">¶</a></h3><p>We consider a model from the RKHS,
+$$
+f(\cdot)=\sum_{i=1}^n \alpha_i \kappa(\cdot,x_i)
+$$</p>
+<p>By reproducing property, we have
+$$
+\langle f, \kappa(\cdot, x_j) \rangle_H = \sum_{i=1}^n \alpha_i \kappa(x_i,x_j) = f(x_j)
+$$</p>
+<p>We would like to have
+$$
+\min_f \sum_{i=1}^n (f(x_j)-y_j)^2
+$$
+which translates to
+$$
+\min_\alpha \|K\alpha-y\|^2
+$$</p>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Adding-the-Ridge">Adding the Ridge<a class="anchor-link" href="#Adding-the-Ridge">¶</a></h3><p>From the smoothness property, we know the smoothness is controlled by $\|f\|_H$.  To regularize the regression, it is natural to try
+$$
+\min_\alpha \|K\alpha-y\|^2 + \lambda \|f\|_H^2
+$$</p>
+<p>Note that
+$$
+\|f\|_H^2 = \langle f, f\rangle_H = \alpha^T K\alpha
+$$</p>
+<p>Then one can recover the KRR solution
+$$
+\alpha = (K+\lambda I)^{-1}y
+$$</p>
 </div>
 </div>
 </div>
