@@ -7880,6 +7880,16 @@ b &amp;=&amp; \sin(a) &amp;\quad&amp; \dfrac{d}{db} &amp;=&amp; \dfrac{dz_1}{db}
 z_1 &amp;=&amp; b+x &amp;\Rightarrow&amp; \dfrac{d}{dz_1} &amp;=&amp; ? 
 \end{array}
 $$</p>
+</div>
+</div>
+</div>
+</div><div class="fragment">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p>Now we know the operator,
 $$
 \dfrac{d}{dx} = z_0\dfrac{d}{da} + \dfrac{d}{dz_1} = z_0\cos(a)\dfrac{d}{dz_1} + \dfrac{d}{dz_1}
@@ -7892,7 +7902,7 @@ This is as if we set a <strong>seed</strong> $dz_1=1$.</p>
 </div>
 </div>
 </div>
-</div></section><section>
+</div></div></section><section>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -8127,7 +8137,7 @@ $$</p>
 <li>Use a probability distribution to "mollify" the discontinuity</li>
 <li>"Zeroth"-order optimization - estimate gradients by sampling</li>
 </ul>
-<p>More in Part III of <code>Automatic Differentiation</code></p>
+<p>More in Part II of <code>Automatic Differentiation</code></p>
 </div>
 </div>
 </div>
@@ -8227,10 +8237,10 @@ $$\ppf{\cL}{\theta}=\underbrace{\ppf{\cL}{h}}_{\mbox{given}} \underbrace{\ppf{h}
 <li>For each layer (from top to bottom) with output $\vh$, input $\vx$, and weights $\vW$,<ul>
 <li>Assuming that $\ppf{\vh}{\cL}$ is given, compute gradients using the <strong>chain rule</strong> as follows:
 $$
-\begin{align}
+\begin{align*}
 \ppf{\cL}{\vW} &amp;= \ppf{\cL}{\vh}\ppf{\vh}{\vW} \\
 \ppf{\cL}{\vx} &amp;= \ppf{\cL}{\vh}\ppf{\vh}{\vx}
-\end{align}
+\end{align*}
 $$</li>
 </ul>
 </li>

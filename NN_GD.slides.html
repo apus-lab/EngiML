@@ -7545,10 +7545,10 @@ $$
   $$</li>
 <li>Set next iterate $w$ to be <strong>root</strong> of tangent line:
 $$
-  \begin{gather}
+  \begin{align*}
   f(w_{k-1}) + (w-w_{k-1}) f'(w_{k-1}) = 0 \\
-  \implies \boxed{ w = w_{k-1} - \frac{f(w_{k-1})}{f'(w_{k-1})} }
-  \end{gather}
+  \Rightarrow \boxed{ w = w_{k-1} - \frac{f(w_{k-1})}{f'(w_{k-1})} }
+  \end{align*}
   $$</li>
 </ul>
 </div>
@@ -7728,8 +7728,10 @@ $$</p>
 <ul>
 <li>Advantage: Easier to compute, esp. when the dataset is huge; sometimes can escape local minima</li>
 <li>Disadvantage: The gradient becomes <strong>noisy</strong> - impacts convergence; the Hessian is <strong>not</strong> well-defined even if we want to use it</li>
-<li>In between there are "mini-batch" mode</li>
 </ul>
+<blockquote>
+<p>In between there are "mini-batch" mode</p>
+</blockquote>
 </div>
 </div>
 </div>
@@ -7938,7 +7940,18 @@ $$</li>
 </div>
 </div>
 </div>
-</div></section></section><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Interactive-Examples">Interactive Examples<a class="anchor-link" href="#Interactive-Examples">¶</a></h2>
+</div>
+</div>
+</div>
+</div></section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8118,7 +8131,7 @@ $$</li>
 </li>
 <li>Otherwise, do a split of train-valid-test.<ul>
 <li>Train: for decreasing the loss</li>
-<li>Valid: for picking the best parameter during training (behave like test in CV)</li>
+<li>Valid: for picking the best parameter during training (behave like in CV)</li>
 <li>Test: <em>Completely</em> unseen in the training process, used to verify the model performance</li>
 </ul>
 </li>
@@ -8133,17 +8146,27 @@ $$</li>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Basics:-Diagnose-your-loss-curve">Basics: Diagnose your loss curve<a class="anchor-link" href="#Basics:-Diagnose-your-loss-curve">¶</a></h3><ul>
+<h3 id="Basics:-Diagnose-your-loss-curve">Basics: Diagnose your loss curve<a class="anchor-link" href="#Basics:-Diagnose-your-loss-curve">¶</a></h3><p><img alt="No description has been provided for this image" src="pics/nn_train_curves.png" width="700px"/></p>
+</div>
+</div>
+</div>
+</div><div class="fragment">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<ul>
 <li>Linearly decrease: increase the learning rate</li>
 <li>Shaky curves: increase the batch size</li>
 <li>Distant train/valid curves: overfitting</li>
 <li>Overlapping train/valid curves: underfitting</li>
 </ul>
-<p><img alt="No description has been provided for this image" src="pics/nn_train_curves.png" width="700px"/></p>
 </div>
 </div>
 </div>
-</div></section><section>
+</div></div></section><section>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -8312,6 +8335,9 @@ $$</li>
 </li>
 </ul>
 <p>[2] T. Salimans, et al. Weight normalization: A simple reparameterization to accelerate training of deep neural networks. NeurIPS 2016</p>
+<blockquote>
+<p>Nowadays, there are more strategies to normalize, see e.g. <a href="https://tungmphung.com/deep-learning-normalization-methods/">here</a>.</p>
+</blockquote>
 </div>
 </div>
 </div>
