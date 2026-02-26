@@ -5,7 +5,7 @@
 <meta content="chrome=1" http-equiv="X-UA-Compatible"/>
 <meta content="yes" name="apple-mobile-web-app-capable"/>
 <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
-<title>index slides</title><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script><script type="module">
+<title>NN_ModelBias slides</title><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script><script type="module">
   import mermaid from 'https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.7.0/mermaid.esm.min.mjs';
   mermaid.initialize({ startOnLoad: true });
 </script>
@@ -7434,214 +7434,788 @@ main {
 <main>
 <div class="reveal">
 <div class="slides"><section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=bf786fc8">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Machine-Learning-for-Engineering">Machine Learning for Engineering<a class="anchor-link" href="#Machine-Learning-for-Engineering">¶</a></h2><h3 id="Instructor:-Daning-Huang">Instructor: <a href="https://apus-lab.github.io">Daning Huang</a><a class="anchor-link" href="#Instructor:-Daning-Huang">¶</a></h3>
+<h2 id="Machine-Learning-for-Engineering">Machine Learning for Engineering<a class="anchor-link" href="#Machine-Learning-for-Engineering">¶</a></h2><h2 id="Neural-Networks:-Model-Bias">Neural Networks: Model Bias<a class="anchor-link" href="#Neural-Networks:-Model-Bias">¶</a></h2><h3 id="Instructor:-Daning-Huang">Instructor: Daning Huang<a class="anchor-link" href="#Instructor:-Daning-Huang">¶</a></h3>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=bb113b41">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Introduction">Introduction<a class="anchor-link" href="#Introduction">¶</a></h2><p>This website hosts the slides for several Machine Learning-related courses that are taught at Penn State Aerospace.</p>
+<p>$$
+\newcommand\ppf[2]{\dfrac{\partial #1}{\partial #2}}
+\newcommand\norm[1]{\left\Vert#1\right\Vert}
+\newcommand{\bR}{\mathbb{R}}
+\newcommand{\cD}{\mathcal{D}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\cN}{\mathcal{N}}
+\newcommand{\vF}{\mathbf{F}}
+\newcommand{\vH}{\mathbf{H}}
+\newcommand{\vI}{\mathbf{I}}
+\newcommand{\vK}{\mathbf{K}}
+\newcommand{\vL}{\mathbf{L}}
+\newcommand{\vM}{\mathbf{M}}
+\newcommand{\vO}{\mathbf{O}}
+\newcommand{\vQ}{\mathbf{Q}}
+\newcommand{\vV}{\mathbf{V}}
+\newcommand{\vW}{\mathbf{W}}
+\newcommand{\vb}{\mathbf{b}}
+\newcommand{\vf}{\mathbf{f}}
+\newcommand{\vh}{\mathbf{h}}
+\newcommand{\vm}{\mathbf{m}}
+\newcommand{\vx}{\mathbf{x}}
+\newcommand{\vy}{\mathbf{y}}
+$$</p>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="TODAY:-Neural-Networks">TODAY: Neural Networks<a class="anchor-link" href="#TODAY:-Neural-Networks">¶</a></h2><ul>
+<li>Model biases</li>
+<li>An illustrative example</li>
+<li>Some additional perspectives</li>
+</ul>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="General-Discussion">General Discussion<a class="anchor-link" href="#General-Discussion">¶</a></h2>
+</div>
+</div>
+</div>
+</div><div class="fragment">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="FAQ:-Does-a-neural-network-have-to-be-always-layer-structured?">FAQ: Does a neural network have to be always layer-structured?<a class="anchor-link" href="#FAQ:-Does-a-neural-network-have-to-be-always-layer-structured?">¶</a></h3>
+</div>
+</div>
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <ul>
-<li>The goal is to help you to<ul>
-<li>Understand fundamentals of machine learning</li>
-<li>Learn technical details of ML algorithms</li>
-<li>Learn how to implement some important algorithms</li>
-<li>Use machine learning algorithms for your research and applications</li>
+<li>No. It can be any directed acyclic graph (DAG).</li>
+<li>Example of a complex neural network</li>
+</ul>
+<p><img alt="No description has been provided for this image" src="pics/dag.png" width="250px"/></p>
+</div>
+</div>
+</div>
+</div></div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="FAQ:-Can-we-define-any-arbitrary-layers?">FAQ: Can we define any arbitrary layers?<a class="anchor-link" href="#FAQ:-Can-we-define-any-arbitrary-layers?">¶</a></h3>
+</div>
+</div>
+</div>
+</div><div class="fragment">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<ul>
+<li>We can define any layer as long as it is differentiable.<ul>
+<li>When it is not differentiable, we can make it approximately so.</li>
 </ul>
 </li>
-<li>Prerequisites: multivariate calculus, linear algebra, some familiarity with probability</li>
-</ul>
-<p><code>Use arrows to navigate; esc to see outline view of slides.</code></p>
-</div>
-</div>
-</div>
-</div></section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e3ec6c65-2c30-46a1-9f4b-077f88ede324">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Disclaimer">Disclaimer<a class="anchor-link" href="#Disclaimer">¶</a></h2><p><code>Keep deriving equations until you give up; handle the rest by ML</code></p>
-<p>What we focus on:</p>
-<ul>
-<li>Regression problems</li>
-<li>Fusion of physics and data</li>
-<li>Dynamical systems</li>
-</ul>
-<p>What we don't focus on:</p>
-<ul>
-<li>Classification problems</li>
-<li>Image processing</li>
-<li>Large language model, AIGC, etc.<ul>
-<li>But LLMs are highly recommended to assist your learning...</li>
-<li>But we do cover some recent generative models, e.g., diffusion model</li>
+<li>Example) Addition layer<ul>
+<li>Forward: $\textbf{h} = \textbf{x}_1 + \textbf{x}_2$</li>
+<li>Backward<ul>
+<li>$\nabla_{\textbf{x}_1}\mathcal{L} = \nabla_{\textbf{h}}\mathcal{L}\nabla_{\textbf{x}_1}\textbf{h}=\nabla_{\textbf{h}}\mathcal{L}$</li>
+<li>$\nabla_{\textbf{x}_2}\mathcal{L} = \nabla_{\textbf{h}}\mathcal{L}\nabla_{\textbf{x}_2}\textbf{h}=\nabla_{\textbf{h}}\mathcal{L}$</li>
 </ul>
 </li>
-<li>Reinforcement learning (but might come soon)</li>
 </ul>
+</li>
+</ul>
+<p><img alt="No description has been provided for this image" src="pics/addition.png" width="500px"/></p>
 </div>
 </div>
 </div>
-</div></section></section><section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=7b44f98f">
+</div></div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Specifically, the course consists of following topics:</p>
-<ul>
-<li>Mathematical background</li>
-<li>Linear regression</li>
-<li>Gaussian process regression</li>
-<li>Neural networks</li>
-<li>High-Dimensional systems</li>
-<li>Dynamical and differential systems</li>
-</ul>
-<p>Next:</p>
-<ul>
-<li>Move to <strong>right</strong> to access the links to the specific topics, or</li>
-<li>See <a href="index_scope.slides.html">here</a> for a more technical description of the scope.</li>
-</ul>
+<h3 id="FAQ:-How-to-handle-shared-weights?">FAQ: How to handle shared weights?<a class="anchor-link" href="#FAQ:-How-to-handle-shared-weights?">¶</a></h3>
 </div>
 </div>
 </div>
-</div></section></section><section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0752bf86">
+</div><div class="fragment">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Mathematical background</p>
 <ul>
-<li><a href="Math_LA.slides.html">Linear Algebra</a></li>
-<li><a href="Math_Prob.slides.html">Probability Theory</a>, <a href="Math_Prob_supp_mat.pdf">Supp. notes</a></li>
-<li><a href="Math_Opt.slides.html">Optimization</a></li>
-<li><a href="Math_DE.slides.html">Differential Equations</a></li>
+<li>To constrain $W_1=W_2=W$, we need $\Delta W_1 = \Delta W_2$.</li>
+<li>Compute $\nabla_{W_1}\mathcal{L}$ and $\nabla_{W_2}\mathcal{L}$ separately.</li>
+<li>Use $\nabla_{W}\mathcal{L}=\nabla_{W_1}\mathcal{L}+\nabla_{W_2}\mathcal{L}$ to update the shared weight.</li>
+<li>In practice, we accumulate gradients to the shared memory space for $\nabla_{W}\mathcal{L}$ during back-propagation.</li>
+<li>Weight sharing is used in <em>convolutional neural networks</em> and <em>recurrent neural networks</em>.</li>
 </ul>
-<p>Linear regression</p>
+<p><img alt="No description has been provided for this image" src="pics/weight_sharing.png" width="500px"/></p>
+</div>
+</div>
+</div>
+</div></div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="What-is-%22deep%22-neural-network?">What is "deep" neural network?<a class="anchor-link" href="#What-is-%22deep%22-neural-network?">¶</a></h3><ul>
+<li>If we have to given a definition...</li>
+<li>A neural network is considered to be <strong>deep</strong> if it has more than two (non-linear) hidden layers.</li>
+<li>Higher layers extract more abstract and hierarchical features.</li>
+</ul>
+</div>
+</div>
+</div>
+</div><div class="fragment">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <ul>
-<li><a href="LR_Basics.slides.html">Basics</a></li>
-<li><a href="LR_Reg.slides.html">Regularization</a></li>
-<li><a href="LR_Prob.slides.html">Probability Formulation</a></li>
-<li><a href="LR_BiasVar.slides.html">Model Selection</a></li>
+<li>Difficulties in training deep neural networks<ul>
+<li>Easily overfit (The number of parameters is large)</li>
+<li>Hard to optimize (highly non-convex optimization)</li>
+<li>Computationally expensive (many matrix multiplications)</li>
+</ul>
+</li>
+<li>Recent Advances<ul>
+<li>Large-scale dataset (e.g., 1M images in ImageNet, PB text for ChatGPT)</li>
+<li>Better regularization (e.g., Dropout, Spectral)</li>
+<li>Better optimization (e.g., Adam family, Muon)</li>
+<li>Better hardware (GPU/TPU for matrix computation)</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div></div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="%22Bias%22-of-a-Model">"Bias" of a Model<a class="anchor-link" href="#%22Bias%22-of-a-Model">¶</a></h2><p>The FAQ basically says we can design <strong>any</strong> parametrized model of <strong>any</strong> architecture.</p>
+<p>But we would want the family of models to be <strong>compatible with</strong> the problem at hand.</p>
+</div>
+</div>
+</div>
+</div><div class="fragment">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>For example, the model should</p>
+<ul>
+<li>Capture <em>temporal correlation</em> for <em>time series</em>.</li>
+<li>Generate <em>localized features</em> for <em>object detection</em> in images.</li>
+<li>Preserve <em>symmetry</em> of the original problem.  (e.g., if we fit an odd function, the NN should be odd too)</li>
+<li>Satisfy any physics-based relations that are already <em>known</em>.</li>
+<li>etc.</li>
+</ul>
+</div>
+</div>
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>The level of model-problem compatibility is referred to as <strong>model bias</strong>.</p>
+<blockquote>
+<p>Not to be confused with the bias-variance trade-off</p>
+</blockquote>
+</div>
+</div>
+</div>
+</div></div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Biases">Biases<a class="anchor-link" href="#Biases">¶</a></h3><p>There are (at least) four types of biases: <strong>observational</strong>, <strong>learning</strong>, <strong>inductive</strong>, and <strong>physics</strong>.</p>
+<p>Refs: <a href="https://arxiv.org/abs/1806.01261">Battaglia2018</a>, <a href="https://www.nature.com/articles/s42254-021-00314-5.">Karniadakis2021</a></p>
+</div>
+</div>
+</div>
+</div><div class="fragment">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>To make it more tangible, suppose we want to fit a simple model for a nonlinear spring
+$$
+F = k_1 x + k_2 x^3
+$$
+given data of $(x_i,F_i)$.</p>
+<ul>
+<li>Physical knowledge tells us that the model should be an odd function.</li>
+</ul>
+</div>
+</div>
+</div>
+</div></div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="Observation-Bias">Observation Bias<a class="anchor-link" href="#Observation-Bias">¶</a></h4><ul>
+<li>No special structure on the model.</li>
+<li>Manipulate the data so that it satisfies our knowledge<ul>
+<li>For a data point $(x_i,F_i)$, make sure $(-x_i,-F_i)$ is also a data point.</li>
+<li>Or, sample strategically to achieve the same effect</li>
+</ul>
+</li>
+<li>Within the range of (augmented) data, the learned model is <em>approximately</em> an odd function.</li>
+</ul>
+</div>
+</div>
+</div>
+</div><div class="fragment">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<blockquote>
+<p>Cons: Higher training cost for larger dataset; only approximation</p>
+</blockquote>
+</div>
+</div>
+</div>
+</div></div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="Learning-Bias">Learning Bias<a class="anchor-link" href="#Learning-Bias">¶</a></h4><ul>
+<li>No special structure on the model or data.</li>
+<li>Design special losses to enforce the model form.<ul>
+<li>Add a penalty $L(x) = f(x)+f(-x)$</li>
+<li>$f(x)$ gets penalized when it is not odd</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div><div class="fragment">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<ul>
+<li><p>One more example: "physics-informed" neural network</p>
+<ul>
+<li>Want solution to a PDE $u_{xx}+u_{yy}=0$.</li>
+<li>Define a network $u^*(x,y)$ and drive a loss $||u^*_{xx}+u^*_{yy}||$ to zero.</li>
+<li>(Technically we also need losses on boundary conditions)</li>
+</ul>
+</li>
+<li><p>More on these models in this module.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div></div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="Inductive-Bias">Inductive Bias<a class="anchor-link" href="#Inductive-Bias">¶</a></h4><ul>
+<li>Place structure on the model to enforce known knowledge.<ul>
+<li>Given any model $\hat{f}(x)$, define $f(x) = \hat{f}(x)-\hat{f}(-x)$ as our final model.</li>
+<li>$f(x)$ is always odd.</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div><div class="fragment">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<ul>
+<li>One more example: Say we want the output to be a $3\times 3$ rotation matrix $R$.<ul>
+<li>Need $|R|=1$, so simply outputing a $3\times 3$ array would not work.</li>
+<li>Instead we learn a vector $x=[x_1,x_2,x_3]$, and for <em>any</em> $x$, $\exp(\hat{x})$ is a rotation matrix
+$$
+\hat{x} = \begin{bmatrix} 0 &amp; -x_3 &amp; x_2 \\ x_3 &amp; 0 &amp; -x_1 \\ -x_2 &amp; x_1 &amp; 0 \end{bmatrix}
+$$</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div></div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="Physics-Bias">Physics Bias<a class="anchor-link" href="#Physics-Bias">¶</a></h4><ul>
+<li>Embed physics-based model into the model.<ul>
+<li>Suppose we know a baseline relation $F\approx k^* x$, $k^*$ known</li>
+<li>Define model as $F=k^* x + \hat{f}(x)$, and learn $\hat{f}$ instead of the entire $F$.</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div><div class="fragment">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<ul>
+<li>One more example: Constitutive relations for elasticity<ul>
+<li>$\nabla\cdot \sigma(\epsilon)=F$, $F$ force, $\sigma$ stress, $\epsilon$ strain</li>
+<li>We keep the equation in the model and just learn $\sigma(\epsilon)$</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div></div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Classical-Deep-Architectures">Classical Deep Architectures<a class="anchor-link" href="#Classical-Deep-Architectures">¶</a></h3><ul>
+<li>Convolutional Neural Network (CNN)<ul>
+<li>Widely used for image modeling</li>
+<li>e.g. object recognition, segmentation, vision-based reinforcement learning problems</li>
+<li>e.g. flow analysis and modeling (i.e. thinking the flow field as 2D/3D images)</li>
+</ul>
+</li>
+<li>Recurrent Neural Network (RNN)<ul>
+<li>Widely used for sequential data modeling</li>
+<li>e.g. machine translation, image caption generation</li>
+<li>e.g. time series analysis and forecasting, nonlinear dynamics</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>These are mainly the cases of <strong>inductive</strong> bias.</p>
+</blockquote>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="An-Illustrative-Example">An Illustrative Example<a class="anchor-link" href="#An-Illustrative-Example">¶</a></h2><p>Let's fit a NN to predict the area $A$ of a triangle given its edge lengths $(a,b,c)$.</p>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Level-0:-Do-nothing">Level 0: Do nothing<a class="anchor-link" href="#Level-0:-Do-nothing">¶</a></h3><ul>
+<li>Model: 3 hidden layers, 128 neurons each</li>
+<li>Training data: 4000 samples of $\{(a_i,b_i,c_i),A_i\}_{i=1}^N$, length range $(0.2, 1.0)$</li>
+<li>Loss: Simple RMSE
+$$
+\mathcal{L}(\theta) = \sum_{i=1}^N \|A_i - f(a_i,b_i,c_i)\|^2
+$$</li>
+<li>Training: 2000 epoch (no validation for simplicity), Adam optimizer</li>
 </ul>
 </div>
 </div>
 </div>
 </div></section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=b97ccff1">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Kernels and Gaussian processes (GP)</p>
+<p>Test data variation:</p>
 <ul>
-<li><a href="KGP_Kern.slides.html">Kernel Method</a> / <a href="KGP_RKHS.slides.html">Theoretical View</a></li>
-<li><a href="KGP_Prob.slides.html">GP Formulation</a></li>
-<li><a href="KGP_Sampling.slides.html">Sampling</a></li>
-<li><a href="KGP_BO.pdf">Bayesian Optimization (Full, PDF)</a> <a href="KGP_BO.slides.html">slides (Visual only)</a></li>
-<li><a href="KGP_Variants.slides.html">Variants</a></li>
+<li>"base": 4000 samples, same length distribution</li>
+<li>"permuted": Edge order permuted - the output should be the same</li>
+<li>"scaled": Edges are uniformly scaled, scaling factor $s$ range $(0.6,1.7)$ - the output should scale by $s^2$</li>
 </ul>
-<p>Basics of neural networks</p>
+<p>Two test datasets:</p>
 <ul>
-<li><a href="NN_Basics.slides.html">Basics</a></li>
-<li><a href="NN_GD.slides.html">Training</a></li>
-<li><a href="NN_BP.slides.html">Automatic Differentiation</a></li>
-<li><a href="NN_ModelBias.slides.html">Model Bias</a></li>
+<li>In distribution: length range $(0.2, 1.0)$, same as training.</li>
+<li>Out of distribution: length range $(1.5, 3.0)$, i.e., entirely unseen in training.</li>
 </ul>
 </div>
 </div>
 </div>
 </div></section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=99498427">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>High-Dimensional systems</p>
-<ul>
-<li><a href="HD_Basics.slides.html">Basics</a></li>
-<li><a href="HD_Spatial.slides.html">Spatial Decomposition</a></li>
-<li><a href="HD_VAE.slides.html">Autoencoders</a></li>
-<li><a href="HD_Clustering.slides.html">Clustering</a></li>
-<li><a href="HD_Temporal.slides.html">Temporal Decomposition</a></li>
-</ul>
-<p>Model Architectures</p>
-<ul>
-<li><a href="NN_Variants.slides.html">Common Architectures</a></li>
-<li><a href="DS_Adj.slides.html">Neural ODEs</a></li>
-<li><a href="NN_PI.slides.html">Physics-Informed NN</a></li>
-<li><a href="NN_BP_More.slides.html">Physics-Infused Models</a></li>
-<li><a href="DS_Diffusion.slides.html">Diffusion Models</a> / <a href="DS_Diffusion_cond.slides.html">Extras: Conditionals</a></li>
-<li><a href="DS_Diffusion_fm.slides.html">Flow Matching</a></li>
-</ul>
+<p>Deviation starts as edge lengths increase.</p>
+<p><img alt="No description has been provided for this image" src="pics/level0_prd_ID.png" width="500px"/></p>
 </div>
 </div>
 </div>
 </div></section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=8ee87ce4-987c-4db9-a70f-f7a6d9d37cf2">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Dynamical and differential systems</p>
-<ul>
-<li><a href="DS_Basics.slides.html">Basics</a></li>
-<li><a href="DS_Lin.slides.html">Linear System</a></li>
-<li><a href="DS_Nonnormal.slides.html">Nonnormality</a>, <a href="DS_DMD_Revisit.slides.html">DMD Revisited</a></li>
-<li><a href="DS_NL.slides.html">Tackling Nonlinearity</a></li>
-<li><a href="DS_Regr.slides.html">Sparse Regression</a></li>
-<li><a href="DS_Koopman.slides.html">Koopman Operator Theory</a></li>
-<li><a href="DS_Opt.slides.html">Differentially-constrained problems</a></li>
-</ul>
-<p>Draft</p>
-<ul>
-<li>More Variants of linear regression <a href="LR_Variants.slides.html">draft</a></li>
-<li><a href="KGP_MCMC.slides.html">Markov Chain Monte Carlo</a></li>
-<li>Variational Inference <a href="NN_VI.slides.html">draft</a></li>
-</ul>
+<p>Completely off!</p>
+<p><img alt="No description has been provided for this image" src="pics/level0_prd_OOD.png" width="500px"/></p>
 </div>
 </div>
 </div>
 </div></section></section><section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=af1db368">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="References">References<a class="anchor-link" href="#References">¶</a></h2><ol>
-<li>[PRML] Pattern Recognition and Machine Learning, Christopher Bishop, 2006.</li>
-<li>[MLaPP] Machine Learning: A Probabilistic Perspective, Kevin P. Murphy, 2012.</li>
-<li>[GPML] Gaussian Processes for Machine Learning, C. E. Rasmussen and C. K. I. Williams, 2006.</li>
-<li>[DMSC] Data-driven Modeling and Scientific Computation, Nathan Kutz, 2013.</li>
+<h3 id="Level-1:-Observation-Bias">Level 1: Observation Bias<a class="anchor-link" href="#Level-1:-Observation-Bias">¶</a></h3><ul>
+<li>Same model, training method, and loss</li>
+<li>Training data: 4000 samples of $\{(a_i,b_i,c_i),A_i\}_{i=1}^N$, length range $(0.2, 1.0)$</li>
+<li>Data augmentation: For each sample,<ul>
+<li>Permutation produces 5 more samples: $\{(a_i,c_i,b_i),A_i\}_{i=1}^N$, $\{(c_i,a_i,b_i),A_i\}_{i=1}^N$, etc.</li>
+<li>Scaling produces 1 more sample: $\{(sa_i,sc_i,sb_i),s^2A_i\}_{i=1}^N$ ($s$ randomly chosen).</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<ul>
+<li>In-distribution is nearly perfect, but OOD is still off.</li>
+<li>Training cost increased from 16s to 42s (b/c more data).</li>
+</ul>
+<p><img align="left" alt="No description has been provided for this image" src="pics/level1_prd_ID.png" width="390px"/>
+<img align="left" alt="No description has been provided for this image" src="pics/level1_prd_OOD.png" width="390px"/></p>
+<p style="clear: both;"></p>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Level-2:-Learning-Bias">Level 2: Learning Bias<a class="anchor-link" href="#Level-2:-Learning-Bias">¶</a></h3><ul>
+<li>Same model, training method, and data</li>
+<li>Modify the loss<ul>
+<li>Permutation penalty
+$$
+\mathcal{L}_p(\theta) = \sum_{i=1}^N \|A_i - f(a_i,c_i,b_i)\|^2 + \sum_{i=1}^N \|A_i - f(c_i,a_i,b_i)\|^2 + \cdots
+$$</li>
+<li>Scaling penalty, for random $s$
+$$
+\mathcal{L}_s(\theta) = \sum_{i=1}^N \|s^2A_i - f(sa_i,sc_i,sb_i)\|^2
+$$</li>
+<li>Total loss, with user-specified weights
+$$
+\mathcal{L}_{tot} = \mathcal{L} + w_p \mathcal{L}_p + w_s \mathcal{L}_s
+$$</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<ul>
+<li>Similar to level 1</li>
+<li>Training cost further increased to 66s!  (extra backpropagation in penalty terms)</li>
+</ul>
+<p><img alt="No description has been provided for this image" src="pics/level2_prd_ID.png" width="390px"/>
+<img alt="No description has been provided for this image" src="pics/level2_prd_OOD.png" width="390px"/></p>
+<p style="clear: both;"></p>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Level-3:-Inductive-Bias">Level 3: Inductive Bias<a class="anchor-link" href="#Level-3:-Inductive-Bias">¶</a></h3><ul>
+<li>Same training method, data, and loss</li>
+<li>Modify the model for guaranteed permutation and scaling symmetries<ul>
+<li>Normalize: $(\tilde{a}, \tilde{b}, \tilde{c}) = (a,b,c) / s$, $s=a+b+c$</li>
+<li>Sort: $(\tilde{a}, \tilde{b}, \tilde{c}) \rightarrow (\bar{a}, \bar{b}, \bar{c})$ (e.g., high to low)</li>
+<li>MLP evaluation: $\bar{A} = f(\bar{a}, \bar{b}, \bar{c})$</li>
+<li>Scaling: $A=s^2\bar{A}$</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<ul>
+<li>Now both ID and OOD are nearly perfect!</li>
+<li>Train cost reduces to 16s again (same as level 0)</li>
+</ul>
+<p><img alt="No description has been provided for this image" src="pics/level3_prd_ID.png" width="390px"/>
+<img alt="No description has been provided for this image" src="pics/level3_prd_OOD.png" width="390px"/></p>
+<p style="clear: both;"></p>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Level-4:-%22Physics%22-Bias">Level 4: "Physics" Bias<a class="anchor-link" href="#Level-4:-%22Physics%22-Bias">¶</a></h3><ul>
+<li>Same training method, data, and loss</li>
+<li>Modify the model further by domain knowledge - only one parameter $C$ to fit
+$$
+f(a,b,c) = C\sqrt{(a+b+c)(a+b-c)(a-b+c)(-a+b+c)}
+$$</li>
+</ul>
+<blockquote>
+<p>The detailed reasoning is two slides later</p>
+</blockquote>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<ul>
+<li>Perfect fit</li>
+<li>A few millisec to train</li>
+</ul>
+<p><img alt="No description has been provided for this image" src="pics/level4_prd_ID.png" width="390px"/>
+<img alt="No description has been provided for this image" src="pics/level4_prd_OOD.png" width="390px"/></p>
+<p style="clear: both;"></p>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Reasons for choosing the particular model form.</p>
+<ol>
+<li>In the extreme cases $c=a+b$, $b=a+c$, $a=b+c$, area should be 0; so we guess $f(a,b,c)$ contains a factor of $(a+b-c)(a-b+c)(-a+b+c)$.</li>
+<li>Area has dimension $\text{length}^2$, but the factor is $\text{length}^3$; so we guess
+$$
+f(a,b,c)^2 = g(a,b,c)(a+b-c)(a-b+c)(-a+b+c)
+$$
+where $g(a,b,c)$ has dimension $\text{length}$</li>
+<li>There is permutation symmetry, so the simplest choice is $g(a,b,c) = C_1 (a+b+c)$.</li>
+<li>Hence we obtain the previously assumed form.  Note it satisfies scaling symmetry too.</li>
 </ol>
-<h2 id="Relevant-Courses">Relevant Courses<a class="anchor-link" href="#Relevant-Courses">¶</a></h2><ol>
-<li>More basic ones: <a href="https://www.eecs189.org/">Berkeley CS 189</a>, <a href="https://cs229.stanford.edu/">Stanford CS 229</a></li>
-<li>CNN-specific: <a href="http://cs231n.stanford.edu/">Stanford CS 231n</a></li>
-<li>ML with a Linear Algebra flavor: <a href="https://ocw.mit.edu/courses/mathematics/18-065-matrix-methods-in-data-analysis-signal-processing-and-machine-learning-spring-2018/">MIT 18.065</a></li>
-</ol>
-<h2 id="Credits:">Credits:<a class="anchor-link" href="#Credits:">¶</a></h2><ol>
-<li><a href="https://github.com/thejakeyboy/umich-eecs545-lectures">UMich EECS 545</a> inspired me a lot when I took the course in 2016 and when I initially developed the course myself in 2020.</li>
-<li>@evislomo for generating the initial set of homework solutions</li>
-</ol>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="One-More-Perspective">One More Perspective<a class="anchor-link" href="#One-More-Perspective">¶</a></h2>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Consider the optimization of a loss $\mathcal{L}$ with a model $f$, given parameter $\theta$,
+$$
+\mathcal{L} = \mathcal{L}(f(\theta))
+$$</p>
+<p>If the optimized model does not perform well, it <em>usually</em> means</p>
+<ul>
+<li><strong>Gradient is zero</strong> at unfavorable places</li>
+<li>and we are stuck in one of them</li>
+</ul>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="When-is-gradient-zero?">When is gradient zero?<a class="anchor-link" href="#When-is-gradient-zero?">¶</a></h3><p>The gradient can be viewed as an inner product,</p>
+<p>$$
+\frac{\partial \mathcal{L}}{\partial \theta} =
+\left\langle
+\left.
+\frac{\partial \mathcal{L}}{\partial F}
+\right|_{F = f(\theta)},
+\;
+\frac{\partial f(\theta)}{\partial \theta}
+\right\rangle
+$$</p>
+<p>where $F = f(\theta)$ highlights the model evaluation at the current iterate $\theta$.</p>
+<p>Then the zero gradient implies the orthogonality between
+$$
+\frac{\partial \mathcal{L}}{\partial F}
+\quad \text{and} \quad
+\frac{\partial f(\theta)}{\partial \theta}
+$$</p>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Fixing-orthogonality">Fixing orthogonality<a class="anchor-link" href="#Fixing-orthogonality">¶</a></h3><p>If the gradient is not supposed to be zero, we can try modifying</p>
+<ul>
+<li>the loss $\mathcal{L}$ (e.g., the observation and learning biases)</li>
+<li>the model $f$ (e.g., the inductive and physics biases)</li>
+<li>the inner product itself (e.g., the learning bias)</li>
+</ul>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Example">Example<a class="anchor-link" href="#Example">¶</a></h3><ul>
+<li>Left: diverge due to inappropriate loss</li>
+<li>Right: changing loss gives the correct gradient to the basin <a href="https://epubs.siam.org/doi/pdf/10.1137/22M1477805">SISC2023</a></li>
+</ul>
+<p><img alt="No description has been provided for this image" src="pics/sgd_ngd.png" width="700px"/></p>
 </div>
 </div>
 </div>
