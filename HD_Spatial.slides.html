@@ -7474,25 +7474,13 @@ $$</p>
 <li>Connection to other methods</li>
 </ul>
 </li>
+<li>Tensor Train Decomposition</li>
 <li>Other dimension reduction methods</li>
 </ul>
 <h3 id="References:">References:<a class="anchor-link" href="#References:">¶</a></h3><ul>
 <li>[PRML] Chap. 12</li>
 <li>[MLaPP] Chap. 27</li>
 </ul>
-</div>
-</div>
-</div>
-</div></section></section><section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Principal-Components-Analysis">Principal Components Analysis<a class="anchor-link" href="#Principal-Components-Analysis">¶</a></h2><blockquote>
-<p>Uses material from <strong>[MLAPP]</strong> and <strong>[PRML]</strong></p>
-</blockquote>
 </div>
 </div>
 </div>
@@ -7545,7 +7533,7 @@ $$</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Dimensionality-Reduction">Dimensionality Reduction<a class="anchor-link" href="#Dimensionality-Reduction">¶</a></h3><p>Data may even be embedded in a low-dimensional <strong>nonlinear manifold</strong>.</p>
+<p>Data may even be embedded in a low-dimensional <strong>nonlinear manifold</strong>.</p>
 <ul>
 <li>How can we recover a low-dimensional representation?</li>
 </ul>
@@ -7560,7 +7548,7 @@ $$</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Dimensionality-Reduction">Dimensionality Reduction<a class="anchor-link" href="#Dimensionality-Reduction">¶</a></h3><p>In physics, a seemingly high-dimensional problem, e.g. an unsteady flow field, might live in a low-dimensional subspace.</p>
+<p>In physics, a seemingly high-dimensional problem, e.g. an unsteady flow field, might live in a low-dimensional subspace.</p>
 <img alt="No description has been provided for this image" src="pics/cylinder_flow.png" width="500px"/>
 <p>An interesting <a href="https://arc.aiaa.org/doi/pdf/10.2514/1.J058462">paper</a> on modal analysis of fluid flow.</p>
 </div>
@@ -7573,7 +7561,7 @@ $$</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Principal-Components-Analysis">Principal Components Analysis<a class="anchor-link" href="#Principal-Components-Analysis">¶</a></h3><p>Given a set $X = \{x_n\}$ of observations</p>
+<h2 id="Principal-Components-Analysis">Principal Components Analysis<a class="anchor-link" href="#Principal-Components-Analysis">¶</a></h2><p>Given a set $X = \{x_n\}$ of observations</p>
 <ul>
 <li>in a space of dimension $D$,</li>
 <li>find a <strong>linear subspace</strong> of dimension $M &lt; D$</li>
@@ -7625,7 +7613,7 @@ $$</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="PCA:--First-Principal-Component">PCA:  First Principal Component<a class="anchor-link" href="#PCA:--First-Principal-Component">¶</a></h3><p>Given data points $\{x_n\}$ in $D$-dim space, define</p>
+<h3 id="PCA:-The-First-Principal-Component">PCA: The First Principal Component<a class="anchor-link" href="#PCA:-The-First-Principal-Component">¶</a></h3><p>Given data points $\{x_n\}$ in $D$-dim space, define</p>
 <ul>
 <li><p>Mean $\bar x = \frac{1}{N} \sum_{n=1}^{N} x_n $</p>
 </li>
@@ -7663,9 +7651,274 @@ $$ \frac{1}{N} \sum_{n=1}^{N}\{u_1^Tx_n - u_1^T \bar x \}^2 = u_1^TSu_1$$</p>
 </li>
 <li><p>So $u_1$ is eigenvector of $S$ with largest eigenvalue.</p>
 </li>
+</ul>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="PCA:-The-Next-PC's">PCA: The Next PC's<a class="anchor-link" href="#PCA:-The-Next-PC's">¶</a></h3><ul>
 <li><p>Repeating the above procedure, one obtains the "less" principal components.</p>
 </li>
+<li><p><strong>New Goal:</strong> Maximize the projection variance over directions $u_k$:
+$$ u_k^TSu_k$$</p>
+</li>
+<li><p>With two constraints now:</p>
+<ul>
+<li>Normalization: $u_k^Tu_k=1$</li>
+<li>Orthogonality to previous PC's: $u_k^T u_i = 0$, for $i=1,2,\cdots,k-1$</li>
 </ul>
+</li>
+<li><p>Ultimately, $u_k$ is the $k$th eigenvector of $S$, with eigenvalue $\lambda_k$.</p>
+</li>
+</ul>
+<blockquote>
+<p>You will dive into the details in the homework.</p>
+</blockquote>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Example---Eigenfaces-1/2">Example - Eigenfaces 1/2<a class="anchor-link" href="#Example---Eigenfaces-1/2">¶</a></h3><ul>
+<li>$1560$ images of faces</li>
+<li>Image size: $50 \times 37$ - $1850$ pixels per image</li>
+<li>Reshape as a vector in $\mathbb{R}^{1850}$</li>
+</ul>
+<img alt="No description has been provided for this image" src="pics/pca_eigenfaces_samples.png" width="600px"/>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<img alt="No description has been provided for this image" src="pics/pca_eigenfaces.png" width="600px"/>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Reconstruction-from-PCA">Reconstruction from PCA<a class="anchor-link" href="#Reconstruction-from-PCA">¶</a></h3><p>One major application of PCA is to approximate the original $D$-dim data by $M$-dim coordinates, $D\gg M$,</p>
+<p>$$
+x \approx \bar{x} + c_1u_1 + c_2u_2 + \cdots + c_Mu_M \equiv \bar{x} + Uc
+$$</p>
+<p>where $U\in\mathbb{R}^{D\times M}$ and $c\in\mathbb{R}^M$.</p>
+</div>
+</div>
+</div>
+</div><div class="fragment">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>To find $c$, note that $U^TU=I$, because of orthogonality</p>
+<p>$$
+c = U^T(x-\bar{x})
+$$</p>
+</div>
+</div>
+</div>
+</div></div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="Explained-variances">Explained variances<a class="anchor-link" href="#Explained-variances">¶</a></h4><ul>
+<li>Each $u_i$ has a variance $\sigma_i^2$ - Spread of data along $u_i$.</li>
+<li>The chosen $M$ PC's: <strong>Explained</strong> variances in PCA - $\sigma_1^2$, $\sigma_2^2$, $\cdots$, $\sigma_M^2$.</li>
+<li>Explained variance ratio
+$$
+r = \frac{\sum_{i=1}^M\sigma_i^2}{\sum_{i=1}^D\sigma_i^2}
+$$</li>
+<li>If $r\approx 1$, all data is explained using the $M$ components (instead of all the $D$ dimensions).</li>
+<li>In practice one chooses $r$ to determine $M$.</li>
+</ul>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="Advantages">Advantages<a class="anchor-link" href="#Advantages">¶</a></h4><ul>
+<li>Storage: Instead of storing the full $N\times D$ numbers, store<ul>
+<li>PC coordinates: $c$'s, size $N\times M$ (again $D\gg M$)</li>
+<li>PC's (Overhead): $D\times (M+1)$</li>
+<li>Overall $O(M(D+N))$</li>
+<li>Every new data: Add $M$, instead of $D$.</li>
+</ul>
+</li>
+<li>Modeling, e.g., linear regression:<ul>
+<li>Instead of learning weights in $\mathbb{R}^D$</li>
+<li>Learn weights in $\mathbb{R}^M$</li>
+<li>Much fewer to learn, and maybe more stable and robust</li>
+</ul>
+</li>
+<li>Data analysis: Understanding dominant patterns in data - can reveal physics</li>
+</ul>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Example---Eigenfaces-2/2">Example - Eigenfaces 2/2<a class="anchor-link" href="#Example---Eigenfaces-2/2">¶</a></h3><ul>
+<li>Choosing $M=150$ for $N=1560$ and $D=1850$.</li>
+<li>Compression ratio
+$$
+\approx \frac{ND}{M(D+N)} = \frac{1560\times 1850}{150\times(1560 + 1850)} \approx 5.64
+$$</li>
+</ul>
+<img alt="No description has been provided for this image" src="pics/pca_eigenfaces_variance.png" width="600px"/>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<blockquote>
+<p>Note trade-off in accuracy.</p>
+</blockquote>
+<img alt="No description has been provided for this image" src="pics/pca_eigenfaces_recon.png" width="600px"/>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="PCA-and-SVD">PCA and SVD<a class="anchor-link" href="#PCA-and-SVD">¶</a></h3><p>The search of the principal components of the data ends up in solving an eigenvalue problem (EVP) associated with the empirical covariance matrix
+$$
+S u_i=\lambda_i u_i
+$$</p>
+<ul>
+<li>One would want to choose the largest $M$ eigenvalues and the associated eigenvectors.</li>
+<li>These eigenpairs maximizes the variances $\sigma_i^2 = u_i^T S u_i$, and minimizes the projection error $J=\sum_{M+1}^D\lambda_i$.</li>
+<li>Another way to look at explained variance ratio - for a small number, e.g. $\epsilon=0.01$,
+$$
+\frac{\sum_{i=1}^M\lambda_i}{\sum_{i=1}^D\lambda_i} = 1-\frac{J}{\sum_{i=1}^D\lambda_i} \geq 1-\epsilon
+$$</li>
+</ul>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Now consider data matrix $X\in\mathbb{R}^{N\times D}$, whose rows are the data vectors, mean subtracted.</p>
+<ul>
+<li>Suppose now $D\gg N$, so it is inefficient to do an EVP for $S=\frac{1}{N}X^TX$, which has a cost of $O(D^3)$.</li>
+<li>Instead, one could do the following EVP at reduced cost $O(N^3)$,
+$$
+\frac{1}{N}XX^T (X u_i)=\lambda_i (X u_i)\quad\Rightarrow\quad \tilde{S} v_i=\lambda_i v_i
+$$</li>
+<li>The eigenvalues are the same as those associated with $u_i$.</li>
+<li>And to recover $u_i$ from $v_i$,
+$$
+u_i=\frac{1}{\sqrt{N\lambda_i}}X^T v_i
+$$</li>
+</ul>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Furthermore, consider the singular value decomposition of the data matrix
+$$
+X=U\Sigma V^T,\quad X^TX=V\Sigma^2 V^T,\quad XX^T=U\Sigma^2U^T
+$$</p>
+<ul>
+<li>$u_i$ and $v_i$ are the left and right singular vectors of $X$, and $\lambda_i=\sigma_i^2$.</li>
+<li>Alternatively, one could do the SVD of $X$ to find the principal components of the dataset.</li>
+<li>While full SVD is expensive, there is a <em>randomized</em> SVD algorithm that can find max components efficiently.</li>
+<li>The SVD approach also called the <strong>snapshot method</strong></li>
+</ul>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="Side-note---1">Side note - 1<a class="anchor-link" href="#Side-note---1">¶</a></h4><p>A theoretical guarantee, <strong>Eckart–Young theorem</strong></p>
+<p>For a centered matrix $X\in\mathbb{R}^{n\times m}$, say $n&gt;m$, if we want a rank-$r$ approximation $Y$ to $X$, i.e.,
+$$
+\min_{\operatorname{rank}(Y)=r} \|X - Y\|_F
+$$
+Then using the SVD of $X=U\Sigma V^\top$, and its rank-$r$ truncation
+$$
+Y = U_r \Sigma_r V_r^\top,
+$$
+and the approximation error is
+$$
+\|X - Y\|_F = \sqrt{\sum_{i=r+1}^m \sigma_i^2}
+$$</p>
+<p>Thus, SVD provides the <strong>optimal low-rank approximation</strong> in Frobenius norm.</p>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="Side-note---2">Side note - 2<a class="anchor-link" href="#Side-note---2">¶</a></h4><p>It is also possible to <em>hard-threshold</em> the SVD truncation.  For an $m\times n$ matrix, let $m$ be the median of SV's, one can truncate all the SV's below $\omega(\beta)m$, where
+$$
+\beta=m/n,\quad \omega(\beta) \approx 0.56\beta^3 - 0.95\beta^2 + 1.82\beta + 1.43
+$$
+But I would always recommend looking at the data and the spectrum of SV's before truncating.</p>
+<p>Ref: M. Gavish and D. Donoho, The Optimal Hard Threshold for Singular Values is $4/\sqrt{3}$, arXiv 1305.5870.</p>
 </div>
 </div>
 </div>
@@ -7742,7 +7995,7 @@ $$</p>
 <p>We can simply maximize this likelihood function with respect to $\mu, W, \sigma$.</p>
 <ul>
 <li>Mean: $\mu = \bar x$</li>
-<li>Noise:
+<li>Noise (i.e., the "unexplained" variances):
 $$ \sigma_{ML}^2 = \frac{1}{D-M} \sum_{i=M+1} ^{D} \lambda_i $$</li>
 <li>Transform:
 $$W_{ML} = U_M (L_M - \sigma^2 I)^{\frac{1}{2}} R $$</li>
@@ -7791,111 +8044,6 @@ $$W_{ML} = U_M (L_M - \sigma^2 I)^{\frac{1}{2}} R $$</li>
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h3 id="e.g.,-Expectation-Maximization">e.g., Expectation Maximization<a class="anchor-link" href="#e.g.,-Expectation-Maximization">¶</a></h3><p>which alternatively optimizes the $W$ and $z$ in the probabilistic formulation.</p>
 <img alt="No description has been provided for this image" src="pics/pca_8.png" width="700px"/>
-</div>
-</div>
-</div>
-</div></section></section><section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="PCA-and-SVD">PCA and SVD<a class="anchor-link" href="#PCA-and-SVD">¶</a></h3><p>The search of the principal components of the data ends up in solving an eigenvalue problem (EVP) associated with the empirical covariance matrix
-$$
-S u_i=\lambda_i u_i
-$$</p>
-<ul>
-<li>one would want to choose the largest $M$ eigenvalues and the associated eigenvectors.</li>
-<li>These eigenpairs maximizes the variances $\sigma_i^2 = u_i^T S u_i$, and minimizes the projection error $J=\sum_{M+1}^D\lambda_i$.</li>
-<li>One typically choose $M$ such that, for a small number, e.g. $\epsilon=0.01$,
-$$
-\frac{\sum_{i=1}^M\lambda_i}{\sum_{i=1}^D\lambda_i} = 1-\frac{J}{\sum_{i=1}^D\lambda_i} \geq 1-\epsilon
-$$</li>
-</ul>
-</div>
-</div>
-</div>
-</div></section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Now consider data matrix $X\in\mathbb{R}^{N\times D}$, whose rows are the data vectors, mean subtracted.</p>
-<ul>
-<li>Suppose now $D\gg N$, so it is inefficient to do an EVP for $S=\frac{1}{N}X^TX$, which has a cost of $O(D^3)$.</li>
-<li>Instead, one could do the following EVP at reduced cost $O(N^3)$,
-$$
-\frac{1}{N}XX^T (X u_i)=\lambda_i (X u_i)\quad\Rightarrow\quad \tilde{S} v_i=\lambda_i v_i
-$$</li>
-<li>The eigenvalues are the same as those associated with $u_i$.</li>
-<li>And to recover $u_i$ from $v_i$,
-$$
-u_i=\frac{1}{\sqrt{N\lambda_i}}X^T v_i
-$$</li>
-</ul>
-</div>
-</div>
-</div>
-</div></section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Furthermore, consider the singular value decomposition of the data matrix
-$$
-X=U\Sigma V^T,\quad X^TX=V\Sigma^2 V^T,\quad XX^T=U\Sigma^2U^T
-$$</p>
-<ul>
-<li>It is clear that $u_i$ and $v_i$ are the left and right singular vectors of $X$, and there is a one-to-one correspondence between the singular values and the eigenvalues.</li>
-<li>Alternatively, one could do the SVD of $X$ to find the principal components of the dataset.</li>
-<li>While full SVD is expensive, there is a <em>randomized</em> SVD algorithm that can find max components efficiently.</li>
-<li>The SVD approach also called the <strong>snapshot method</strong></li>
-</ul>
-</div>
-</div>
-</div>
-</div></section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Finally, a theoretical guarantee, <strong>Eckart–Young theorem</strong></p>
-<p>For a centered matrix $X\in\mathbb{R}^{n\times m}$, say $n&gt;m$, if we want a rank-$r$ approximation $Y$ to $X$, i.e.,
-$$
-\min_{\operatorname{rank}(Y)=r} \|X - Y\|_F
-$$
-Then using the SVD of $X=U\Sigma V^\top$, and its rank-$r$ truncation
-$$
-Y = U_r \Sigma_r V_r^\top,
-$$
-and the approximation error is
-$$
-\|X - Y\|_F = \sqrt{\sum_{i=r+1}^m \sigma_i^2}
-$$</p>
-<p>Thus, SVD provides the <strong>optimal low-rank approximation</strong> in Frobenius norm.</p>
-</div>
-</div>
-</div>
-</div></section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h4 id="Side-note">Side note<a class="anchor-link" href="#Side-note">¶</a></h4><p>It is also possible to <em>hard-threshold</em> the SVD truncation.  For an $m\times n$ matrix, let $m$ be the median of SV's, one can truncate all the SV's below $\omega(\beta)m$, where
-$$
-\beta=m/n,\quad \omega(\beta) \approx 0.56\beta^3 - 0.95\beta^2 + 1.82\beta + 1.43
-$$
-But I would always recommend looking at the data and the spectrum of SV's before truncating.</p>
-<p>Ref: M. Gavish and D. Donoho, The Optimal Hard Threshold for Singular Values is $4/\sqrt{3}$, arXiv 1305.5870.</p>
 </div>
 </div>
 </div>
@@ -8434,16 +8582,16 @@ $$</p>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h3 id="Example">Example<a class="anchor-link" href="#Example">¶</a></h3><p>Consider a synthetic grayscale video of a small ball translating across a 2D grid.</p>
-<p>Let the video be a tensor, $T=H=W=64$
+<p>Let the video be a tensor, $H=W=T=64$
 $$
-\mathcal{X} \in \mathbb{R}^{T \times H \times W}
+\mathcal{X} \in \mathbb{R}^{H \times W \times T}
 $$</p>
 <p><strong>Baseline (matrix SVD):</strong> flatten space and do SVD on<br/>
 $$
-X \in \mathbb{R}^{T \times (HW)}
+X \in \mathbb{R}^{(HW)\times T}
 $$
-Truncation to rank $r$ yields storage $r(T+HW)$.</p>
-<p><strong>TT approach:</strong> Not only keeping $T \times H \times W$, but also granulating more
+Truncation to rank $r$ yields storage $r(HW+T)$.</p>
+<p><strong>TT approach:</strong> Not only keeping $H \times W \times T$, but also granulating more
 $$
 \tilde{\mathcal{X}} \in \mathbb{R}^{8\times 8 \times 8\times 8 \times 8 \times 8}
 $$
@@ -8472,6 +8620,53 @@ with storage $\sum_k r_{k-1} n_k r_k$.</p>
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <img alt="No description has been provided for this image" src="pics/tt_svd_error.png" width="500px"/>
 <p>TT achieves fewer parameters with higher accuracy!</p>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="Under-the-hood---SVD-modes">Under the hood - SVD modes<a class="anchor-link" href="#Under-the-hood---SVD-modes">¶</a></h4><p>Challenge in compression: Long tail in eigenvalue distribution.</p>
+<img alt="No description has been provided for this image" src="pics/tt_svd_components.png" width="800px"/>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="Under-the-hood---TT-modes">Under the hood - TT modes<a class="anchor-link" href="#Under-the-hood---TT-modes">¶</a></h4><p>More non-trivial to visualize.  Take a simpler case of TT directly on $\mathcal{X}\in\mathbb{R}^{64\times64\times64}$
+$$
+\mathcal{X} = \underbrace{G_1}_{1\times H\times r_1}\quad\underbrace{G_2}_{r_1\times W \times r_2}\quad\underbrace{G_3}_{r_2\times T\times 1}
+$$</p>
+<p>Consider "spatial" modes - $r_2$ modes of shape $H\times W$ - analogy of PC modes
+$$
+\underbrace{M}_{H\times W \times r_2} = \underbrace{G_1}_{1\times H\times r_1}\quad\underbrace{G_2}_{r_1\times W \times r_2}
+$$</p>
+<p>$G_3$ behaves like PC coordinates over time.</p>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Show the first 2 spatial modes, and the corresponding factors from $G_1$ and $G_2$.</p>
+<ul>
+<li>Similar to SVD modes</li>
+<li>But improved compression via additional reduction in spatial modes.</li>
+</ul>
+<img alt="No description has been provided for this image" src="pics/tt_tt3_components.png" width="700px"/>
 </div>
 </div>
 </div>
